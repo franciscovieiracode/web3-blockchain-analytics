@@ -1,0 +1,13 @@
+.imgLogo{
+    border-radius: 50%;
+}
+
+.fullStackString{
+    text-decoration: none;
+    display: inline-block;
+    color: grey;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+  }

@@ -1,0 +1,36 @@
+.image{
+    margin-top: 3%;
+    margin-left: 55%;
+}
+
+.textLanding{
+    float: left;
+    max-width: 36%;
+    margin-left: 5%;
+}
+
+.little{
+    margin-left: 7%;
+    margin-top: 12%;
+}
+
+.secText{
+    margin-top: 10%;
+}
+
+.sec {
+    font-size: 30px;
+  }
+
+.paragraph{
+    font-size: 1.5rem;
+}
+
+@media (max-width: 576px) { 
+    .img1{
+        display: none;
+    }
+    .textLanding{
+        max-width: fit-content;
+    }
+ }

@@ -1,0 +1,36 @@
+.container{
+  margin-top: 3%;
+    height: 35rem;
+}
+
+.title{
+    margin-left: 34%;
+}
+.alert {
+    height: 30px;
+    line-height:30px;
+    padding:0px 15px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+.btn{
+    background-color: #6699cc;
+  }
+
+.terms{
+    margin-left: 0.7rem;
+
+  }
+
+  .term{
+    text-decoration: none;
+}
+
+.signInRouter{
+    text-decoration: none;
+}
+
+.termsAndCondition{
+  margin-left: 30vw;
+}

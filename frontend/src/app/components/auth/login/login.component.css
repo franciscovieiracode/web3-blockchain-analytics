@@ -1,0 +1,30 @@
+.register{
+    text-decoration: none;
+}
+
+.container{
+    margin-top: 6rem;
+}
+
+.buttonDiv{
+    margin-left: 34%;
+    margin-right: 34%;
+    max-height: 100%;
+}
+
+.signUpRouter{
+    text-decoration: none;
+
+}
+
+.alert {
+    height: 30px;
+    line-height:30px;
+    padding:0px 15px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+.btn{
+    background-color: #6699cc;
+  }

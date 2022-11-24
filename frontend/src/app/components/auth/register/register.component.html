@@ -1,0 +1,93 @@
+<app-header></app-header>
+<div class="container-fluid p-0 mt-2">
+    <div class="container">
+        <p class="title display-6 ">Sign Up</p>
+        <p class="title">Please fill in this form to crate an account!</p>
+        <form #formData="ngForm">
+                {{ '' // First Name }}
+                <div class="form-group row d-flex align-items-center justify-content-center mb-2 pt-2 gx-2">
+                    <div class="col-sm-2">
+                      <input type="text" required class="form-control" id="inputFirstName" placeholder="First Name" name="firstName" [(ngModel)]="firstName" #firstNameControl="ngModel">
+                      <div *ngIf="firstNameControl.touched && !firstNameControl.valid">
+                        <div *ngIf="firstNameControl.errors?.['required']">
+                            <div class="alert alert-danger mt-1" role="alert">Required field!</div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="email" required class="form-control" id="inputLastName" placeholder="Last Name" name="lastName" [(ngModel)]="lastName" #lastNameControl="ngModel">
+                        <div *ngIf="lastNameControl.touched && !lastNameControl.valid">
+                          <div *ngIf="lastNameControl.errors?.['required']">
+                              <div class="alert alert-danger mt-1" role="alert">Required field!</div>
+                          </div>
+                      </div>
+                      </div>
+                </div>
+
+    
+                {{ '' // email }}
+                <div class="form-group row d-flex align-items-center justify-content-center mb-2 pt-2">
+                    <div class="col-sm-4">
+                      <input type="email" required class="form-control" id="inputEmail" placeholder="Email" name="email" [(ngModel)]="email" #emailControl="ngModel" [email]="true">
+                      <div *ngIf="emailControl.touched && !emailControl.valid">
+                        <div *ngIf="emailControl.errors?.['required']">
+                            <div class="alert alert-danger mt-1" role="alert">Required field!</div>
+                        </div>
+                        <div *ngIf="emailControl.errors?.['email']">
+                            <div class="alert alert-danger mt-1" role="alert">Invalid email!</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+    
+                  {{ '' // password }}
+                  <div class="form-group row d-flex align-items-center justify-content-center mb-2 pt-2">
+                    <div class="col-sm-4">
+                      <input type="password" required class="form-control" id="inputPassword" placeholder="Password" name="password" [(ngModel)]="password" #passwordControl="ngModel" minlength="8" maxlength="30">
+                      <div *ngIf="passwordControl.touched && !passwordControl.valid">
+                        <div *ngIf="passwordControl.errors?.['required']">
+                            <div class="alert alert-danger mt-1" role="alert">Required field!</div>
+                        </div>
+                        <div *ngIf="passwordControl.errors?.['minlength']">
+                            <div class="alert alert-danger mt-1" role="alert">Minimum 8 digits</div>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  {{ '' // Confirm Password }}
+                  <div class="form-group row d-flex align-items-center justify-content-center mb-2 pt-2">
+                    <div class="col-sm-4">
+                      <input type="password" required class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="confirmPassword" #confirmPasswordControl="ngModel" minlength="8" maxlength="30">
+                      <div *ngIf="confirmPasswordControl.touched && !confirmPasswordControl.valid">
+                        <div *ngIf="confirmPasswordControl.errors?.['required']">
+                            <div class="alert alert-danger mt-1" role="alert">Required field!</div>
+                        </div>
+                        <div *ngIf="confirmPasswordControl.errors?.['minlength']">
+                            <div class="alert alert-danger mt-1" role="alert">Minimum 8 digits</div>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="termsAndCondition mt-3">
+                    <input class="form-check-input" type="checkbox" value="isAgreed" id="isAgreed" [checked]="checkbox" (change)="checkbox = !checkbox">
+                    <label class="form-check-label terms" for="flexCheckDefault">
+                         I accept the <a href="" class="term">Terms of use</a> & <a href="" class="term">Privacy Policy</a>*
+                      </label>
+                  </div>
+    
+                <div class="form-group row d-flex align-items-center justify-content-center ">
+                    <div *ngIf="errorMessage" class="col-sm-4 mb-1">
+                        <div class="alert alert-danger center-block" role="alert">{{errorMessage}}</div>
+                    </div>
+                    <div class="col-sm-4 d-flex justify-content-start mt-3">
+                        <button type="submit" [disabled]="!checkbox" class="botao btn btn-primary" (click)="register()">Register</button>
+                    </div>
+                  </div>
+            </form>
+            <div class="text-center mt-4">
+                <a href="login" class="signInRouter">Already have an account? Login here</a>
+            </div>
+    </div>
+</div>

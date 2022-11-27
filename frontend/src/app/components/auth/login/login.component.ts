@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginStatusComponent } from '../login-status/login-status.component';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   errorMessage:string | undefined = undefined;
 
 
-  constructor() {
+  constructor(public loginStatus: LoginStatusComponent) {
     this.email="";
     this.password="";
    }
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-
+    this.loginStatus.isLogin = true
   }
 
 }

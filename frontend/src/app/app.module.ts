@@ -9,6 +9,8 @@ import { HomePageComponent } from './components/landing-page/home-page/home-page
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LoginStatusComponent } from './components/auth/login-status/login-status.component';
+import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
+import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { LoginStatusComponent } from './components/auth/login-status/login-statu
     HomePageComponent,
     RegisterComponent,
     LoginComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    TermsOfUseComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+.container{
+    margin-top: 3%;
+    margin-left: 18%;
+    max-width: 65%;
+}
+
+.terms{
+    font-weight: bold;
+}
+
+.back{
+    font-size: large;
+    text-decoration: none;
+}

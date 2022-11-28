@@ -3,11 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
+import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
+  {path:'terms',component:TermsOfUseComponent},
+  {path:'privacy', component:PrivacyComponent},
   {path:'**', redirectTo: ''}
 ];
 

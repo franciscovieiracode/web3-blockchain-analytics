@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/landing-page/header/header.compone
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { LoginStatusComponent } from './components/auth/login-status/login-status.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +16,16 @@ import { LoginComponent } from './components/auth/login/login.component';
     HeaderComponent,
     HomePageComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LoginStatusComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [LoginStatusComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,4 +10,18 @@
 
 .btn:hover {
     transform: scale(1.2);
-  }
+}
+
+.item-dropdown{
+    border-radius: 15px;
+    margin-top: 5px;
+}
+
+.list-dropdown{
+    padding: 5px 5px;
+    width: 205px;
+}
+
+.item-dropdown:active{
+    background-color: gray;
+}

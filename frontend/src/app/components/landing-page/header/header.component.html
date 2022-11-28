@@ -1,15 +1,73 @@
 <nav class="navbar navbar-expand-lg navbar-light py-2" id="mainNav">
     <div class="container px-4 px-lg-5">
         <a href="">
-            <a class="navbar-brand"><img src="../../../../assets/img/header/logo.png" class="imgLogo" height="50" alt=""></a>
+            <a class="navbar-brand"><img src="../../../../assets/img/header/logo.png" class="imgLogo" height="50"
+                    alt=""></a>
             <a class="fullStackString">Block Analytics</a>
         </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div *ngIf="loginStatus.isLogin == false" class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-3">
-                <li class="nav-item px-4"><button class="nav-link btn shadow-none" >Crypto Prices</button></li>
-                <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="login()" >Login</button></li>
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Crypto Prices</button></li> <!-- adicionar (click)=""-->
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="login()">Login</button></li>
+            </ul>
+        </div>
+
+        <div *ngIf="loginStatus.isLogin == true" class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-3">
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Crypto Prices</button></li>
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Transactions</button></li>
+                <li class="nav-item px-4">
+                    <div class="row">
+                        <div class="col">
+                            <div ngbDropdown class="d-inline-block">
+                                <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1"
+                                    ngbDropdownToggle>
+                                    Connect Wallet
+                                </button>
+                                <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                    <button ngbDropdownItem class="item-dropdown"> 
+                                        <img src="../../../../assets/img/wallets-icons/metaIcon.png" alt="" width="161" height="32">
+                                    </button> <!-- adicionar (click)=""-->
+                                    <div class="dropdown-divider"></div>
+                                    <button ngbDropdownItem class="item-dropdown">
+                                        <img src="../../../../assets/img/wallets-icons/Coinbase-logo.png" alt="" width="161" height="32">
+                                    </button> <!-- adicionar (click)=""-->
+                                    <div class="dropdown-divider"></div>
+                                    <button ngbDropdownItem class="item-dropdown">
+                                        <img src="../../../../assets/img/wallets-icons/ethereum-logo.png" alt="" width="161" height="32">
+                                    </button> <!-- adicionar (click)=""-->
+                                    <div class="dropdown-divider"></div>
+                                    <button ngbDropdownItem class="item-dropdown">
+                                        <img src="../../../../assets/img/wallets-icons/cardano-logo.png" alt="" width="161" height="32">
+                                    </button> <!-- adicionar (click)=""-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item px-4">
+                    <div class="row">
+                        <div class="col">
+                            <div ngbDropdown class="d-inline-block">
+                                <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1"
+                                    ngbDropdownToggle><img src="../../../../assets/img/header/user.png" alt=""
+                                        width="30" height="30" style="border-radius: 50%;"></button>
+                                <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                    <p><strong>Francisco João Moreira Vieira</strong></p>
+                                    <div class="dropdown-divider"></div>
+                                    <button ngbDropdownItem>Profile</button> <!-- adicionar (click)=""-->
+                                    <button ngbDropdownItem>Settings</button> <!-- adicionar (click)=""-->
+                                    <div class="dropdown-divider"></div>
+                                    <button ngbDropdownItem>Sign Out</button> <!-- adicionar (click)=""-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

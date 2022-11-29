@@ -7,13 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginStatusComponent implements OnInit {
 
-  isLogin: Boolean
 
   constructor() { 
-    this.isLogin = false
   }
 
   ngOnInit(): void {
   }
 
+  getStatus(){
+    let isLogin = false
+
+    if(localStorage.getItem("status")){
+      isLogin = true
+    }
+
+    return isLogin
+
+  }
 }

@@ -11,6 +11,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { LoginStatusComponent } from './components/auth/login-status/login-status.component';
 import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
+import { EthereumComponent } from './components/wallets/ethereum/ethereum.component';
+import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy
     LoginComponent,
     LoginStatusComponent,
     TermsOfUseComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    EthereumComponent,
+    MetamaskComponent
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@
                                         <img src="../../../../assets/img/wallets-icons/metaIcon.png" alt="" width="161" height="32">
                                     </button> <!-- adicionar (click)=""-->
                                     <div class="dropdown-divider"></div>
-                                    <button ngbDropdownItem class="item-dropdown">
+                                    <button ngbDropdownItem class="item-dropdown" (click)="connectCoinbase()">
                                         <img src="../../../../assets/img/wallets-icons/Coinbase-logo.png" alt="" width="161" height="32">
                                     </button> <!-- adicionar (click)=""-->
                                     <div class="dropdown-divider"></div>
@@ -41,9 +41,9 @@
                                         <img src="../../../../assets/img/wallets-icons/ethereum-logo.png" alt="" width="161" height="32">
                                     </button> <!-- adicionar (click)=""-->
                                     <div class="dropdown-divider"></div>
-                                    <button ngbDropdownItem class="item-dropdown">
+                                    <button ngbDropdownItem class="item-dropdown" (click)="connectCardano()">
                                         <img src="../../../../assets/img/wallets-icons/cardano-logo.png" alt="" width="161" height="32">
-                                    </button> <!-- adicionar (click)=""-->
+                                    </button > 
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                     <button ngbDropdownItem>Profile</button> <!-- adicionar (click)=""-->
                                     <button ngbDropdownItem>Settings</button> <!-- adicionar (click)=""-->
                                     <div class="dropdown-divider"></div>
-                                    <button ngbDropdownItem>Sign Out</button> <!-- adicionar (click)=""-->
+                                    <button ngbDropdownItem (click)="logout()">Sign Out</button>
                                 </div>
                             </div>
                         </div>

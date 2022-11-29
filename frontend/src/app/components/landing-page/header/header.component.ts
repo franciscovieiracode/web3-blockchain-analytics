@@ -18,4 +18,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
+  logout(){
+    localStorage.setItem("status", "false");
+    this.router.navigate([''])
+  }
+
+  connectCardano(){
+    this.router.navigate(['/cardano'])
+  }
+
+  connectCoinbase(){
+    this.router.navigate(['/coinbase'])
+  }
 }

@@ -24,5 +24,4 @@ export class LoginComponent implements OnInit {
   login(){
     localStorage.setItem("status", "true");
   }
-
 }

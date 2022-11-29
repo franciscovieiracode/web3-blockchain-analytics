@@ -17,11 +17,9 @@ export class LoginStatusComponent implements OnInit {
   getStatus(){
     let isLogin = false
 
-    if(localStorage.getItem("status")){
+    if(localStorage.getItem("status") == "true"){
       isLogin = true
     }
-
     return isLogin
-
   }
 }

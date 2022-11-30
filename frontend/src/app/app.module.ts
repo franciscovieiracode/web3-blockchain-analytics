@@ -13,6 +13,8 @@ import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 import { EthereumComponent } from './components/wallets/ethereum/ethereum.component';
 import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
+import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
+import { CardanoComponent } from './components/wallets/cardano/cardano.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { MetamaskComponent } from './components/wallets/metamask/metamask.compon
     TermsOfUseComponent,
     PrivacyComponent,
     EthereumComponent,
-    MetamaskComponent
+    MetamaskComponent,
+    CoinbaseComponent,
+    CardanoComponent
   ],
   imports: [
     BrowserModule,

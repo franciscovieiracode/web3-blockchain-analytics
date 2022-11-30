@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<div class="card" style="width: 43rem;height: 30rem;">
+    <div class="image">
+        <img src="../../../../assets/img/wallets-icons/Coinbase-logo.png" alt="" width="161" height="32">
+    </div>
+    <div class="container">
+        <div class="textLanding mt-2">
+            <form>
+                <input type="text" required name="connectionName" class="form-control"
+                    placeholder="Name your account (eg: Binance trading account)">
+                <p style="font-size:80%;color:grey">Give a name to your connection. </p>
+            </form>
+        </div>
+        <div class="textLanding mt-2">
+            <form>
+                <input type="text" name="description" class="form-control"
+                    placeholder="Connection description (optional)">
+                <p style="font-size:80%;color:grey">Give a description to your connection. </p>
+            </form>
+        </div>
+        <div class="textLanding mt-2">
+            <form>
+                <input type="text" required name="apiKey" class="form-control" placeholder="API Key">
+            </form>
+        </div>
+        <div class="textLanding mt-2">
+            <form>
+                <input type="text" required name="apiSecret" class="form-control" placeholder="API Secret">
+            </form>
+        </div>
+    </div>
+    <div class="buttonDiv d-grid mt-4">
+        <button type="button" class="btn btn-primary">Connect</button>
+    </div>
+    <div class="buttonDiv d-grid mt-4">
+        <button type="button" class="btn btn-outline-secondary">Go Back</button>
+    </div>
+
+</div>

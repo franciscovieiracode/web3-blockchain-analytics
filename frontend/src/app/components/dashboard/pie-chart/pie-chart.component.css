@@ -1,0 +1,14 @@
+.chartContainer{
+    margin-top: 10%;
+    margin-left: 20%;
+    height: 400px;
+    width: 400px;
+    margin-left: 5%;
+    margin-bottom: 0;
+}
+
+@media (max-width: 576px) { 
+    .chartContainer{
+        max-width: fit-content;
+        }
+ }

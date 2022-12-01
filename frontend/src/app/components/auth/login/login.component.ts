@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginStatusComponent } from '../login-status/login-status.component';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   errorMessage:string | undefined = undefined;
 
 
-  constructor(public loginStatus: LoginStatusComponent) {
+  constructor(public loginStatus: LoginStatusComponent, public router:Router) {
     this.email="";
     this.password="";
    }
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.router.navigate(['dashboard'])
     localStorage.setItem("status", "true");
   }
 }

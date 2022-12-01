@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
+import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
 import { CardanoComponent } from './components/wallets/cardano/cardano.component';
 import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'cardano', component:CardanoComponent},
   {path:'coinbase', component:CoinbaseComponent},
   {path:'dashboard', component:DashboardComponent},
+  {path:'transactions', component:TransactionlistComponent},
   {path:'**', redirectTo: ''}
 ];
 

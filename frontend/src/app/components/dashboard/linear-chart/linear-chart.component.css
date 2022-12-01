@@ -1,0 +1,11 @@
+.chartDetails {
+    width: 800px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 576px) { 
+    .chartDetails{
+        max-width: fit-content
+    }
+ }

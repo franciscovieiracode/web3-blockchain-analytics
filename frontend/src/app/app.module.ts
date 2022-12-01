@@ -15,6 +15,13 @@ import { EthereumComponent } from './components/wallets/ethereum/ethereum.compon
 import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
 import { CardanoComponent } from './components/wallets/cardano/cardano.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PieChartComponent } from './components/dashboard/pie-chart/pie-chart.component';
+import { LinearChartComponent } from './components/dashboard/linear-chart/linear-chart.component';
+import { DetailesComponent } from './components/dashboard/detailes/detailes.component';
+import { DatePickerComponent } from './components/dashboard/date-picker/date-picker.component';
+import { CryptoDetailsComponent } from './components/dashboard/crypto-details/crypto-details.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -29,13 +36,20 @@ import { CardanoComponent } from './components/wallets/cardano/cardano.component
     EthereumComponent,
     MetamaskComponent,
     CoinbaseComponent,
-    CardanoComponent
+    CardanoComponent,
+    DashboardComponent,
+    PieChartComponent,
+    LinearChartComponent,
+    DetailesComponent,
+    DatePickerComponent,
+    CryptoDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    NgApexchartsModule
   ],
   providers: [LoginStatusComponent],
   bootstrap: [AppComponent]

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'privacy', component:PrivacyComponent},
   {path:'cardano', component:CardanoComponent},
   {path:'coinbase', component:CoinbaseComponent},
+  {path:'dashboard', component:DashboardComponent},
   {path:'**', redirectTo: ''}
 ];
 

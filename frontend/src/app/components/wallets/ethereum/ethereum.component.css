@@ -1,0 +1,29 @@
+.card{
+    margin-left: 25%;
+    margin-top: 5%;
+}
+
+.container{
+    margin-top: 1rem;
+}
+
+.image{
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.buttonDiv{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    max-height: 100%;
+}
+
+.textLanding{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    max-height: 100%;
+}
+
+.input{
+    margin-top: 1rem;
+}

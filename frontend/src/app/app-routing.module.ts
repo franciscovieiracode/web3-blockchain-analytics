@@ -9,9 +9,11 @@ import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use
 import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
 import { CardanoComponent } from './components/wallets/cardano/cardano.component';
 import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
+import { EthereumComponent } from './components/wallets/ethereum/ethereum.component';
+import { LoginStatusGuard } from './guards/login-status.guard';
 
 const routes: Routes = [
-  {path:'', component: HomePageComponent},
+  {path:'', component: HomePageComponent, canActivate:[LoginStatusGuard]},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'terms',component:TermsOfUseComponent},
@@ -19,6 +21,7 @@ const routes: Routes = [
   {path:'cardano', component:CardanoComponent},
   {path:'coinbase', component:CoinbaseComponent},
   {path:'dashboard', component:DashboardComponent},
+  {path:'ethereum', component:EthereumComponent},
   {path:'transactions', component:TransactionlistComponent},
   {path:'**', redirectTo: ''}
 ];

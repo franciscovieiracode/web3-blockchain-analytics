@@ -18,13 +18,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
-   transactions(){
-    this.router.navigate(['/transactions'])
-  }
-
   logout(){
     localStorage.setItem("status", "false");
     this.router.navigate([''])
+  }
+
+  transactions(){
+    this.router.navigate(['/transactions'])
   }
 
   connectCardano(){
@@ -33,5 +33,13 @@ export class HeaderComponent implements OnInit {
 
   connectCoinbase(){
     this.router.navigate(['/coinbase'])
+  }
+
+  connectEthereum(){
+    this.router.navigate(['/ethereum'])
+  }
+
+  connectMetamask(){
+    console.log('clicked')
   }
 }

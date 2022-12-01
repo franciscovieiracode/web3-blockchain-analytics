@@ -12,7 +12,6 @@ import { LoginStatusComponent } from './components/auth/login-status/login-statu
 import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 import { EthereumComponent } from './components/wallets/ethereum/ethereum.component';
-import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
 import { CardanoComponent } from './components/wallets/cardano/cardano.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -35,7 +34,6 @@ import { TransactionlistComponent } from './components/transactions/transactionl
     TermsOfUseComponent,
     PrivacyComponent,
     EthereumComponent,
-    MetamaskComponent,
     CoinbaseComponent,
     CardanoComponent,
     DashboardComponent,

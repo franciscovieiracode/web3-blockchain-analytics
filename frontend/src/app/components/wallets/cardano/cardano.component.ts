@@ -8,8 +8,16 @@ import { Router } from '@angular/router';
 })
 export class CardanoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  connectComplete(){
+    this.router.navigate(['/dashboard'])
+  }
+
+  goBack(){
+    this.router.navigate(['/dashboard'])
   }
 }

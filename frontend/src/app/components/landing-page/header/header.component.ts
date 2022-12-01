@@ -40,6 +40,6 @@ export class HeaderComponent implements OnInit {
   }
 
   connectMetamask(){
-    console.log('clicked')
+    this.router.navigate(['/metamask'])
   }
 }

@@ -22,6 +22,7 @@ import { DatePickerComponent } from './components/dashboard/date-picker/date-pic
 import { CryptoDetailsComponent } from './components/dashboard/crypto-details/crypto-details.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
+import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TransactionlistComponent } from './components/transactions/transactionl
     DetailesComponent,
     DatePickerComponent,
     CryptoDetailsComponent,
-    TransactionlistComponent
+    TransactionlistComponent,
+    MetamaskComponent
   ],
   imports: [
     BrowserModule,

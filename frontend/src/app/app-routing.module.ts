@@ -10,6 +10,7 @@ import { TransactionlistComponent } from './components/transactions/transactionl
 import { CardanoComponent } from './components/wallets/cardano/cardano.component';
 import { CoinbaseComponent } from './components/wallets/coinbase/coinbase.component';
 import { EthereumComponent } from './components/wallets/ethereum/ethereum.component';
+import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 import { LoginStatusGuard } from './guards/login-status.guard';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'coinbase', component:CoinbaseComponent},
   {path:'dashboard', component:DashboardComponent},
   {path:'ethereum', component:EthereumComponent},
+  {path:'metamask', component:MetamaskComponent},
   {path:'transactions', component:TransactionlistComponent},
   {path:'**', redirectTo: ''}
 ];

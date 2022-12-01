@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login'])
   }
 
+   transactions(){
+    this.router.navigate(['/transactions'])
+  }
+
   logout(){
     localStorage.setItem("status", "false");
     this.router.navigate([''])

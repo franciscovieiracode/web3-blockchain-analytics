@@ -19,7 +19,7 @@
         <div *ngIf="loginStatus.getStatus() == true" class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-3">
                 <li class="nav-item px-4"><button class="nav-link btn shadow-none">Crypto Prices</button></li>
-                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Transactions</button></li>
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="transactions()">Transactions</button></li>
                 <li class="nav-item px-4">
                     <div class="row">
                         <div class="col">

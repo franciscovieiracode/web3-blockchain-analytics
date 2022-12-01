@@ -11,7 +11,9 @@ describe('TransactionlistComponent', () => {
       declarations: [ TransactionlistComponent ]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TransactionlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

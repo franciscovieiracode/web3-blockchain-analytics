@@ -22,6 +22,7 @@ import { DetailesComponent } from './components/dashboard/detailes/detailes.comp
 import { DatePickerComponent } from './components/dashboard/date-picker/date-picker.component';
 import { CryptoDetailsComponent } from './components/dashboard/crypto-details/crypto-details.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     LinearChartComponent,
     DetailesComponent,
     DatePickerComponent,
-    CryptoDetailsComponent
+    CryptoDetailsComponent,
+    TransactionlistComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,10 @@
 <app-header></app-header>
-<div class="card" style="width: 43rem;height: 26rem;">
-    <div class="image">
-        <img src="../../../../assets/img/wallets-icons/cardano-logo.png" alt="" width="158" height="39">
-    </div>
-    <div class="container">
+
+<div class="container">
+        <div class="image">
+            <img src="../../../../assets/img/wallets-icons/cardano-logo.png" alt="" width="158" height="39">
+        </div>
+        
         <div class="textLanding mt-2">
             <form>
                 Enter a wallet name <br>
@@ -18,12 +19,13 @@
                 <input type="text" required name="walletAddress" class="form-control" placeholder="Wallet Address">
             </form>
         </div>
-    </div>
-    <div class="buttonDiv d-grid mt-4">
-        <button type="button" class="btn btn-primary" (click)="connectComplete()">Connect</button>
-    </div>
-    <div class="buttonDiv d-grid mt-4">
-        <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
+
+        <div class="buttonDiv d-grid mt-4">
+            <button type="button" class="btn btn-primary" (click)="connectComplete()">Connect</button>
+        </div>
+        <div class="buttonDiv d-grid mt-4">
+            <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
+        </div>
     </div>
 
-</div>
+    

@@ -23,6 +23,7 @@ import { CryptoDetailsComponent } from './components/dashboard/crypto-details/cr
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
 import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MetamaskComponent } from './components/wallets/metamask/metamask.compon
     DatePickerComponent,
     CryptoDetailsComponent,
     TransactionlistComponent,
-    MetamaskComponent
+    MetamaskComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

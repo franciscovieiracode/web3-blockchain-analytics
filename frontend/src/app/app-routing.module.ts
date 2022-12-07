@@ -4,6 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
 import { TermsOfUseComponent } from './components/terms-and-privacy/terms-of-use/terms-of-use.component';
 import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:'ethereum', component:EthereumComponent},
   {path:'metamask', component:MetamaskComponent},
   {path:'transactions', component:TransactionlistComponent},
+  {path:'settings', component:SettingsComponent},
   {path:'**', redirectTo: ''}
 ];
 

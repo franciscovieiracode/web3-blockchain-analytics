@@ -1,0 +1,129 @@
+<app-header></app-header>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
+
+<section class="py-5 my-5">
+    <div class="container">
+        <h1 class="mb-5">Account Settings</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="profilepic">
+                        <div class="img-circle text-center mb-3">
+                            <label id="uploadBtn" class="profilepic__content" for="file">
+                                <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+                                <span class="profilepic__text">Edit Profile</span>
+                            </label>
+                            <input id="file" type="file"/>
+                            <img class="profilepic__image" src="../../../../assets/img/header/user.png" id="photo"
+                            class="shadow" />
+                        </div>
+                    </div>
+                    <h4 class="text-center">Joao Alberto</h4>
+                </div>
+
+                <!-- Nav tabs -->
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#account">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#password">Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#currency">Currency</a>
+                    </li>
+
+                </div>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane container active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <h3 class="mb-4">Account Settings</h3>
+                    <div class="row ">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" value="Joao">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" value="Alberto">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" value="joaozinhoalberto@gmail.com">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Phone number</label>
+                                <input type="text" class="form-control" value="+351 918343275">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-primary" (click)="dashboard()">Update</button>
+                        <button class="btn btn-light" (click)="dashboard()">Cancel</button>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="password">
+                    <h3 class="mb-4">Password Settings</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Old password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>New password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Confirm new password</label>
+                                <input type="password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-primary" (click)="dashboard()">Update</button>
+                        <button class="btn btn-light" (click)="dashboard()">Cancel</button>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="currency">
+                    <h3 class="mb-4">Currency Settings</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Currency</label>
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm currency">
+                                    <option selected>Euro</option>
+                                    <option value="1">Dolar</option>
+                                    <option value="2">Real</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-primary" (click)="dashboard()">Update</button>
+                        <button class="btn btn-light" (click)="dashboard()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

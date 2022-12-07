@@ -42,4 +42,8 @@ export class HeaderComponent implements OnInit {
   connectMetamask(){
     this.router.navigate(['/metamask'])
   }
+
+  settingsButton(){
+    this.router.navigate(['/settings'])
+  }
 }

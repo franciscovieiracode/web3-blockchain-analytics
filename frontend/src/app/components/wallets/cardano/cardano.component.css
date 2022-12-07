@@ -1,29 +1,28 @@
-.card{
-    margin-left: 25%;
-    margin-top: 5%;
+.container {
+    max-width: 52em;
+    margin: 0 auto;
+    padding: 0 1em;
+    margin-top: 4rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
 }
 
-.container{
-    margin-top: 1rem;
-}
-
-.image{
+.image {
     margin-top: 2rem;
     margin-left: 2rem;
 }
 
 .buttonDiv{
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 2rem;
     max-height: 100%;
 }
 
-.textLanding{
+.textLanding {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
     max-height: 100%;
 }
 
-.input{
+.input {
     margin-top: 1rem;
 }

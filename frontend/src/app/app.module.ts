@@ -28,6 +28,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { TransactionlistPipe } from './components/transactions/transactionlist.pipe';
 import { HttpClientModule} from '@angular/common/http';
 import { ModalTransactionComponent } from './components/transactions/transactionlist/modal-transaction/modal-transaction.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -55,6 +56,10 @@ import { ModalTransactionComponent } from './components/transactions/transaction
     SettingsComponent,
     TransactionlistPipe,
     ModalTransactionComponent,
+<<<<<<< HEAD
+=======
+    ProfileComponent
+>>>>>>> 03afe16d3b919db4d050037131ff88ed944b3385
   ],
   imports: [
     BrowserModule,

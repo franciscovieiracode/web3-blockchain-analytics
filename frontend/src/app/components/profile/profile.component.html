@@ -1,0 +1,97 @@
+<app-header></app-header>
+<section class="py-5 my-5">
+    <div class="container">
+        <h1 class="mb-5">Profile</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="profilepic">
+                        <div class="img-circle text-center mb-3">
+                            <input id="file" type="file"/>
+                            <img class="profilepic__image" src="../../../../assets/img/header/user.png" id="photo" class="shadow" />
+                        </div>
+                    </div>
+                    <h4 class="text-center">Joao Alberto</h4>
+                </div>
+                <!-- Nav tabs -->
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#taxReport">Tax Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#loginHistory">Login History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#wallet">Wallet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#contacts">Contacts</a>
+                    </li>
+                </div>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane container active" id="profile" role="tabpanel" aria-labelledby="account-tab">
+                    <div class="header-table">
+                        <h3 class="mb-4">Profile</h3>
+                        <h6 class="mb-4">Account Details</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" value="Joao">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label></label>
+                                <input type="text" class="form-control" value="Alberto">
+                            </div>
+                        </div>
+                        <div class="col-md-13">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" value="joaozinhoalberto@gmail.com">
+                            </div>
+                        </div>
+                        <div class="col-md-13">
+                            <div class="form-group">
+                                <label>Phone number</label>
+                                <input type="text" class="form-control" value="+351 918343275">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="taxReport">
+                    <h3 class="mb-4">Tax Report</h3>
+                    <div class="row ">
+
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="loginHistory">
+                    <h3 class="mb-4">Login History</h3>
+                    <div class="row ">
+
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="wallet">
+                    <h3 class="mb-4">Wallet</h3>
+                    <div class="row ">
+
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="contacts">
+                    <h3 class="mb-4">Contacts</h3>
+                    <div class="row ">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

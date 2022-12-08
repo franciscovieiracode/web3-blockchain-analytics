@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#contacts">Contacts</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#rules">Rules</a>
+                    </li>
                 </div>
             </div>
 
@@ -38,41 +41,118 @@
             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
                 <div class="tab-pane container active" id="profile" role="tabpanel" aria-labelledby="account-tab">
                     <div class="header-table">
-                        <h3 class="mb-4">Profile</h3>
+                        <h3 class="mb-2">Profile</h3>
                         <h6 class="mb-4">Account Details</h6>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" value="Joao">
+                                <input type="text" class="form-control" value="Joao" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label></label>
-                                <input type="text" class="form-control" value="Alberto">
+                                <input type="text" class="form-control" value="Alberto" disabled>
                             </div>
                         </div>
-                        <div class="col-md-13">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" class="form-control" value="joaozinhoalberto@gmail.com">
+                                <input type="text" class="form-control" value="joaozinhoalberto@gmail.com" disabled>
                             </div>
                         </div>
-                        <div class="col-md-13">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Phone number</label>
-                                <input type="text" class="form-control" value="+351 918343275">
+                                <input type="text" class="form-control" value="+351 918343275" disabled>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane container fade" id="taxReport">
-                    <h3 class="mb-4">Tax Report</h3>
-                    <div class="row ">
-
+                    <div style="max-width: 100%">
+                        <button type="button" class="btnNewRule" (click)="buttonNewRule()" >New Rule</button>
+                        <h3>Tax Report</h3>
+                        <div ngbDropdown class="d-inline-block dropdowTypes">
+                            <button type="button" class="nav-link btn shadow-none btn-outline-primary p-2" id="dropdownBasic2" ngbDropdownToggle>Year</button>
+                            <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                <button ngbDropdownItem class="item-dropdown" *ngFor="let item of year">{{item}}</button>
+                            </div>
+                        </div>
                     </div>
+                    <div class="col mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="row">
+                                        <div>
+                                            <p class="nameTax h4">Propeaty Gains</p>
+                                            <p class="moneyTax h4">{{propeatyGainsMoney}}</p>
+                                        </div>
+                                    </div>
+                                    <p style="margin-top: 20px; margin-bottom: 0px;">
+                                        <strong>Taxable:</strong></p>
+                                    <div class="col taxdivlabels" *ngFor="let propeaty of propeatyGains">
+                                        <p class="btnTax">{{propeaty}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="row">
+                                        <div>
+                                            <p class="nameTax h4">Income Gains</p>
+                                            <p class="moneyTax h4">{{incomeGainsMoney}}</p>
+                                        </div>
+                                    </div>
+                                    <p style="margin-top: 20px; margin-bottom: 0px;"><strong>Taxable:</strong></p>
+                                    <div class="col taxdivlabels" *ngFor="let income of incomeGains">
+                                        <p class="btnTax">{{income}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="row">
+                                        <div>
+                                            <p class="nameTax h4">General Deductions</p>
+                                            <p class="moneyTax h4">{{generalDeductionsMoney}}</p>
+                                        </div>
+                                    </div>
+                                    <p style="margin-top: 20px; margin-bottom: 0px;"><strong>Taxable:</strong></p>
+                                    <div class="col taxdivlabels" *ngFor="let general of generalDeductions">
+                                        <p class="btnTax">{{general}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="row">
+                                        <div>
+                                            <p class="nameTax h4">Non-Taxable Gains</p>
+                                            <p class="moneyTax h4">{{nonTaxableGainsMoney}}</p>
+                                        </div>
+                                    </div>
+                                    <p style="margin-top: 20px; margin-bottom: 0px;"><strong>Taxable:</strong></p>
+                                    <div class="col taxdivlabels" *ngFor="let nonTaxable of nonTaxableGains">
+                                        <p class="btnTax">{{nonTaxable}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btnNewRule mt-3" (click)="buttonExport()" >Export PDF</button>
                 </div>
                 <div class="tab-pane container fade" id="loginHistory">
                     <h3 class="mb-4">Login History</h3>
@@ -165,6 +245,12 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="rules">
+                    <h3 class="mb-4">Rules</h3>
+                    <div class="row ">
+
                     </div>
                 </div>
             </div>

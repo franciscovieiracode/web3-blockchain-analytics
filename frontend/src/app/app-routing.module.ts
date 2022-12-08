@@ -6,6 +6,7 @@ import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.
 import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'transactions', component:TransactionlistComponent},
   {path:'settings', component:SettingsComponent},
   {path:'profile', component:ProfileComponent},
+  {path:'newRule', component:NewRuleComponent},
   {path:'prices', component:CryptoPricesComponent},
   {path:'prices/:id', component:DetailedComponent},
   {path:'**', redirectTo: ''}

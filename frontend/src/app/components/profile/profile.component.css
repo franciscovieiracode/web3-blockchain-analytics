@@ -106,6 +106,38 @@ body {
 	text-align: center;
 }
 
+.btnNewRule{
+	float: right;
+	padding: 8px;
+	border-radius: 7px;
+	border: 2px solid rgb(4, 130, 233);
+	background-color: white;
+}
+
+.btnNewRule:hover{
+	background-color:rgb(4, 130, 233);
+}
+
+
+.nameTax{
+	float: left;
+}
+
+.moneyTax{
+	float: right;
+}
+
+.taxdivlabels{
+	max-width: fit-content;
+	padding: 3px;
+}
+
+.btnTax{
+	padding: 8px;
+	border-radius: 7px;
+	background-color:rgb(4, 130, 233) ;
+}
+
 .center{
 	text-align: center;
 	

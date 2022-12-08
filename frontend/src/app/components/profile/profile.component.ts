@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
@@ -10,21 +11,19 @@ import { ClipboardService } from 'ngx-clipboard';
 })
 export class ProfileComponent implements OnInit {
 
+  propeatyGains = ["Lendings", "Loan Interest", "Marin traing Profit", "staking"]
+  propeatyGainsMoney = "9999,99€"
 
-copy(data:any){
-  this._clipboardService.copy(data)
+  incomeGains = ["Airdrop", "Minning", "Salary"]
+  incomeGainsMoney = "9999,99€"
 
-  this.copied=true
-  
-  setTimeout(()=>{this.copied=false},2000)
-}
+  generalDeductions = ["Margin Trading Fee", "Margin Trading Loss"]
+  generalDeductionsMoney = "9999,99€"
 
-clickMethod(name: string) {
-  if(confirm("Are you sure to delete "+ name +"?")) {
-    console.log("Implement delete functionality here");
-  }
-}
+  nonTaxableGains = ["Bounties", "Gift"]
+  nonTaxableGainsMoney = "9999,99€"
 
+  year = ["2021", "2022"]
 
   finalEth = "https://etherscan.io/tx/"
 	teste:any
@@ -56,7 +55,7 @@ clickMethod(name: string) {
       {"name":"Joaquim","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
     ]
    
-    constructor(private _clipboardService: ClipboardService,private http:HttpClient) {
+    constructor(private _clipboardService: ClipboardService,private http:HttpClient, public route: Router) {
       this.copied=false
       this.search=""
       this.pageSize=10
@@ -65,6 +64,26 @@ clickMethod(name: string) {
   ngOnInit(): void {
   }
 
+  buttonNewRule() {
+    this.route.navigate(["/newRule"])
+  }
 
+  buttonExport(){
+    alert("Downloading! :)")
+  }
+
+  copy(data:any){
+    this._clipboardService.copy(data)
+  
+    this.copied=true
+    
+    setTimeout(()=>{this.copied=false},2000)
+  }
+  
+  clickMethod(name: string) {
+    if(confirm("Are you sure to delete "+ name +"?")) {
+      console.log("Implement delete functionality here");
+    }
+  }
 
 }

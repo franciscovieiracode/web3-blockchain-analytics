@@ -29,6 +29,8 @@ import { TransactionlistPipe } from './components/transactions/transactionlist.p
 import { HttpClientModule} from '@angular/common/http';
 import { ModalTransactionComponent } from './components/transactions/transactionlist/modal-transaction/modal-transaction.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
+
 import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.component';
 import { FilterPipe } from './components/crypto-prices/filterpipe.pipe';
 import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
@@ -59,6 +61,7 @@ import { WalletPipe } from './components/profile/wallet.pipe';
     TransactionlistPipe,
     ModalTransactionComponent,
     ProfileComponent,
+    NewRuleComponent,
     CryptoPricesComponent,
     FilterPipe,
     DetailedComponent,

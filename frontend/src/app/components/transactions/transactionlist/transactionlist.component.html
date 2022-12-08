@@ -7,6 +7,9 @@
     <div class="col-3 mb-3">
         <input type="number" [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
     </div>
+    <div class="col-6 mb-6 text-end">
+        <button class="btn btn-outline-success" (click)="open(content)" >Add Contacts</button>
+    </div>
 </div>
 
 <table class="table table-striped">
@@ -61,3 +64,18 @@
     </ngb-toast>
 </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Add Contact</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <input type="text" [(ngModel)]="name" #nameControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Wallet Name">
+        <input type="text" [(ngModel)]="address" #addressControl="ngModel" class="input-group-text text-center col-lg-12 top" placeholder="Wallet Address">
+
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+	</div>
+</ng-template>

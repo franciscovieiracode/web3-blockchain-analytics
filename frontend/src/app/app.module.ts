@@ -54,7 +54,7 @@ import { ModalTransactionComponent } from './components/transactions/transaction
     MetamaskComponent,
     SettingsComponent,
     TransactionlistPipe,
-    ModalTransactionComponent
+    ModalTransactionComponent,
   ],
   imports: [
     BrowserModule,

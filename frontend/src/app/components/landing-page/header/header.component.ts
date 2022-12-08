@@ -49,4 +49,7 @@ export class HeaderComponent implements OnInit {
   profileButton(){
     this.router.navigate(['/profile'])
   }
+  prices(){
+    this.router.navigate(['/prices'])
+  }
 }

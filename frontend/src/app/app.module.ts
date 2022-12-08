@@ -56,10 +56,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     SettingsComponent,
     TransactionlistPipe,
     ModalTransactionComponent,
-<<<<<<< HEAD
-=======
     ProfileComponent
->>>>>>> 03afe16d3b919db4d050037131ff88ed944b3385
   ],
   imports: [
     BrowserModule,

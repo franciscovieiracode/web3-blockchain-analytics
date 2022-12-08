@@ -1,0 +1,35 @@
+<app-header></app-header>
+<section class="py-5 my-5">
+    <div class="container">
+        <h1 class="mb-5">New Rule</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="row tab-content p-md-5 m-4 mt-0 mb-0">
+                <input type="text" required class="form-control" id="ruleName" placeholder="Rule Name" name="ruleName"
+                    [(ngModel)]="ruleName">
+                <input type="text" required class="form-control" id="ruleDescription" placeholder="Rule Description"
+                    name="ruleDescription" [(ngModel)]="ruleDescription">
+                <div ngbDropdown class="d-inline-block dropdowTypes">
+                    <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1" ngbDropdownToggle>Rule
+                        Criteria</button>
+                    <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem class="item-dropdown"
+                            *ngFor="let item of dropdownLabels">{{item}}</button>
+                    </div>
+                </div>
+                <div ngbDropdown class="d-inline-block dropdowTypes">
+                    <button type="button" class="nav-link btn shadow-none" id="dropdownBasic2" ngbDropdownToggle>Rule
+                        Behaviour</button>
+                    <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                        <button ngbDropdownItem class="item-dropdown" *ngFor="let item of behaviour">{{item}}</button>
+                    </div>
+                </div>
+                <input type="number" required class="form-control" id="ruleTax" placeholder="Rule Tax" name="ruleTax"
+                    [(ngModel)]="ruleTax">
+                <div class="col buttonsRules">
+                    <button type="button" class="btnBackSaveRule btn btn-primary" (click)="buttonBack()">Back</button>
+                    <button type="button" class="btnBackSaveRule btn btn-primary" (click)="buttonSave()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

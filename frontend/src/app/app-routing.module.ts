@@ -4,6 +4,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
+import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PrivacyComponent } from './components/terms-and-privacy/privacy/privacy.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:'transactions', component:TransactionlistComponent},
   {path:'settings', component:SettingsComponent},
   {path:'profile', component:ProfileComponent},
+  {path:'newRule', component:NewRuleComponent},
   {path:'**', redirectTo: ''}
 ];
 

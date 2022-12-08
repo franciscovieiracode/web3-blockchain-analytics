@@ -29,6 +29,7 @@ import { TransactionlistPipe } from './components/transactions/transactionlist.p
 import { HttpClientModule} from '@angular/common/http';
 import { ModalTransactionComponent } from './components/transactions/transactionlist/modal-transaction/modal-transaction.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
 
 
 
@@ -56,7 +57,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     SettingsComponent,
     TransactionlistPipe,
     ModalTransactionComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewRuleComponent
   ],
   imports: [
     BrowserModule,

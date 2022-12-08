@@ -7,8 +7,9 @@
                 <div class="p-4">
                     <div class="profilepic">
                         <div class="img-circle text-center mb-3">
-                            <input id="file" type="file"/>
-                            <img class="profilepic__image" src="../../../../assets/img/header/user.png" id="photo" class="shadow" />
+                            <input id="file" type="file" />
+                            <img class="profilepic__image" src="../../../../assets/img/header/user.png" id="photo"
+                                class="shadow" />
                         </div>
                     </div>
                     <h4 class="text-center">Joao Alberto</h4>
@@ -85,56 +86,56 @@
 
                         <div class="row">
                             <div class="col-3 mb-3 searchBar">
-                                <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Search wallet">
+                                <input type="text" [(ngModel)]="search" #searchControl="ngModel"
+                                    class="input-group-text text-center col-lg-12" placeholder="Search wallet">
                             </div>
                             <div class="col-5 mb-5">
-                                <input type="number" min=0 [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
+                                <input type="number" min=0 [(ngModel)]="pageSize" #searchControl="ngModel"
+                                    class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
                             </div>
 
-                            <ngb-pagination
-                        [(page)]="page"
-                        [pageSize]="pageSize"
-                        [collectionSize]="wallets.length"></ngb-pagination>
+                            <ngb-pagination [(page)]="page" [pageSize]="pageSize"
+                                [collectionSize]="wallets.length"></ngb-pagination>
                         </div>
-                        
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col" >Connection</th>
+                                    <th scope="col">Connection</th>
                                     <th scope="col">Value</th>
-                                    <th scope="col" >Address</th>
+                                    <th scope="col">Address</th>
                                     <th class="center" scope="col">Remove</th>
-                        
-                        
-                        
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let wallet of wallets | slice: (page-1) * pageSize : page * pageSize | wallet:search">
+                                <tr
+                                    *ngFor="let wallet of wallets | slice: (page-1) * pageSize : page * pageSize | wallet:search">
                                     <td scope="row" *ngIf="wallet.type == 'car'">
-                                        <img src="../../../../assets/img/wallets-icons/cardano_icon.png" height="15" alt="">&nbsp; {{ wallet.connection }}  
+                                        <img src="../../../../assets/img/wallets-icons/cardano_icon.png" height="15"
+                                            alt="">&nbsp; {{ wallet.connection }}
                                     </td>
                                     <td scope="row" *ngIf="wallet.type == 'eth'">
-                                        <img src="../../../../assets/img/wallets-icons/ethereum_icon.png" height="15" alt=""> &nbsp;{{ wallet.connection }}  
+                                        <img src="../../../../assets/img/wallets-icons/ethereum_icon.png" height="15"
+                                            alt=""> &nbsp;{{ wallet.connection }}
                                     </td>
                                     <td scope="row" *ngIf="wallet.type == 'meta'">
-                                        <img src="../../../../assets/img/wallets-icons/metamask_icon.png" height="14" alt="">&nbsp; {{ wallet.connection }}  
+                                        <img src="../../../../assets/img/wallets-icons/metamask_icon.png" height="14"
+                                            alt="">&nbsp; {{ wallet.connection }}
                                     </td>
                                     <td scope="row" *ngIf="wallet.type == 'coinbase'">
-                                        <img src="../../../../assets/img/wallets-icons/coinbase_icon.png" height="15" alt="">&nbsp; {{ wallet.connection }}  
+                                        <img src="../../../../assets/img/wallets-icons/coinbase_icon.png" height="15"
+                                            alt="">&nbsp; {{ wallet.connection }}
                                     </td>
 
                                     <td scope="row">{{ wallet.value }}</td>
-                                    <td ><a class="source" href="wallet.address" target="_blank">{{wallet.address }}</a></td>
-
-                                    <td class="center">
-                                        <button type=button class="buttondel"  (click)="clickMethod(wallet.connection)"><i class="material-icons">&#xe92b;</i></button>
-                                        
+                                    <td><a class="source" href="wallet.address" target="_blank">{{wallet.address }}</a>
                                     </td>
 
-                                    
-                        
-                        
+                                    <td class="center">
+                                        <button type=button class="buttondel"
+                                            (click)="clickMethod(wallet.connection)"><i
+                                                class="material-icons">&#xe92b;</i></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -143,7 +144,27 @@
                 <div class="tab-pane container fade" id="contacts">
                     <h3 class="mb-4">Contacts</h3>
                     <div class="row ">
-
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Address</th>
+                                    <th class="center" scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let contact of contacts">
+                                    <td scope="row">{{ contact.name }}</td>
+                                    <td scope="row">{{ contact.address }}</td>
+                                    <td class="center">
+                                        <button style="margin-right: 20px;" type=button class="buttondel"><i
+                                                class="material-icons">&#xe150;</i></button>
+                                        <button type=button class="buttondel" (click)="clickMethod(contact.name)"><i
+                                                class="material-icons">&#xe92b;</i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

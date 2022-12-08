@@ -47,6 +47,14 @@ clickMethod(name: string) {
     page=1
     pageSize:number
 
+    contacts =[
+      {"name":"Alberto","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+      {"name":"Dinis","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+      {"name":"Maria","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+      {"name":"Pedro","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+      {"name":"Joao","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+      {"name":"Joaquim","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
+    ]
    
     constructor(private _clipboardService: ClipboardService,private http:HttpClient) {
       this.copied=false

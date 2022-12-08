@@ -1,225 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Transactions</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="transactionlist.component.css">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
-
-</head>
-
-<body>
-    <app-header></app-header>
-    <hr />
-    <div class="container-xl" style="margin-right: 20%; margin-left: 5%; max-width: 90%; width: 90%;">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <h2>Transactions<b></b></h2>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="search-box" style="padding-top: 2%;">
-                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Quick Search">
-                            </div>
-                        </div>
-                        <div class="clearfix" style="padding-left: 2%; float: right;">
-                            <ul class="pagination">
-                                <li class="page-item active"><a href="#"><i class="fa fa-angle-double-left"></i></a>
-                                </li>
-                                <li class="page-item active"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li class="page-item active"><a href="#">1 of 5 pages</a></li>
-                                <li class="page-item active"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                <li class="page-item active"><a href="#"><i class="fa fa-angle-double-right"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-
-                <table id="table" class="table table-striped table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="align-top">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0">
-                                    <input type="checkbox" class="custom-control-input" id="all-items">
-                                    <label class="custom-control-label" for="all-items"></label>
-                                </div>
-                            </th>
-                            <th>Timestamp <i class="fa fa-sort"></i></th>
-                            <th>Type</th>
-                            <th>In <i class="fa fa-sort"></i></th>
-                            <th style="width: 15%;">Out</th>
-                            <th style="width: 10%;">Cost <i class="fa fa-sort"></i></th>
-                            <th>Sale Price <i class="fa fa-sort"></i></th>
-                            <th style="width: 15%;">Tx ID</th>
-                            <th>Classification</th>
-                            <th>Source</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="align-middle">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                    <input type="checkbox" class="custom-control-input" id="item-1">
-                                    <label class="custom-control-label" for="item-1"></label>
-                                </div>
-                            </td>
-                            <td class="align-middle text-center">
-                                Oct 27, 2022<br>
-                                07:55 AM
-                            <td style="color: orange; font-weight: bolder;">SEND</td>
-                            <td>-</td>
-                            <td><a (click)="open(content)" herf="">-0005 ETH</a><br>
-                                To: <a href="asd.com">0xa...eb</a>
-                            </td>
-                            <td>-</td>
-                            <td>€ 9.39</td>
-                            <td>Tx ID: <a href="google.com">0xoru74j4</a></td>
-                            <td>Unclassified</td>
-                            <td><i class="fa fa-sort"></i><a href="google.com">0xa...eb</a></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                    <input type="checkbox" class="custom-control-input" id="item-1">
-                                    <label class="custom-control-label" for="item-1"></label>
-                                </div>
-                            </td>
-                            <td class="align-middle text-center">
-                                Oct 27, 2022<br>
-                                07:55 AM
-                            <td style="color: orange; font-weight: bolder;">SEND</td>
-                            <td>-</td>
-                            <td><a (click)="open(content)" herf="">-0005 ETH</a><br>
-                                To: <a href="asd.com">0xa...eb</a>
-                            </td>
-                            <td>-</td>
-                            <td>€ 9.39</td>
-                            <td>Tx ID: <a href="google.com">0xoru74j4</a></td>
-                            <td>Unclassified</td>
-                            <td><i class="fa fa-sort"></i><a href="google.com">0xa...eb</a></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                    <input type="checkbox" class="custom-control-input" id="item-1">
-                                    <label class="custom-control-label" for="item-1"></label>
-                                </div>
-                            </td>
-                            <td class="align-middle text-center">
-                                Oct 27, 2022<br>
-                                07:55 AM
-                            <td style="color: orange; font-weight: bolder;">SEND</td>
-                            <td>-</td>
-                            <td><a (click)="open(content)" herf="">-0005 ETH</a><br>
-                                To: <a href="asd.com">0xa...eb</a>
-                            </td>
-                            <td>-</td>
-                            <td>€ 9.39</td>
-                            <td>Tx ID: <a href="google.com">0xoru74j4</a></td>
-                            <td>Unclassified</td>
-                            <td><i class="fa fa-sort"></i><a href="google.com">0xa...eb</a></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                    <input type="checkbox" class="custom-control-input" id="item-1">
-                                    <label class="custom-control-label" for="item-1"></label>
-                                </div>
-                            </td>
-                            <td class="align-middle text-center">
-                                Oct 27, 2022<br>
-                                07:55 AM
-                            <td style="color: orange; font-weight: bolder;">SEND</td>
-                            <td>-</td>
-                            <td><a (click)="open(content)" herf="">-0005 ETH</a><br>
-                                To: <a href="asd.com">0xa...eb</a>
-                            </td>
-                            <td>-</td>
-                            <td>€ 9.39</td>
-                            <td>Tx ID: <a href="google.com">0xoru74j4</a></td>
-                            <td>Unclassified</td>
-                            <td><i class="fa fa-sort"></i><a href="google.com">0xa...eb</a></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle">
-                                <div
-                                    class="custom-control custom-control-inline custom-checkbox custom-control-nameless m-0 align-top">
-                                    <input type="checkbox" class="custom-control-input" id="item-1">
-                                    <label class="custom-control-label" for="item-1"></label>
-                                </div>
-                            </td>
-                            <td class="align-middle text-center">
-                                Oct 27, 2022<br>
-                                07:55 AM
-                            <td style="color: orange; font-weight: bolder;">SEND</td>
-                            <td>-</td>
-                            <td><a (click)="open(content)" herf="">-0005 ETH</a><br>To: <a href="asd.com">0xa...eb</a>
-                            </td>
-                            <td>-</td>
-                            <td>€ 9.39</td>
-                            <td>Tx ID: <a href="google.com">0xoru74j4</a></td>
-                            <td>Unclassified</td>
-                            <td><i class="fa fa-sort"></i><a href="google.com">0xa...eb</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clearfix" style="padding-left: 2%; float: right;">
-                    <ul class="pagination">
-                        <li class="page-item active"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="page-item active"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                        <li class="page-item active"><a href="#">1 of 5 pages</a></li>
-                        <li class="page-item active"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        <li class="page-item active"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
+<app-header></app-header>
+<div class="container">
+<div class="row">
+    <div class="col-3 mb-3 searchBar">
+        <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Search transaction">
     </div>
+    <div class="col-3 mb-3">
+        <input type="number" [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
+    </div>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Date</th>
+			<th scope="col">Type</th>
+			<th scope="col">In</th>
+			<th scope="col">Out</th>
+            <th scope="col">Amount</th>
+			<th scope="col">Price</th>
+			<th scope="col">Tx ID</th>
+			<th scope="col">Classification</th>
+            <th scope="col">Source</th>
+            <th scope="col">Details</th>
 
 
-    <ng-template #content let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Address</h4>
-            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="mb-3">
-                    <label for="dateOfBirth">Name</label>
-                    <div class="input-group">
-                        <input id="name" class="form-control" placeholder="Rename address" name="dp" />
-                    </div>
-                    <br>
-                    <label for="dateOfBirth">Address</label><br>
-                    <a style="color:blue; padding-left:5px ;" herf="">x12312x1212312x313</a>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let transaction of transactions | slice: (page-1) * pageSize : page * pageSize | transactionlist:search">
+			<th scope="row">{{ transaction.date }}</th>
+			<td class="text-warning">
+                <div *ngIf="transaction.type == 'SENT'">
+                    <p class="text-warning">{{transaction.type}}</p>
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-        </div>
-    </ng-template>
+                <div *ngIf="transaction.type == 'RECEIVE'">
+                    <p class="text-success">{{transaction.type}}</p>
+                </div>
+            </td>
+            <td><a class="copy" (click)="copy(transaction.in)">{{ transaction.in | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td><a class="copy" (click)="copy(transaction.out)">{{ transaction.out | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td>{{ transaction.ammount }}</td>
+            <td>{{ transaction.price}}</td>
+            <td><a class="copy" (click)="copy(transaction.tx)">{{ transaction.tx | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td>{{transaction.classification}}</td>
+			<td><a class="source" href="{{finalEth}}{{transaction.source}}" target="_blank">{{transaction.source | slice:0:9 }}</a>...</td>
+			<td><button (click)="openDetails(transaction)" class="btn btn-outline-secondary">Detailed info</button></td>
 
-    <!--<button (click)="open(content)">Launch demo modal</button>-->
-</body>
 
-</html>
+		</tr>
+	</tbody>
+</table>
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="transactions.length"></ngb-pagination>
+<div>
+    <ngb-toast *ngIf="copied" class="toaster" header="Notification" [autohide]="false" (hidden)="copied=false">
+        Copied to clipboard!
+    </ngb-toast>
+</div>
+</div>

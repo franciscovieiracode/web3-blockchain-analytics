@@ -46,4 +46,7 @@ export class HeaderComponent implements OnInit {
   settingsButton(){
     this.router.navigate(['/settings'])
   }
+  profileButton(){
+    this.router.navigate(['/profile'])
+  }
 }

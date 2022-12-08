@@ -31,7 +31,10 @@ import { ModalTransactionComponent } from './components/transactions/transaction
 import { ProfileComponent } from './components/profile/profile.component';
 import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
 
-
+import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.component';
+import { FilterPipe } from './components/crypto-prices/filterpipe.pipe';
+import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
+import { WalletPipe } from './components/profile/wallet.pipe';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,11 @@ import { NewRuleComponent } from './components/profile/new-rule/new-rule.compone
     TransactionlistPipe,
     ModalTransactionComponent,
     ProfileComponent,
-    NewRuleComponent
+    NewRuleComponent,
+    CryptoPricesComponent,
+    FilterPipe,
+    DetailedComponent,
+    WalletPipe
   ],
   imports: [
     BrowserModule,

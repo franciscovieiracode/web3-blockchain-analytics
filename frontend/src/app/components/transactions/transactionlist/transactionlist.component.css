@@ -12,3 +12,11 @@
     right: 0%;
     background-color: lightgreen;
 }
+
+.btn:hover {
+    transform: scale(1.2);
+}
+
+.top{
+    margin-top: 5%;
+}

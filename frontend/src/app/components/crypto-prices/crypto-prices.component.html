@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-lg-6" placeholder="Search for ticket">
+</div>
+
+<div class="container p-2 my-2 mt-2">
+    <div class="row">
+        <div class="col-lg-3 text-center">
+            Ranking
+        </div>
+        <div class="col-lg-3 text-center">
+            Coin
+        </div>
+        <div class="col-lg-3 text-center">
+            Price
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let price of prices | filterpipe:search ,let i = index">
+    <div class="container p-2 my-2">
+        <div class="row">
+            <div class="col-lg-3 text-center">
+                #{{i+1}}  
+            </div>
+            <div class="col-lg-3 text-center">
+                {{price.symbol}}
+            </div>
+            <div class="col-lg-3 text-center">
+                {{price.price}} $
+            </div>
+            <div class="col-lg-3 text-center">
+                <button (click)="detailed(price.symbol)" class="btn btn-outline-success btn-sm">Detailed Info</button>
+            </div>
+        </div>
+    </div>
+</div>

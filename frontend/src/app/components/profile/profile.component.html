@@ -156,9 +156,26 @@
                 </div>
                 <div class="tab-pane container fade" id="loginHistory">
                     <h3 class="mb-4">Login History</h3>
-                    <div class="row ">
-
-                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Browser</th>
+                                <th scope="col">IP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let log of login | slice: (page-1) * pageSizeLogins : page * pageSizeLogins">
+                                <th scope="row">{{ log.date }}</th>
+                                <th scope="row">{{ log.browser }}</th>
+                                <th scope="row">{{ log.ip }}</th>                    
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSizeLogins"
+  [collectionSize]="login.length"></ngb-pagination>
                 </div>
                 <div class="tab-pane container fade" id="wallet">
                     <h3 class="mb-4">Wallet</h3>

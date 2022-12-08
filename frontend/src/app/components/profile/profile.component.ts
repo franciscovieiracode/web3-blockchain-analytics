@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
     copied:boolean
     page=1
     pageSize:number
+    pageSizeLogins:number
 
     contacts =[
       {"name":"Alberto","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
@@ -54,11 +55,25 @@ export class ProfileComponent implements OnInit {
       {"name":"Joao","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
       {"name":"Joaquim","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
     ]
+
+    login=[
+      {"date":"08-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"08-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"07-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"07-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"06-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
+
+
+    ]
    
     constructor(private _clipboardService: ClipboardService,private http:HttpClient, public route: Router) {
       this.copied=false
       this.search=""
       this.pageSize=10
+      this.pageSizeLogins=6
     }
 
   ngOnInit(): void {

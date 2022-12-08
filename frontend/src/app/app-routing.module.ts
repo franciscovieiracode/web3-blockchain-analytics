@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.component';
+import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path:'transactions', component:TransactionlistComponent},
   {path:'settings', component:SettingsComponent},
   {path:'profile', component:ProfileComponent},
+  {path:'prices', component:CryptoPricesComponent},
+  {path:'prices/:id', component:DetailedComponent},
   {path:'**', redirectTo: ''}
 ];
 

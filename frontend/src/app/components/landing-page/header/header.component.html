@@ -11,14 +11,14 @@
 
         <div *ngIf="loginStatus.getStatus() == false" class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-3">
-                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Crypto Prices</button></li> <!-- adicionar (click)=""-->
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="prices()">Crypto Prices</button></li> <!-- adicionar (click)=""-->
                 <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="login()">Login</button></li>
             </ul>
         </div>
 
         <div *ngIf="loginStatus.getStatus() == true" class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto my-2 my-lg-3">
-                <li class="nav-item px-4"><button class="nav-link btn shadow-none">Crypto Prices</button></li>
+                <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="prices()">Crypto Prices</button></li>
                 <li class="nav-item px-4"><button class="nav-link btn shadow-none" (click)="transactions()">Transactions</button></li>
                 <li class="nav-item px-4">
                     <div class="row">

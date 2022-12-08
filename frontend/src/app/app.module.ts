@@ -24,6 +24,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TransactionlistComponent } from './components/transactions/transactionlist/transactionlist.component';
 import { MetamaskComponent } from './components/wallets/metamask/metamask.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { TransactionlistPipe } from './components/transactions/transactionlist.pipe';
+import { HttpClientModule} from '@angular/common/http';
+import { ModalTransactionComponent } from './components/transactions/transactionlist/modal-transaction/modal-transaction.component';
+
+
 
 @NgModule({
   declarations: [
@@ -46,16 +52,21 @@ import { SettingsComponent } from './components/settings/settings.component';
     CryptoDetailsComponent,
     TransactionlistComponent,
     MetamaskComponent,
-    SettingsComponent
+    SettingsComponent,
+    TransactionlistPipe,
+    ModalTransactionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    ClipboardModule,
+    HttpClientModule
   ],
   providers: [LoginStatusComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[ModalTransactionComponent]
 })
 export class AppModule { }

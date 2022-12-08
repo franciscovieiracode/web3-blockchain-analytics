@@ -34,11 +34,15 @@ export class TransactionlistComponent implements OnInit {
   copied:boolean
   page=1
   pageSize:number
+  name:string
+  address:string
 
 	constructor(private modalService: NgbModal,private _clipboardService: ClipboardService,private http:HttpClient) {
 		this.copied=false
 		this.search=""
 		this.pageSize=10
+		this.name=""
+		this.address=""
 	}
 
 		openDetails(transaction:any){
@@ -48,6 +52,11 @@ export class TransactionlistComponent implements OnInit {
 			modalRef.componentInstance.fromParent = transaction;
 			
 		}
+	
+		open(content:any) {
+			this.modalService.open(content);
+		}
+	
 
 	copy(data:any){
 		this._clipboardService.copy(data)
@@ -56,7 +65,6 @@ export class TransactionlistComponent implements OnInit {
     
 		setTimeout(()=>{this.copied=false},2000)
 	}
-
 
   ngOnInit(): void {
   }

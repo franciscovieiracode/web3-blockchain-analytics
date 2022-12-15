@@ -1,0 +1,13 @@
+﻿.container {
+    margin-top: 6rem;
+}
+
+.buttonDiv {
+    margin-left: 34%;
+    margin-right: 34%;
+    max-height: 100%;
+}
+
+.btn {
+    background-color: #6699cc;
+}

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 
@@ -69,11 +70,13 @@ export class ProfileComponent implements OnInit {
 
     ]
    
-    constructor(private _clipboardService: ClipboardService,private http:HttpClient, public route: Router) {
+    constructor(private _clipboardService: ClipboardService,private http:HttpClient,
+       public route: Router, public titleService:Title) {
       this.copied=false
       this.search=""
       this.pageSize=10
       this.pageSizeLogins=6
+      this.titleService.setTitle("Profile")
     }
 
   ngOnInit(): void {

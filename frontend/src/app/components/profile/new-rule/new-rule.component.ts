@@ -1,5 +1,6 @@
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,12 +19,13 @@ export class NewRuleComponent implements OnInit {
   ruleCriteria: string
   ruleBehaviour: string
 
-  constructor(public route: Router) { 
+  constructor(public route: Router,public titleService:Title) { 
     this.ruleName = ""
     this.ruleDescription = ""
     this.ruleTax = ""
     this.ruleCriteria=""
     this.ruleBehaviour = ""
+    this.titleService.setTitle("New Rule")
   }
 
   ngOnInit(): void {

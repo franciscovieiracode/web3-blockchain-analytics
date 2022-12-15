@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,7 @@ export class RegisterComponent implements OnInit {
   checkbox:boolean
   errorMessage:String
 
-  constructor() { 
+  constructor(private titleService:Title, public router:Router) { 
     this.firstName=""
     this.lastName=""
     this.email=""
@@ -24,13 +26,14 @@ export class RegisterComponent implements OnInit {
     this.confirmPassword=""
     this.errorMessage=""
     this.checkbox = false
+    this.titleService.setTitle("Register")
   }
 
   ngOnInit(): void {
   }
 
   register(){
-    alert(123)
+    this.router.navigate(['/dashboard'])
   }
 
 }

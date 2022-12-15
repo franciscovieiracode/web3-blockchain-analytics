@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  constructor(private router:Router) { }
+  constructor(private router:Router,public titleService:Title) {
+    this.titleService.setTitle("Settings")
+   }
 
   ngOnInit(): void {
   }

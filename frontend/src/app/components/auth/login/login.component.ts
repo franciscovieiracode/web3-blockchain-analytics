@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LoginStatusComponent } from '../login-status/login-status.component';
 
@@ -14,10 +15,11 @@ export class LoginComponent implements OnInit {
   errorMessage:string | undefined = undefined;
 
 
-  constructor(public loginStatus: LoginStatusComponent, public router:Router) {
+  constructor(public loginStatus: LoginStatusComponent, public router:Router,private titleService:Title) {
     this.email="";
     this.password="";
-   }
+    this.titleService.setTitle("Login")
+  }
 
   ngOnInit(): void {
   }

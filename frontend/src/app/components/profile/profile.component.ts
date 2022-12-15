@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
@@ -12,7 +13,7 @@ import { ClipboardService } from 'ngx-clipboard';
 })
 export class ProfileComponent implements OnInit {
 
-  propeatyGains = ["Lendings", "Loan Interest", "Marin traing Profit", "staking"]
+  propeatyGains = ["Lendings", "Loan Interest", "Margin Trading Profit", "Staking"]
   propeatyGainsMoney = "9999,99€"
 
   incomeGains = ["Airdrop", "Minning", "Salary"]
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
     {"type":"meta","connection":"metamask","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
     {"type":"coinbase","connection":"coinbase","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"}, ]
     search:string
+    searchContact:string
     copied:boolean
     page=1
     pageSize:number
@@ -66,17 +68,34 @@ export class ProfileComponent implements OnInit {
       {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
       {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
       {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-
-
     ]
+
+    rules=[
+      {"name":"Minning","criteria":"Minning","behaviour":"Taxable","tax":"28%"},
+      {"name":"Eth gift","criteria":"Gift","behaviour":"Non-Taxable","tax":"0%"}
+    ]
+    name:String
+    description:String
+    criteria:String
+    behaviour:String
+    taxRule:Number
+
+    walletName:String
    
     constructor(private _clipboardService: ClipboardService,private http:HttpClient,
-       public route: Router, public titleService:Title) {
+       public route: Router, public titleService:Title,private modalService: NgbModal) {
       this.copied=false
       this.search=""
       this.pageSize=10
       this.pageSizeLogins=6
       this.titleService.setTitle("Profile")
+      this.name=""
+      this.description=""
+      this.criteria=""
+      this.behaviour=""
+      this.taxRule=0
+      this.walletName=""
+      this.searchContact=""
     }
 
   ngOnInit(): void {
@@ -102,6 +121,20 @@ export class ProfileComponent implements OnInit {
     if(confirm("Are you sure to delete "+ name +"?")) {
       console.log("Implement delete functionality here");
     }
+  }
+
+  deleteRule(name:String){
+    alert("Deleted "+name+" Rule")
+  }
+
+  
+  open(content:any) {
+    this.modalService.open(content);
+  }
+
+  openEditContact(contentContact:any){
+    this.modalService.open(contentContact);
+
   }
 
 }

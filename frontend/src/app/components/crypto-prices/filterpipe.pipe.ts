@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
     }
     else{
       return prices.filter((crypto:any)=>{        
-        return crypto.symbol.toLowerCase().includes(search.toLowerCase())
+        return crypto.name.toLowerCase().includes(search.toLowerCase())
       })
     }
   }

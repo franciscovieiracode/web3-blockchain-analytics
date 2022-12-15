@@ -6,32 +6,42 @@
 
 <div class="container p-2 my-2 mt-2">
     <div class="row">
-        <div class="col-lg-3 text-center">
+        <div class="col-lg-2 text-center">
             Ranking
         </div>
         <div class="col-lg-3 text-center">
             Coin
         </div>
-        <div class="col-lg-3 text-center">
+        <div class="col-lg-2 text-center">
             Price
+        </div>
+        <div class="col-lg-3 text-center">
+            24H Return
         </div>
     </div>
 </div>
 
-<div *ngFor="let price of prices | filterpipe:search ,let i = index">
+<div *ngFor="let price of prices | filterpipe:search">
     <div class="container p-2 my-2">
         <div class="row">
-            <div class="col-lg-3 text-center">
-                #{{i+1}}  
+            <div class="col-lg-2 text-center">
+                {{price.market_cap_rank}}  
             </div>
             <div class="col-lg-3 text-center">
-                {{price.symbol}}
+                {{price.name}}
+                <img src="{{price.image}}" alt="" height="20">
             </div>
-            <div class="col-lg-3 text-center">
-                {{price.price}} $
+            <div class="col-lg-2 text-center">
+                {{price.current_price}} $
             </div>
-            <div class="col-lg-3 text-center">
-                <button (click)="detailed(price.symbol)" class="btn btn-outline-success btn-sm">Detailed Info</button>
+            <div *ngIf="price.price_change_percentage_24h > 0" class="col-lg-3 text-center positive">
+                {{price.price_change_percentage_24h}} %
+            </div>
+            <div *ngIf="price.price_change_percentage_24h < 0" class="col-lg-3 text-center negative">
+                {{price.price_change_percentage_24h}} %
+            </div>
+            <div class="col-lg-2 text-center">
+                <button (click)="openDetails(price)" class="btn btn-outline-success btn-sm">Detailed Info</button>
             </div>
         </div>
     </div>

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.component';
-import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomePageComponent } from './components/landing-page/home-page/home-page.component';
 import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
   {path:'profile', component:ProfileComponent},
   {path:'newRule', component:NewRuleComponent},
   {path:'prices', component:CryptoPricesComponent},
-  {path:'prices/:id', component:DetailedComponent},
   {path:'**', redirectTo: ''}
 ];
 

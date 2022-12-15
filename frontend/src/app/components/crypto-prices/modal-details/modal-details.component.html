@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h5 class="modal-title">Crypto Details</h5>
+</div>
+<div class="modal-body">
+    <div class="container text-center">
+        <div class="mb-3">Crypto Name : {{ fromParent.name }} <img src="{{fromParent.image}}" alt="" height="20"></div>
+        <div class="mb-3">Symbol : {{ fromParent.symbol }}</div>
+        <div class="mb-3">Price : {{ fromParent.current_price }}</div>
+        <div class="mb-3">Market Cap : {{ fromParent.market_cap }}</div>
+        <div *ngIf="fromParent.price_change_percentage_24h > 0" class="positive mb-3">
+            Last 24H Return : {{fromParent.price_change_percentage_24h}} %
+        </div>
+        <div *ngIf="fromParent.price_change_percentage_24h < 0" class="negative mb-3">
+            Last 24H Return : {{fromParent.price_change_percentage_24h}} %
+        </div>        <div class="mb-3">Total Coins In Circulation : {{ fromParent.circulating_supply }}</div>
+        <div class="mb-3">Total Coins : {{ fromParent.total_supply }}</div>
+    </div>
+
+    
+

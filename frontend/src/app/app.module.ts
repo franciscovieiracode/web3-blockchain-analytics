@@ -33,9 +33,9 @@ import { NewRuleComponent } from './components/profile/new-rule/new-rule.compone
 
 import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.component';
 import { FilterPipe } from './components/crypto-prices/filterpipe.pipe';
-import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
 import { WalletPipe } from './components/profile/wallet.pipe';
 import { ContactsPipePipe } from './components/profile/contacts-pipe.pipe';
+import { ModalDetailsComponent } from './components/crypto-prices/modal-details/modal-details.component';
 
 @NgModule({
   declarations: [
@@ -65,9 +65,9 @@ import { ContactsPipePipe } from './components/profile/contacts-pipe.pipe';
     NewRuleComponent,
     CryptoPricesComponent,
     FilterPipe,
-    DetailedComponent,
     WalletPipe,
-    ContactsPipePipe
+    ContactsPipePipe,
+    ModalDetailsComponent
   ],
   imports: [
     BrowserModule,

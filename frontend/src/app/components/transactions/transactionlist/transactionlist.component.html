@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped" >
 	<thead>
 		<tr>
 			<th scope="col">Date</th>
@@ -41,12 +41,21 @@
                     <p class="text-success">{{transaction.type}}</p>
                 </div>
             </td>
-            <td><a class="copy" (click)="copy(transaction.in)">{{ transaction.in | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td><a class="copy" (click)="copy(transaction.out)">{{ transaction.out | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td><a class="source" href="{{finalEth}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td><a class="source" href="{{finalEth}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
             <td>{{ transaction.ammount }}</td>
             <td>{{ transaction.price}}</td>
             <td><a class="copy" (click)="copy(transaction.tx)">{{ transaction.tx | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td>{{transaction.classification}}</td>
+            <td>
+            <div ngbDropdown class="d-inline-block dropdowTypes">
+                <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1" ngbDropdownToggle>{{transaction.classification}}
+                    </button>
+                <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem class="item-dropdown" *ngFor="let item of dropdownLabels">{{item}}</button>
+                        
+                </div>
+            </div>
+            </td>
 			<td><a class="source" href="{{finalEth}}{{transaction.source}}" target="_blank">{{transaction.source | slice:0:9 }}</a>...</td>
 			<td><button (click)="openDetails(transaction)" class="btn btn-outline-secondary">Detailed info</button></td>
 

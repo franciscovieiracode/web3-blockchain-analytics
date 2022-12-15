@@ -6,11 +6,16 @@
     <div class="mb-3"><p class="text">Status:</p> {{ fromParent.stats }}</div>
     <div class="mb-3"><p class="text">Block:</p> {{ fromParent.block }}</div>
     <div class="mb-3"><p class="text">Date:</p> {{ fromParent.date }}</div>
-    <div class="mb-3"><p class="text">From:</p> {{ fromParent.in }}</div>
-    <div class="mb-3"><p class="text">To:</p> {{ fromParent.out }}</div>
+    <div class="mb-3"><p class="text">From:</p> {{ fromParent.in }}
+        <input type="text" class="input-group-text text-center col-lg-12" placeholder="Rename wallet"></div>
+    <div class="mb-3"><p class="text">To:</p> {{ fromParent.out }}
+       <input type="text" class="input-group-text text-center col-lg-12" placeholder="Rename wallet"></div>
     <div class="mb-3"><p class="text">Value:</p> {{ fromParent.ammount }}</div>
     <div class="mb-3"><p class="text">Fee:</p> {{ fromParent.fee }}</div>
 
+    
+
 </div>
-<div class="modal-footer">
+<div class="modal-footer"><button type="button" class="btn btn-outline-dark">Save</button>
 </div>
+

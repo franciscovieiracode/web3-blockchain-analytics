@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -37,12 +38,14 @@ export class TransactionlistComponent implements OnInit {
   name:string
   address:string
 
-	constructor(private modalService: NgbModal,private _clipboardService: ClipboardService,private http:HttpClient) {
+	constructor(private modalService: NgbModal,
+		private _clipboardService: ClipboardService,private http:HttpClient, private titleService:Title) {
 		this.copied=false
 		this.search=""
 		this.pageSize=10
 		this.name=""
 		this.address=""
+		this.titleService.setTitle("Transactions")
 	}
 
 		openDetails(transaction:any){

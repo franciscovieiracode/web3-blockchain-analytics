@@ -82,7 +82,7 @@
                         <div class="alert alert-danger center-block" role="alert">{{errorMessage}}</div>
                     </div>
                     <div class="col-sm-4 d-flex justify-content-start mt-3">
-                        <button type="submit" [disabled]="!checkbox" class="botao btn btn-primary" (click)="register()">Register</button>
+                        <button type="submit" [disabled]="!checkbox || !firstNameControl.valid || !lastNameControl.valid || !emailControl.valid || !passwordControl.valid" class="botao btn btn-primary" (click)="register()">Register</button>
                     </div>
                   </div>
             </form>

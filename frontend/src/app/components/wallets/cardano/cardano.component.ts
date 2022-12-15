@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class CardanoComponent implements OnInit {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,private titleService:Title) {
+    this.titleService.setTitle("Cardano")
+   }
+
 
   ngOnInit(): void {
   }

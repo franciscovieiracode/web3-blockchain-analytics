@@ -17,13 +17,14 @@ export class TransactionlistComponent implements OnInit {
 
 	dropdownLabels = ["Default: 28%", "Salary", "Minning", "Staking"]
 	finalEth = "https://etherscan.io/tx/"
+	finalEthAd = "https://etherscan.io/address/"
 	teste:any
   closeResult = '';
 
 
 
   transactions =[
-	{"date":"08-12-2022","type":"SENT","in":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c","out":"0x388c818ca8b9251b393131c08a736a67ccb19297","ammount":"0.005 ETH","price":"9,20","tx":"0xe3b8e7972df0ac67a5a6e9b56c0782504b3ab7857e968daefed6d4de902562cc", "classification":"Salary","source":"0xe3b8e7972df0ac67a5a6e9b56c0782504b3ab7857e968daefed6d4de902562cc", "block":"16135188", "fee":"13.916777895 Gwei", "stats":"Sucess"},
+	{"date":"08-12-2022","type":"SENT","in":"0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5","out":"0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5","ammount":"0.005 ETH","price":"9,20","tx":"0xe3b8e7972df0ac67a5a6e9b56c0782504b3ab7857e968daefed6d4de902562cc", "classification":"Salary","source":"0xe3b8e7972df0ac67a5a6e9b56c0782504b3ab7857e968daefed6d4de902562cc", "block":"16135188", "fee":"13.916777895 Gwei", "stats":"Sucess"},
 	{"date":"25-10-2022","type":"RECEIVE","in":"0xb3023d5e75010f7404dbfdeea69aaf3733e64558","out":"0x9e10f4a990c994316f5ef244def17434d6fb7ba4","ammount":"0.0016 ETH","price":"2,00","tx":"0x17ed533c28b39d01aa1bb64049a2d58200f6d9af604ce9637bf56c80ed910741", "classification":"Default: 28%","source":"0x17ed533c28b39d01aa1bb64049a2d58200f6d9af604ce9637bf56c80ed910741", "block":"16135188", "fee":"13.916777895 Gwei","stats":"Sucess"},
 	{"date":"08-12-2022","type":"SENT","in":"0xdafea492d9c6733ae3d56b7ed1adb60692c98bc5","out":"0x388c818ca8b9251b393131c08a736a67ccb19297","ammount":"0.19708 ETH","price":"242,75","tx":"0xf1ba99136d8241fd46b83cde30fced69137fda5447401b63ad6c4cfc9fb59b68", "classification":"Default: 28%","source":"0xf1ba99136d8241fd46b83cde30fced69137fda5447401b63ad6c4cfc9fb59b68", "block":"16136459", "fee":"29.102018185 Gwei","stats":"Sucess"},
 	{"date":"01-12-2022","type":"SENT","in":"0x14259515c9d957dd6ce338f346afa80e05f4ca29","out":"0xbfef411d9ae30c5b471d529c838f1abb7b65d67f","ammount":"0.003 ETH","price":"3,83","tx":"0x4941da1aaf81d64a317d9c9c57348c261a6d208775a8adaee554c51581f4ae5f", "classification":"Minning","source":"0x4941da1aaf81d64a317d9c9c57348c261a6d208775a8adaee554c51581f4ae5f", "block":"16135188", "fee":"13.916777895 Gwei","stats":"Sucess"},

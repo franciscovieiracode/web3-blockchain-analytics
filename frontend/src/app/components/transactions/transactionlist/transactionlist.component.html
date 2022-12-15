@@ -7,9 +7,32 @@
     <div class="col-3 mb-3">
         <input type="number" min=1 [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
     </div>
+    
+    
+    
+    
     <div class="col-6 mb-6 text-end">
         <button class="btn btn-outline-success" (click)="open(content)" >Add Contacts</button>
     </div>
+    <div class="col-3 mb-3">
+        <div ngbDropdown class="d-inline-block col-lg-3">
+            <button type="button" class="btn btn-outline-primary " id="dropdownBasic1" ngbDropdownToggle>
+                Wallet
+            </button>
+            <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem class="item-dropdown">Wallet1</button>
+                <div class="dropdown-divider"></div>
+                <button ngbDropdownItem class="item-dropdown">Wallet2</button>
+                <div class="dropdown-divider"></div>
+                <button ngbDropdownItem class="item-dropdown">Wallet3</button>
+                <div class="dropdown-divider"></div>
+                <button ngbDropdownItem class="item-dropdown">All</button>
+            </div>
+        </div>
+    </div>
+    
+        
+    
 </div>
 
 <table class="table table-striped" >
@@ -41,8 +64,8 @@
                     <p class="text-success">{{transaction.type}}</p>
                 </div>
             </td>
-            <td><a class="source" href="{{finalEth}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td><a class="source" href="{{finalEth}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
             <td>{{ transaction.ammount }}</td>
             <td>{{ transaction.price}}</td>
             <td><a class="copy" (click)="copy(transaction.tx)">{{ transaction.tx | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>

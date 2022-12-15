@@ -38,12 +38,12 @@
 <table class="table table-striped" >
 	<thead>
 		<tr>
-			<th scope="col">Date</th>
+			<th scope="col" class="cursor" (click)="sortbyDate()">Date <img src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
 			<th scope="col">Type</th>
 			<th scope="col">In</th>
 			<th scope="col">Out</th>
             <th scope="col">Amount</th>
-			<th scope="col">Price</th>
+			<th scope="col" class="cursor" (click)="sortByPrice()">Price <img src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
 			<th scope="col">Tx ID</th>
 			<th scope="col">Classification</th>
             <th scope="col">Source</th>
@@ -55,7 +55,7 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let transaction of transactions | slice: (page-1) * pageSize : page * pageSize | transactionlist:search">
-			<th scope="row">{{ transaction.date }}</th>
+			<th scope="row">{{transaction.formatedDate}}</th>
 			<td class="text-warning">
                 <div *ngIf="transaction.type == 'SENT'">
                     <p class="text-warning">{{transaction.type}}</p>
@@ -64,9 +64,11 @@
                     <p class="text-success">{{transaction.type}}</p>
                 </div>
             </td>
-            <td><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td>{{ transaction.ammount }}</td>
+            <td *ngIf="transaction.type == 'SENT'"><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+            <td *ngIf="transaction.type == 'SENT'"><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.walletname}} </a></td>
+
+            <td *ngIf="transaction.type == 'RECEIVE'"><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.walletname}} </a></td>
+            <td *ngIf="transaction.type == 'RECEIVE'"><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>            <td>{{ transaction.ammount }}</td>
             <td>{{ transaction.price}}</td>
             <td><a class="copy" (click)="copy(transaction.tx)">{{ transaction.tx | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
             <td>

@@ -9,6 +9,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalTransactionComponent {
   @Input() fromParent:any;
 
+  finalEthAd = "https://etherscan.io/address/"
+
   constructor(public activeModal:NgbActiveModal){
     
   }

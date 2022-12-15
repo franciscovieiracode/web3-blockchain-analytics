@@ -2,17 +2,17 @@
 <div class="container border text-center mt-5" *ngIf="ticketData">
     <div class="d-flex justify-content-center">  
         <p class="display-5 lead mb-3 mt-4 m-3">{{ticketData.an}}</p>
-        <img src="../../assets/img/{{ticket.toLowerCase()}}.jpg" class="img mt-4" height="50" alt="">
+        <img src="../../assets/img/prices/{{ticket.toLowerCase()}}.jpg" class="img mt-4" height="50" alt="">
     </div>
     <div class="m-3">Ticket: {{ticketData.s}}</div>
     <div class="m-3">Price: {{ticketData.c}} $</div>
     <div class="m-3">Current coins in circulation {{ ticketData.cs | number:'.0'}}</div>
     <div class="m-3">Current Marketcap {{ticketData.c*ticketData.cs| number:'.2'}} $</div>
-    <a href="prices" class="card-link back">Back to Menu</a>
+    <a href="prices" class="back card-link back">Back to Menu</a>
 </div>
  
 
 <div class="container text-center mt-5" *ngIf="notFound">
     <div class="display-5 lead mb-3 mt-4">Pair does not exist</div>
-    <a href="prices" class="card-link">Back to menu</a>
+    <a href="prices" class="back card-link">Back to menu</a>
 </div>

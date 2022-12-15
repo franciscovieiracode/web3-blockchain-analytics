@@ -1,7 +1,13 @@
-.back{
-    text-decoration: none;
+.container{
+    height: 22rem;
+    width: 50%;
 }
 
-.container{
-    padding-bottom: 5%;
+.img{
+    border-radius: 30%;
+    padding-top: 2%;
+}
+
+.back{
+    text-decoration: none;
 }

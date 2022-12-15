@@ -2,16 +2,15 @@
 <div class="container">
 <div class="row">
     <div class="col-3 mb-3 searchBar">
-        <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Search transaction">
+        <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-12" placeholder="Search transaction">
     </div>
-    <div class="col-3 mb-3">
-        <input type="number" min=1 [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-lg-3" placeholder="Choose Page Size">
+    <div class="col-1 mb-3 ">
+        <input type="number" min=1 [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-12" placeholder="Choose Page Size">    
     </div>
     
-    
-    
-    
-    <div class="col-6 mb-6 text-end">
+    <div class="col-3 "><app-date-picker></app-date-picker></div>
+
+    <div class="col-5 mb-6 text-end">
         <button class="btn btn-outline-success" (click)="open(content)" >Add Contacts</button>
     </div>
     <div class="col-3 mb-3">
@@ -31,7 +30,7 @@
         </div>
     </div>
     
-        
+ 
     
 </div>
 

@@ -35,6 +35,7 @@ import { CryptoPricesComponent } from './components/crypto-prices/crypto-prices.
 import { FilterPipe } from './components/crypto-prices/filterpipe.pipe';
 import { DetailedComponent } from './components/crypto-prices/detailed/detailed.component';
 import { WalletPipe } from './components/profile/wallet.pipe';
+import { ContactsPipePipe } from './components/profile/contacts-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { WalletPipe } from './components/profile/wallet.pipe';
     CryptoPricesComponent,
     FilterPipe,
     DetailedComponent,
-    WalletPipe
+    WalletPipe,
+    ContactsPipePipe
   ],
   imports: [
     BrowserModule,

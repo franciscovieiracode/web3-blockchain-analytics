@@ -88,7 +88,7 @@
                                 <div class="row">
                                     <div class="row">
                                         <div>
-                                            <p class="nameTax h4">Propeaty Gains</p>
+                                            <p class="nameTax h4">Property Gains</p>
                                             <p class="moneyTax h4">{{propeatyGainsMoney}}</p>
                                         </div>
                                     </div>
@@ -241,6 +241,12 @@
                 <div class="tab-pane container fade" id="contacts">
                     <h3 class="mb-4">Contacts</h3>
                     <div class="row ">
+                        <div class="row">
+                            <div class="col-3 mb-3 searchBar">
+                                <input type="text" [(ngModel)]="searchContact" #searchControl="ngModel"
+                                    class="input-group-text text-center col-lg-12" placeholder="Search wallet">
+                            </div>
+                            </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -250,11 +256,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let contact of contacts">
+                                <tr *ngFor="let contact of contacts | slice: (page-1) * pageSizeLogins : page * pageSizeLogins | contactsPipe:searchContact">
                                     <td scope="row">{{ contact.name }}</td>
                                     <td scope="row">{{ contact.address }}</td>
                                     <td class="center">
-                                        <button style="margin-right: 20px;" type=button class="buttondel"><i
+                                        <button style="margin-right: 20px;" type=button (click)="open(contentContact)" class="buttondel"><i
                                                 class="material-icons">&#xe150;</i></button>
                                         <button type=button class="buttondel" (click)="clickMethod(contact.name)"><i
                                                 class="material-icons">&#xe92b;</i></button>
@@ -262,15 +268,74 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <ngb-pagination
+                        [(page)]="page"
+                        [pageSize]="pageSizeLogins"
+                        [collectionSize]="login.length"></ngb-pagination>
                     </div>
                 </div>
                 <div class="tab-pane container fade" id="rules">
-                    <h3 class="mb-4">Rules</h3>
-                    <div class="row ">
-
-                    </div>
+                    <h3 class="mb-4">Your Tax Rules</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Criteria</th>
+                                <th scope="col">Behaviour</th>
+                                <th scope="col">Tax</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rule of rules | slice: (page-1) * pageSizeLogins : page * pageSizeLogins">
+                                <th scope="row">{{ rule.name }}</th>
+                                <th scope="row">{{ rule.criteria }}</th>
+                                <th scope="row">{{ rule.behaviour }}</th>  
+                                <th scope="row">{{ rule.tax }}</th> 
+                                <td class="center">
+                                    <button style="margin-right: 20px;" type=button (click)="open(content)" class="buttondel"><i
+                                            class="material-icons">&#xe150;</i></button>
+                                    <button type=button (click)="deleteRule(rule.name)" class="buttondel" ><i
+                                            class="material-icons">&#xe92b;</i></button>
+                                </td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSizeLogins"
+  [collectionSize]="login.length"></ngb-pagination>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Edit Rule</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <input type="text" [(ngModel)]="name" #nameControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Rule Name">
+        <input type="text" [(ngModel)]="description" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Rule Description">
+        <input type="text" [(ngModel)]="criteria" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Rule Criteria">
+        <input type="text" [(ngModel)]="behaviour" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Behaviour">
+        <input type="text" [(ngModel)]="taxRule" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Tax Rule">
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+	</div>
+</ng-template>
+
+<ng-template #contentContact let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Edit Rule</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <input type="text" [(ngModel)]="walletName" #walletNameControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Wallet Name">
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+	</div>
+</ng-template>

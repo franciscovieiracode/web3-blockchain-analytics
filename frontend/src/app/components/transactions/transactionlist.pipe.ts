@@ -15,6 +15,7 @@ export class TransactionlistPipe implements PipeTransform {
       || tran.out.toLowerCase().includes(search.toLowerCase()) 
       || tran.type.toLowerCase().includes(search.toLowerCase())
       || tran.date.toLowerCase().includes(search.toLowerCase())
+      || tran.walletname.toLowerCase().includes(search.toLowerCase())
     })
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,9 +14,10 @@ export class CryptoPricesComponent {
   search:string
   sorted:any
 
-  constructor(public router:Router){
+  constructor(public router:Router, private titleService: Title){
     this.search=""
     this.sorted=""
+    this.titleService.setTitle("Crypto Prices")
   }
 
   detailed(detailed:any){

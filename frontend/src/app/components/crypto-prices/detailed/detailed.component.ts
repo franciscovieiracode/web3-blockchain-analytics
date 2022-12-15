@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,8 +13,8 @@ export class DetailedComponent {
   ticketData:any
   notFound:boolean = false
 
-  constructor(public router:Router){
-
+  constructor(public router:Router,private titleService: Title){
+    this.titleService.setTitle(this.ticket + " Price")
   }
   ngOnInit(): void {
       this.ticketData=this.data[0]

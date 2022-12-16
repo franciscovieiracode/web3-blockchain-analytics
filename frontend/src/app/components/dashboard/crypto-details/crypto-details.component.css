@@ -6,10 +6,14 @@
     font-weight: bold;
 }
 
-.return{
+style{
+	border-top: 1px solid #8c8b8b;
+}
+
+.positive{
     color: green;
 }
 
-style{
-	border-top: 1px solid #8c8b8b;
+.negative{
+    color: red;
 }

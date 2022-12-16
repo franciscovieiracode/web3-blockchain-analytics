@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container m-3">
     <p class="bold">Positions</p>
     <div class="row">
         <div class="col-2">
@@ -21,44 +21,29 @@
         </div>
     </div>
     <hr class="line">
-    <div class="row">
-        <div class="col-2">
-            <p>Ethereum</p>
-        </div>
-        <div class="col-2">
-            <p>ETH</p>
-        </div>
-        <div class="col-2">
-            <p>9.958,50</p>
-        </div>
-        <div class="col-2">
-            <p>1.278,85 $</p>
-        </div>
-        <div class="col-2">
-            <p>127.512,40 $</p>
-        </div>
-        <div class="col-2">
-            <p class="return">5 %</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            <p>Cardano</p>
-        </div>
-        <div class="col-2">
-            <p>ADA</p>
-        </div>
-        <div class="col-2">
-            <p>270.500</p>
-        </div>
-        <div class="col-2">
-            <p>0,31 $</p>
-        </div>
-        <div class="col-2">
-            <p>83,700 $</p>
-        </div>
-        <div class="col-2">
-            <p class="return">2 %</p>
+    <div *ngFor="let d of data">
+            <div class="row mt-3">
+                <div class="col-2">
+                    {{d.name}}
+                </div>
+                <div class="col-2">
+                    {{d.symbol}}
+                </div>
+                <div class="col-2">
+                    {{d.balance}} {{d.symbol}}
+                </div>
+                <div class="col-2">
+                    {{d.coin_value}} $
+                </div>
+                <div class="col-2">
+                    {{d.total}} $
+                </div>
+                <div *ngIf="d.return24h > 0" class="col-2 positive">
+                    {{d.return24h}} %
+                </div>
+                <div *ngIf="d.return24h < 0" class="col-2 negative">
+                    {{d.return24h}} %
+                </div>
+            </div>
         </div>
     </div>
-</div>

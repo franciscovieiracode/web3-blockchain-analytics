@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailesComponent implements OnInit {
 
+  data={"balance":"12.000,52","profit":"2.000","gain":"20"}
+
   constructor() { }
 
   ngOnInit(): void {

@@ -17,7 +17,7 @@ export class LoginStatusComponent implements OnInit {
   getStatus(){
     let isLogin = false
 
-    if(localStorage.getItem("status") == "true"){
+    if(localStorage.getItem("currentUser") != null){
       isLogin = true
     }
     return isLogin

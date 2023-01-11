@@ -2,7 +2,7 @@
 using server.Models;
 using System.Diagnostics;
 
-namespace server.Controllers
+namespace server.Controllers.Backend
 {
     public class HomeController : Controller
     {

@@ -1,0 +1,35 @@
+﻿@model List<Backend.Models.User>
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Users List</h1>
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Last Visit</th>
+                <th>Role</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td><img src=@employee.Img width="50" height="50" /></td>
+                    <td>@employee.FirstName @employee.LastName</td>
+                    <td>@employee.LastVisitme</td>
+                    <td>@employee.Role</td>
+                    <td>
+                        <button class="btn btn-outline-secondary">Delete</button>
+                        <button class="btn btn-outline-secondary"><a class="text-dark text-decoration-none" asp-area="" asp-controller="Users" asp-action="Edit">Edit</a></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

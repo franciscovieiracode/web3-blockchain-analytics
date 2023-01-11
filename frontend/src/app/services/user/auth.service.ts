@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 
-const endpoint = 'https://localhost:7284/api/Auth/';
+const endpoint = 'https://localhost:7280/api/Auth/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json'

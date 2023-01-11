@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Models;
 
-namespace server.Controllers.Backend
+namespace server.Controllers
 {
     public class UsersController : Controller
     {

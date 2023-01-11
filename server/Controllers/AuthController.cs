@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Diagnostics;
 
-namespace server.Controllers.Frontend
+namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -72,8 +72,6 @@ namespace server.Controllers.Frontend
             return BadRequest();
         }
 
-
-
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] Login loginRequest)
@@ -92,21 +90,21 @@ namespace server.Controllers.Frontend
 
                 var isCorrect = await _userManager.CheckPasswordAsync(existing_user, loginRequest.Password);
 
-                if (!isCorrect)
-                {
-                    return BadRequest(new AuthResult()
+                    if (!isCorrect)
                     {
-                        Result = false,
-                        Error = "Invalid credentials"
+                        return BadRequest(new AuthResult()
+                        {
+                            Result = false,
+                            Error = "Invalid credentials"
+                        });
+                    }
+                    var jwtToken = GenerateJwtToken(existing_user);
+                    return Ok(new AuthResult()
+                    {
+                        Result = true,
+                        Token = jwtToken
                     });
-                }
-                var jwtToken = GenerateJwtToken(existing_user);
-                return Ok(new AuthResult()
-                {
-                    Result = true,
-                    Token = jwtToken
-                });
-
+                
             }
             return BadRequest(new AuthResult()
             {

@@ -26,7 +26,7 @@ import { MetamaskComponent } from './components/wallets/metamask/metamask.compon
 import { SettingsComponent } from './components/settings/settings.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { TransactionlistPipe } from './components/transactions/transactionlist.pipe';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ModalTransactionComponent } from './components/transactions/transactionlist/modal-transaction/modal-transaction.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NewRuleComponent } from './components/profile/new-rule/new-rule.component';
@@ -36,6 +36,7 @@ import { FilterPipe } from './components/crypto-prices/filterpipe.pipe';
 import { WalletPipe } from './components/profile/wallet.pipe';
 import { ContactsPipePipe } from './components/profile/contacts-pipe.pipe';
 import { ModalDetailsComponent } from './components/crypto-prices/modal-details/modal-details.component';
+import { Auth } from './interceptors/auth';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { ModalDetailsComponent } from './components/crypto-prices/modal-details/
     ClipboardModule,
     HttpClientModule
   ],
-  providers: [LoginStatusComponent],
+  providers: [LoginStatusComponent,{provide: HTTP_INTERCEPTORS, useClass: Auth, multi:true}],
   bootstrap: [AppComponent],
   entryComponents:[ModalTransactionComponent]
 })

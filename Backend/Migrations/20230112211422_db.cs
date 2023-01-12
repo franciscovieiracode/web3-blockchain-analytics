@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Backend.Migrations
 {
-    public partial class InitialBackend : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,10 @@ namespace Backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    firstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    lastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -46,23 +50,6 @@ namespace Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Img = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastVisitme = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,6 +158,70 @@ namespace Backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Blockchain",
+                columns: table => new
+                {
+                    BlockchainId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WalletName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WalletAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Blockchain", x => x.BlockchainId);
+                    table.ForeignKey(
+                        name: "FK_Blockchain_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Exchange",
+                columns: table => new
+                {
+                    ExchangenId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    accountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    connectionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApiKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApliSecret = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exchange", x => x.ExchangenId);
+                    table.ForeignKey(
+                        name: "FK_Exchange_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Metamask",
+                columns: table => new
+                {
+                    MetamaskId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WalletAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Metamask", x => x.MetamaskId);
+                    table.ForeignKey(
+                        name: "FK_Metamask_AspNetUsers_Id",
+                        column: x => x.Id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -209,6 +260,21 @@ namespace Backend.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Blockchain_Id",
+                table: "Blockchain",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exchange_Id",
+                table: "Exchange",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Metamask_Id",
+                table: "Metamask",
+                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,7 +295,13 @@ namespace Backend.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Blockchain");
+
+            migrationBuilder.DropTable(
+                name: "Exchange");
+
+            migrationBuilder.DropTable(
+                name: "Metamask");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
+import { GetProfileService } from 'src/app/services/user/get-profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -50,6 +51,8 @@ export class ProfileComponent implements OnInit {
     pageSize:number
     pageSizeLogins:number
 
+    errorMessage:string
+
     contacts =[
       {"name":"Alberto","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
       {"name":"Dinis","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
@@ -81,9 +84,12 @@ export class ProfileComponent implements OnInit {
     taxRule:Number
 
     walletName:String
+
+    profile:any
    
     constructor(private _clipboardService: ClipboardService,private http:HttpClient,
-       public route: Router, public titleService:Title,private modalService: NgbModal) {
+       public route: Router, public titleService:Title,private modalService: NgbModal,
+       private getProfileService: GetProfileService) {
       this.copied=false
       this.search=""
       this.pageSize=10
@@ -96,9 +102,26 @@ export class ProfileComponent implements OnInit {
       this.taxRule=0
       this.walletName=""
       this.searchContact=""
+      this.errorMessage=""
     }
 
   ngOnInit(): void {
+    this.getProfileService.getCurrentProfile().subscribe({
+      next: (data) => {
+        if(data && data.result == true){
+          console.log(data);
+          this.profile = data.user
+        }
+      },
+      error: (error) =>{
+        console.log(error.error);
+        
+        if(error.status == 401){
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info('Profile load completed') 
+  })
   }
 
   buttonNewRule() {

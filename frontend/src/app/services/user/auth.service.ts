@@ -26,8 +26,8 @@ export class AuthService {
     return this.http.post<any>(endpoint+"login", new LoginModel(username, password)).pipe(catchError(this.handleError));
   }
 
-  register(firstName:string, lastName:string, email:string,password:string,passwordConfirmation:string,test:string):Observable<any>{
-    return this.http.post<any>(endpoint+"register", new RegisterModel(firstName, lastName,email,password,passwordConfirmation,test)).pipe(catchError(this.handleError));
+  register(firstName:string, lastName:string, email:string,password:string,passwordConfirmation:string):Observable<any>{
+    return this.http.post<any>(endpoint+"register", new RegisterModel(firstName, lastName,email,password,passwordConfirmation)).pipe(catchError(this.handleError));
   }
 
 
@@ -41,7 +41,7 @@ export class AuthService {
 
 export class RegisterModel{
   constructor(public firstName:string, public lastName:string, public email:string,
-    public password:string,public passwordConfirmation:string, public test:string ){}
+    public password:string,public passwordConfirmation:string ){}
 }
 
 export class LoginModel{

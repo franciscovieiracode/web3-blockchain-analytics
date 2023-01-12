@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
   register(){
 
-    this.authService.register(this.firstName, this.lastName, this.email, this.password, this.confirmPassword, "this.test").subscribe({
+    this.authService.register(this.firstName, this.lastName, this.email, this.password, this.confirmPassword).subscribe({
       next: (data) => {
         if(data && data.result == true){
           console.log(data);

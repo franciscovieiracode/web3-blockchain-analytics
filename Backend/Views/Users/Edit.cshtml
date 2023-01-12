@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Backend.Models.UpdateUser
+@{
     ViewData["Title"] = "Edit User";
 }
 
@@ -7,42 +8,46 @@
     <form method="post" action="Edit" class="mt-5">
         <div class="row">
             <div class="col-md-12 mt-3">
-                <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" class="form-control">
-                </div>
+                <label for="" class="form-label">Id</label>
+                <input type="text" class="form-control" asp-for="UserId" readonly>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" class="form-control" value="Joao">
+                    <input type="text" class="form-control" asp-for="FirstName">
                 </div>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" value="Alberto">
+                    <input type="text" class="form-control" asp-for="LastName">
                 </div>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" value="joaozinhoalberto@gmail.com">
+                    <input type="text" class="form-control" asp-for="Email">
+                </div>
+            </div>
+            <div class="col-md-12 mt-3">
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" pattern="[9]{1}[0-9]{8}" asp-for="PhoneNumber">
                 </div>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group ">
-                    <select class="col-md-12 mt-4 p-2">
-                        <option value="" selected disabled hidden>Role</option>
-                        <option value="1">Admin</option>
-                        <option value="2">User</option>
+                    <select asp-for="UserRole" class="col-md-12 mt-4 p-2">
+                        <option selected disabled hidden>@Model.UserRole</option>
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="buttons mt-4">
-            <button class="btn btn-primary" asp-controller="Users" asp-action="Index">Update</button>
-            <button class="btn btn-primary" asp-controller="Users" asp-action="Index">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a class="btn btn-primary text-decoration-none" href="Users">Cancel</a>
         </div>
     </form>
 </div>

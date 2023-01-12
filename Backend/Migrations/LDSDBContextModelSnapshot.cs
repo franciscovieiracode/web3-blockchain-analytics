@@ -22,39 +22,89 @@ namespace Backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Backend.Models.User", b =>
+            modelBuilder.Entity("Backend.Models.Blockchain", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<int>("BlockchainId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Email")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlockchainId"), 1L, 1);
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("WalletAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("WalletName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Img")
+                    b.HasKey("BlockchainId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Blockchain");
+                });
+
+            modelBuilder.Entity("Backend.Models.Exchange", b =>
+                {
+                    b.Property<int>("ExchangenId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExchangenId"), 1L, 1);
+
+                    b.Property<string>("ApiKey")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("ApliSecret")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastVisitme")
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("accountName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("connectionDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("ExchangenId");
 
-                    b.ToTable("Users");
+                    b.HasIndex("Id");
+
+                    b.ToTable("Exchange");
+                });
+
+            modelBuilder.Entity("Backend.Models.Metamask", b =>
+                {
+                    b.Property<int>("MetamaskId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MetamaskId"), 1L, 1);
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("WalletAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MetamaskId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Metamask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -121,6 +171,10 @@ namespace Backend.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -172,6 +226,8 @@ namespace Backend.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -259,6 +315,60 @@ namespace Backend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Database.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("currency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Backend.Models.Blockchain", b =>
+                {
+                    b.HasOne("Backend.Database.ApplicationUser", "applicationUser")
+                        .WithMany("blockchains")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("applicationUser");
+                });
+
+            modelBuilder.Entity("Backend.Models.Exchange", b =>
+                {
+                    b.HasOne("Backend.Database.ApplicationUser", "applicationUser")
+                        .WithMany("exchanges")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("applicationUser");
+                });
+
+            modelBuilder.Entity("Backend.Models.Metamask", b =>
+                {
+                    b.HasOne("Backend.Database.ApplicationUser", "applicationUser")
+                        .WithMany("metamasks")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("applicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -308,6 +418,15 @@ namespace Backend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Backend.Database.ApplicationUser", b =>
+                {
+                    b.Navigation("blockchains");
+
+                    b.Navigation("exchanges");
+
+                    b.Navigation("metamasks");
                 });
 #pragma warning restore 612, 618
         }

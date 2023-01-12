@@ -50,7 +50,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedEmail = false).AddEntityFrameworkStores<LDSDBContext>();
 
 builder.Services.AddCors();

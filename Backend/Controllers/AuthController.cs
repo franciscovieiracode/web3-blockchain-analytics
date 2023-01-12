@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.Database;
+using Backend.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -12,10 +13,10 @@ namespace Backend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthController(UserManager<IdentityUser> userManager, IConfiguration configuration)
+        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -40,10 +41,13 @@ namespace Backend.Controllers
                     });
                 }
                 //create user
-                var new_user = new IdentityUser()
+                var new_user = new ApplicationUser()
                 {
                     UserName = requestDto.Email,
                     Email = requestDto.Email,
+                    firstName = requestDto.FirstName,
+                    lastName = requestDto.LastName,
+                    currency = "Eur"
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
@@ -125,7 +129,7 @@ namespace Backend.Controllers
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
 
                 }),
-                Expires = DateTime.Now.AddHours(1),
+                Expires = DateTime.Now.AddHours(24),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 

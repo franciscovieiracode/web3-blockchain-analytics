@@ -20,8 +20,5 @@ namespace Backend.Models
         [Required]
         public string PasswordConfirmation { get; set; }
 
-        [Required]
-        public string test { get; set; }
-
     }
 }

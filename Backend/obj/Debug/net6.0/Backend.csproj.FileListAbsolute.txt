@@ -300,3 +300,7 @@ C:\Users\franc\Documents\LDS2223_05\Backend\obj\Debug\net6.0\refint\Backend.dll
 C:\Users\franc\Documents\LDS2223_05\Backend\obj\Debug\net6.0\Backend.pdb
 C:\Users\franc\Documents\LDS2223_05\Backend\obj\Debug\net6.0\Backend.genruntimeconfig.cache
 C:\Users\franc\Documents\LDS2223_05\Backend\obj\Debug\net6.0\ref\Backend.dll
+C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

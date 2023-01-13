@@ -5,9 +5,9 @@
     </div>
     
         <div class="textLanding mt-2">
-            <form>
+            <form #formData="ngForm">
                 Enter a wallet name <br>
-                <input type="text" required name="walletName" class="form-control" placeholder="Wallet Name" name="walletAddress" [(ngModel)]="WalletAddress" #walletAddressControl="ngModel">
+                <input type="text" required name="walletName" class="form-control" placeholder="Wallet Name" name="walletName" [(ngModel)]="WalletName" #walletNameControl="ngModel">
                 <p style="font-size:80%;color:grey">Give a name to your wallet. This will help you identify and better
                     manage your wallets. </p>
             </form>
@@ -15,13 +15,17 @@
         <div class="textLanding mt-2">
             <form>
                 Enter the wallet address <br>
-                <input type="text" required name="walletAddress" class="form-control" placeholder="Wallet Address" name="walletName" [(ngModel)]="WalletName" #walletNameControl="ngModel">
+                <input type="text" required name="walletAddress" class="form-control" placeholder="Wallet Address" name="walletAddress" [(ngModel)]="WalletAddress" #walletAddressControl="ngModel">
             </form>
         </div>
     <div class="buttonDiv d-grid mt-4">
-        <button type="button" class="btn btn-primary" (click)="connectComplete()">Connect</button>
+        <button type="button" class="btn btn-primary" [disabled]="!walletNameControl.valid || !walletAddressControl.valid" (click)="connectComplete()">Connect</button>
     </div>
     <div class="buttonDiv d-grid mt-4">
-        <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
+        <button type="submit" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
     </div>
+    <div class="form-group row d-flex align-items-center justify-content-center ">
+        <div *ngIf="wrong==true" class="col-sm-4 mb-1">
+            <div class="alert alert-danger center-block" role="alert">{{errorMessage}}</div>
+        </div>
 </div>

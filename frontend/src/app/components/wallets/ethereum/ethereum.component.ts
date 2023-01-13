@@ -14,6 +14,7 @@ export class EthereumComponent implements OnInit {
   WalletName:string
   errorMessage:string
   wrong:boolean
+  type="ETH"
 
   constructor(public router:Router,private titleService:Title, private addWalletService:AddWalletsService) {
     this.titleService.setTitle("Ethereum")
@@ -27,11 +28,13 @@ export class EthereumComponent implements OnInit {
   }
 
   connectComplete(){
-    this.addWalletService.addBlockchain(this.WalletAddress, this.WalletName).subscribe({
+    this.addWalletService.addBlockchain(this.WalletAddress, this.WalletName, this.type).subscribe({
       next: (data) => {
         if(data && data.result == true){
           console.log(data);
-          alert("yes")
+          this.wrong=true
+          setTimeout(()=>{this.wrong=false},1500)
+          this.router.navigate(['dashboard'])
         }
       },
       error: (error) =>{
@@ -40,8 +43,7 @@ export class EthereumComponent implements OnInit {
         if(error.status == 400){
           this.errorMessage = "Wallet already exist"
           this.wrong=true
-          setTimeout(()=>{this.wrong=false},3000)
-          alert("erro")
+          setTimeout(()=>{this.wrong=false},1500)
         }
         else {
           this.errorMessage ="Please login first"

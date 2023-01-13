@@ -7,7 +7,7 @@ namespace Backend.Models.Requests
         [Required]
         public String accountName { get; set; }
 
-        public String connectionDescription { get; set; }
+        public String? connectionDescription { get; set; }
 
         [Required]
         public String ApiKey { get; set; }

@@ -16,6 +16,7 @@ import {
 } from '@wagmi/core';
 
 import { environment } from '../../../../environments/environment';
+import { AddWalletsService } from 'src/app/services/wallets/add-wallets.service';
 
 @Component({
   selector: 'app-metamask',
@@ -24,9 +25,13 @@ import { environment } from '../../../../environments/environment';
 })
 export class MetamaskComponent implements OnInit {
 
+  wrong:boolean
+  errorMessage=""
   data:any
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private addMetamaskService:AddWalletsService) {
+    this.wrong=false
+   }
 
   async ngOnInit(): Promise<void> {
     const { isConnected } = getAccount();
@@ -43,7 +48,28 @@ export class MetamaskComponent implements OnInit {
 
     this.data = userData
     console.log(this.data.address);
-    
+
+    this.addMetamaskService.addMetamask(this.data.address).subscribe({
+      next: (data) => {
+        if(data && data.result == true){
+          console.log(data);
+          this.router.navigate(['dashboard'])
+        }
+      },
+      error: (error) =>{
+        console.log(error.error);
+        
+        if(error.status == 400){
+          this.errorMessage = "Wallet already exist"
+          this.wrong=true
+          setTimeout(()=>{this.wrong=false},1500)
+        }
+        else {
+          this.errorMessage ="Please login first"
+        }
+      },
+      complete: () => console.info('Added completed') 
+  })    
     // redirect to /user
     this.router.navigate(['/dashboard']);
   }

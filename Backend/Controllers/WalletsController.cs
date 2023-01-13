@@ -4,8 +4,9 @@ using Backend.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
+using System.Text.Json;
+using System.Data;
+using System.Text.Json.Serialization;
 
 namespace Backend.Controllers
 {
@@ -44,6 +45,7 @@ namespace Backend.Controllers
                 WalletAddress = requestDto.WalletAddress,
                 WalletName = requestDto.WalletName,
                 Id = userData.Result.Id,
+                Type = requestDto.Type
             };
 
              _context.blockchains.Add(block);
@@ -151,10 +153,56 @@ namespace Backend.Controllers
         [Route("getExchange")]
         public async Task<IActionResult> getExchange()
         {
-            return BadRequest(new AddWalletResult()
+            var user = _userManager.GetUserId(User);
+            var userData =  _userManager.FindByEmailAsync(user);
+
+            var check = _context.exchanges.Where(x => x.Id == userData.Result.Id)
+                .Select(x => new { x.accountName, x.connectionDescription }).ToArray();
+
+
+            return Ok(new AddWalletResult()
             {
-                result = false,
-                reason = "ok but yes"
+                result = true,
+                address = JsonSerializer.Serialize(check)
+            });
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("getBlockchain")]
+        public async Task<IActionResult> getBlochain()
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            var check = _context.blockchains.Where(x => x.Id == userData.Result.Id)
+                .Select(x => new { x.WalletAddress, x.WalletName, x.Type });
+
+
+            return Ok(new AddWalletResult()
+            {
+                result = true,
+                address = JsonSerializer.Serialize(check)
+            });
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("getMetamask")]
+        public async Task<IActionResult> getMetamask()
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            var check = _context.metamasks.Where(x => x.Id == userData.Result.Id)
+                .Select(x => new { x.WalletAddress });
+
+
+            return Ok(new AddWalletResult()
+            {
+                result = true,
+                address = JsonSerializer.Serialize(check)
             });
         }
 

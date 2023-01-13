@@ -13,6 +13,8 @@ namespace Backend.Models
 
         [Required]
         public String WalletAddress { get; set; }
+
+        public String Type { get; set; }
     
         public String Id { get; set; }
 

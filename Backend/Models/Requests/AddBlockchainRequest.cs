@@ -10,5 +10,7 @@ namespace Backend.Models.Requests
         [Required]
         public string WalletAddress { get; set; }
 
+        public string Type { get; set; }
+
     }
 }

@@ -19,8 +19,16 @@ export class AddWalletsService {
 
   constructor(private http: HttpClient, private router:Router) { }
 
-  addBlockchain(WalletAddress:string, WalletName:string):Observable<any>{
-    return this.http.post(endpoint+"addBlockchain", new addBlockchainModel(WalletAddress,WalletName)).pipe(catchError(this.handleError));
+  addBlockchain(WalletAddress:string, WalletName:string, Type:string):Observable<any>{
+    return this.http.post(endpoint+"addBlockchain", new addBlockchainModel(WalletAddress,WalletName, Type)).pipe(catchError(this.handleError));
+  }
+
+  addExchange(accountName:string,connectionDescription:string,ApiKey:string,ApliSecret:string):Observable<any>{
+    return this.http.post(endpoint+"addExchange", new addExchangeModel(accountName,connectionDescription,ApiKey,ApliSecret))
+  }
+
+  addMetamask(WalletAddress:string):Observable<any>{
+    return this.http.post(endpoint+"addMetamask", new addMetamaskModel(WalletAddress)).pipe(catchError(this.handleError));
   }
 
   handleError(error:HttpErrorResponse) {
@@ -32,6 +40,14 @@ export class AddWalletsService {
 
 
 export class addBlockchainModel{
-  constructor(public WalletAddress:string, public WalletName:string){}
+  constructor(public WalletAddress:string, public WalletName:string, public Type:string){}
 
+}
+
+export class addMetamaskModel{
+  constructor(public WalletAddress:string){}
+}
+
+export class addExchangeModel{
+  constructor(public accountName:string, public connectionDescription:string, public ApiKey:string, public ApliSecret:string){}
 }

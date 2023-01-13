@@ -34,6 +34,10 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("WalletAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

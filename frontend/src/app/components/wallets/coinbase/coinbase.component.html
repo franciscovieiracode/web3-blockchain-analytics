@@ -7,24 +7,28 @@
     <div class="textLanding mt-2">
         <form>
             <input type="text" required name="connectionName" class="form-control"
-                placeholder="Name your account (eg: Trading account)">
+                placeholder="Name your account (eg: Trading account)" name="accountName" [(ngModel)]="accountName" #connectionNameControl="ngModel">
             <p style="font-size:80%;color:grey">Give a name to your connection. </p>
         </form>
     </div>
     <div class="textLanding mt-2">
         <form>
-            <input type="text" name="description" class="form-control" placeholder="Connection description (optional)">
+            <input type="text" name="description" class="form-control" placeholder="Connection description (optional)"
+            name="connectionDescription" [(ngModel)]="connectionDescription" #connectionDescriptionControl="ngModel">
             <p style="font-size:80%;color:grey">Give a description to your connection. </p>
         </form>
     </div>
     <div class="textLanding mt-2">
         <form>
-            <input type="text" required name="apiKey" class="form-control" placeholder="API Key">
+            <input type="text" required name="apiKey" class="form-control" placeholder="API Key"
+            name="ApiKey" [(ngModel)]="ApiKey" #apikeyControl="ngModel">
+            
         </form>
     </div>
     <div class="textLanding mt-2">
         <form>
-            <input type="text" required name="apiSecret" class="form-control" placeholder="API Secret">
+            <input type="text" required name="apiSecret" class="form-control" placeholder="API Secret"
+            name="ApliSecret" [(ngModel)]="ApliSecret" #apliSecretControl="ngModel">
         </form>
     </div>
 

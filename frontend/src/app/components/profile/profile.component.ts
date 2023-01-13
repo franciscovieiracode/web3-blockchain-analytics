@@ -4,7 +4,9 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
+import { combineLatest, forkJoin } from 'rxjs';
 import { GetProfileService } from 'src/app/services/user/get-profile.service';
+import { GetWalletsService } from 'src/app/services/wallets/get-wallets.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,19 +33,10 @@ export class ProfileComponent implements OnInit {
   finalEth = "https://etherscan.io/tx/"
 	teste:any
   closeResult = '';
-  wallets =[
-    {"type":"car","connection":"cardano","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"eth","connection":"ethereum","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"meta","connection":"metamask","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"coinbase","connection":"coinbase","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"car","connection":"cardano","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"eth","connection":"ethereum","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"meta","connection":"metamask","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"coinbase","connection":"coinbase","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"car","connection":"cardano","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"eth","connection":"ethereum","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"meta","connection":"metamask","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    {"type":"coinbase","connection":"coinbase","value":"€ 17.90","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"}, ]
+  wallets:any
+  walletsMetamask=""
+  walletsBlockchain=""
+  walletsExchange=""
     search:string
     searchContact:string
     copied:boolean
@@ -61,6 +54,7 @@ export class ProfileComponent implements OnInit {
       {"name":"Joao","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
       {"name":"Joaquim","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
     ]
+    
 
     login=[
       {"date":"08-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
@@ -89,7 +83,7 @@ export class ProfileComponent implements OnInit {
    
     constructor(private _clipboardService: ClipboardService,private http:HttpClient,
        public route: Router, public titleService:Title,private modalService: NgbModal,
-       private getProfileService: GetProfileService) {
+       private getProfileService: GetProfileService, private getWallets:GetWalletsService) {
       this.copied=false
       this.search=""
       this.pageSize=10
@@ -122,6 +116,64 @@ export class ProfileComponent implements OnInit {
       },
       complete: () => console.info('Profile load completed') 
   })
+
+  this.getWallets.getBlockchain().subscribe({
+    next: (data) => {
+      if(data && data.result == true){
+        console.log(data);
+        this.walletsBlockchain = JSON.parse(data.address)
+      }
+    },
+    error: (error) =>{
+      console.log(error.error);
+      
+      if(error.status == 401){
+        this.errorMessage = "Please login first"
+      }
+    },
+    complete: () => console.info('Blochain Wallets load completed') 
+})
+
+this.getWallets.getExchange().subscribe({
+  next: (data) => {
+    if(data && data.result == true){
+      console.log(data);
+      this.walletsExchange = JSON.parse(data.address)
+    }
+  },
+  error: (error) =>{
+    console.log(error.error);
+    
+    if(error.status == 401){
+      this.errorMessage = "Please login first"
+    }
+  },
+  complete: () => console.info('Exchange wallets load completed') 
+})
+
+this.getWallets.getMetamask().subscribe({
+  next: (data) => {
+    if(data && data.result == true){
+      console.log(data);
+      this.walletsMetamask = JSON.parse(data.address)
+      setTimeout(() => {
+        this.wallets = this.walletsExchange.concat(this.walletsBlockchain,this.walletsMetamask)
+      }, 10);
+      console.log(this.wallets);
+      
+    }
+  },
+  error: (error) =>{
+    console.log(error.error);
+    
+    if(error.status == 401){
+      this.errorMessage = "Please login first"
+    }
+  },
+  complete: () => console.info("Loaded Metamask")
+ 
+})
+
   }
 
   buttonNewRule() {

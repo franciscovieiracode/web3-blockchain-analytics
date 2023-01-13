@@ -11,8 +11,9 @@ export class WalletPipe implements PipeTransform {
   }
   else{
     return wallets.filter((wallet:any)=>{        
-      return  wallet.connection.toLowerCase().includes(search.toLowerCase()) 
-      || wallet.address.toLowerCase().includes(search.toLowerCase())
+      return  wallet.WalletName?.toLowerCase().includes(search.toLowerCase())
+      || wallet.WalletAddress?.toLowerCase().includes(search.toLowerCase()) 
+      || wallet.accountName?.toLowerCase().includes(search.toLowerCase()) 
     })
   }
 }

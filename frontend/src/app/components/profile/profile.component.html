@@ -12,7 +12,7 @@
                                 class="shadow" />
                         </div>
                     </div>
-                    <h4 class="text-center">Joao Alberto</h4>
+                    <h4 class="text-center">{{profile.firstName}} {{profile.lastName}}  </h4>
                 </div>
                 <!-- Nav tabs -->
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -199,7 +199,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Connection</th>
-                                    <th scope="col">Value</th>
                                     <th scope="col">Address</th>
                                     <th class="center" scope="col">Remove</th>
                                 </tr>
@@ -207,30 +206,32 @@
                             <tbody>
                                 <tr
                                     *ngFor="let wallet of wallets | slice: (page-1) * pageSize : page * pageSize | wallet:search">
-                                    <td scope="row" *ngIf="wallet.type == 'car'">
-                                        <img src="../../../../assets/img/wallets-icons/cardano_icon.png" height="15"
-                                            alt="">&nbsp; {{ wallet.connection }}
+                                    <td scope="row">
+                                        <div *ngIf="!wallet.WalletName && !wallet.accountName && wallet.WalletAddress">
+                                            <img src="../../../assets/img/wallets-icons/metamask_icon.png" height="25" alt=""> Metamask
+                                        </div>
+                                        
+                                        <div *ngIf="wallet.accountName && !wallet.WalletName">
+                                            <img src="../../../assets/img/wallets-icons/coinbase_icon.png" height="25" alt=""> {{wallet.accountName}}    
+                                        </div>
+                                        
+                                        <div *ngIf="wallet.WalletAddress && wallet.WalletName">
+                                            <div *ngIf="wallet.Type == 'ETH'">
+                                                <img src="../../../assets/img/wallets-icons/ethereum_icon.png" height="25" alt=""> {{wallet.WalletName}} 
+                                            </div>
+                                            <div *ngIf="wallet.Type == 'ADA'">
+                                                <img src="../../../assets/img/wallets-icons/cardano_icon.png" height="25" alt=""> {{wallet.WalletName}} 
+                                            </div>    
+                                        </div>
+                                        
                                     </td>
-                                    <td scope="row" *ngIf="wallet.type == 'eth'">
-                                        <img src="../../../../assets/img/wallets-icons/ethereum_icon.png" height="15"
-                                            alt=""> &nbsp;{{ wallet.connection }}
-                                    </td>
-                                    <td scope="row" *ngIf="wallet.type == 'meta'">
-                                        <img src="../../../../assets/img/wallets-icons/metamask_icon.png" height="14"
-                                            alt="">&nbsp; {{ wallet.connection }}
-                                    </td>
-                                    <td scope="row" *ngIf="wallet.type == 'coinbase'">
-                                        <img src="../../../../assets/img/wallets-icons/coinbase_icon.png" height="15"
-                                            alt="">&nbsp; {{ wallet.connection }}
-                                    </td>
-
-                                    <td scope="row">{{ wallet.value }}</td>
-                                    <td><a class="source" href="wallet.address" target="_blank">{{wallet.address }}</a>
+                                    <td scope="row">
+                                        {{ wallet.WalletAddress | slice:0:15}}
                                     </td>
 
                                     <td class="center">
                                         <button type=button class="buttondel"
-                                            (click)="clickMethod(wallet.connection)"><i
+                                            (click)="clickMethod(wallet.WalletName)"><i
                                                 class="material-icons">&#xe92b;</i></button>
                                     </td>
                                 </tr>

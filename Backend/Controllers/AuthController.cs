@@ -47,6 +47,9 @@ namespace Backend.Controllers
                     Email = requestDto.Email,
                     firstName = requestDto.FirstName,
                     lastName = requestDto.LastName,
+                    img = "user.png",
+                    typeUser = "User",
+                    lastVisit = DateTime.Now,
                     currency = "Eur"
                 };
 

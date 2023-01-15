@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Backend.Models.User>
-
-@{
+﻿@{
     ViewData["Title"] = "DashBoard";
 }
 @section scripts{
@@ -24,22 +22,6 @@
         });
     </script>
 }
-    @{
-    var countAd = 0;
-    var countUs = 0;
-
-    foreach (var user in Model)
-    {
-        if (user.UserRole == "User")
-        {
-            countUs++;
-        }
-        else if (user.UserRole == "Admin")
-        {
-            countAd++;
-        }
-    }
-}
 <div class="text-center">
     <h1 class="display-4">DashBoard</h1>
     <div class="container mt-3">
@@ -53,7 +35,7 @@
                             </div>
                             <div class="p-2 mt-2">
                                 <p class="titles">Number of Admins</p>
-                                <p class="text-center">@countAd</p>
+                                <p class="text-center">null</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +46,7 @@
                             </div>
                             <div class="p-2 mt-2">
                                 <p class="titles">Number of Clients</p>
-                                <p class="text-center">@countUs</p>
+                                <p class="text-center">null</p>
 
                             </div>
                         </div>

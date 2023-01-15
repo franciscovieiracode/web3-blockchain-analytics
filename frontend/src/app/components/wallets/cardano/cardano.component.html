@@ -26,6 +26,11 @@
         <div class="buttonDiv d-grid mt-4">
             <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
         </div>
+        <div class="text-center">
+            <div *ngIf="wrong==true" class="col-sm-12 mb-1">
+                <div class="alert alert-danger center-block" role="alert">{{errorMessage}}</div>
+            </div>
+    </div>
     </div>
 
     

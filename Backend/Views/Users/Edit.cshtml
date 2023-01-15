@@ -1,4 +1,4 @@
-﻿@model Backend.Models.UpdateUser
+﻿@model Backend.Database.ApplicationUser
 @{
     ViewData["Title"] = "Edit User";
 }
@@ -9,18 +9,18 @@
         <div class="row">
             <div class="col-md-12 mt-3">
                 <label for="" class="form-label">Id</label>
-                <input type="text" class="form-control" asp-for="UserId" readonly>
+                <input type="text" class="form-control" asp-for="Id" readonly>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" class="form-control" asp-for="FirstName">
+                    <input type="text" class="form-control" asp-for="firstName">
                 </div>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" asp-for="LastName">
+                    <input type="text" class="form-control" asp-for="lastName">
                 </div>
             </div>
             <div class="col-md-12 mt-3">
@@ -37,8 +37,8 @@
             </div>
             <div class="col-md-12 mt-3">
                 <div class="form-group ">
-                    <select asp-for="UserRole" class="col-md-12 mt-4 p-2">
-                        <option selected disabled hidden>@Model.UserRole</option>
+                    <select asp-for="typeUser" class="col-md-12 mt-4 p-2">
+                        <option selected disabled hidden>@Model.typeUser</option>
                         <option value="Admin">Admin</option>
                         <option value="User">User</option>
                     </select>
@@ -47,7 +47,7 @@
         </div>
         <div class="buttons mt-4">
             <button type="submit" class="btn btn-primary">Update</button>
-            <a class="btn btn-primary text-decoration-none" href="Users">Cancel</a>
+            <a class="btn btn-primary text-decoration-none" asp-action="Index">Cancel</a>
         </div>
     </form>
 </div>

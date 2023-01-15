@@ -25,6 +25,7 @@ namespace Backend.Controllers
 
         }
 
+        //add blockchain to user
         [Authorize]
         [HttpPost]
         [Route("addBlockchain")]
@@ -33,31 +34,31 @@ namespace Backend.Controllers
             var user = _userManager.GetUserId(User);
             var userData = _userManager.FindByEmailAsync(user);
 
-            var check = _context.blockchains.Where(x=> x.Id == userData.Result.Id);
+            var check = _context.blockchains.Where(x => x.Id == userData.Result.Id);
 
-            var exists = check.Any(x => x.WalletAddress== requestDto.WalletAddress);
+            var exists = check.Any(x => x.WalletAddress == requestDto.WalletAddress);
 
             if (exists == false)
             {
 
-              var block = new Blockchain()
-            {
-                WalletAddress = requestDto.WalletAddress,
-                WalletName = requestDto.WalletName,
-                Id = userData.Result.Id,
-                Type = requestDto.Type
-            };
+                var block = new Blockchain()
+                {
+                    WalletAddress = requestDto.WalletAddress,
+                    WalletName = requestDto.WalletName,
+                    Id = userData.Result.Id,
+                    Type = requestDto.Type
+                };
 
-             _context.blockchains.Add(block);
-             _context.SaveChanges();
+                _context.blockchains.Add(block);
+                _context.SaveChanges();
 
 
 
-            return Ok(new AddWalletResult()
-            {
-                result = true,
-                address = block.WalletAddress
-            });
+                return Ok(new AddWalletResult()
+                {
+                    result = true,
+                    address = block.WalletAddress
+                });
             }
 
             return BadRequest(new AddWalletResult()
@@ -68,6 +69,7 @@ namespace Backend.Controllers
 
         }
 
+        //add metamask to user
         [Authorize]
         [HttpPost]
         [Route("addMetamask")]
@@ -105,6 +107,7 @@ namespace Backend.Controllers
             });
         }
 
+        //add exchange to user
         [Authorize]
         [HttpPost]
         [Route("addExchange")]
@@ -148,13 +151,14 @@ namespace Backend.Controllers
             });
         }
 
+        //get exchanges from user
         [Authorize]
         [HttpGet]
         [Route("getExchange")]
         public async Task<IActionResult> getExchange()
         {
             var user = _userManager.GetUserId(User);
-            var userData =  _userManager.FindByEmailAsync(user);
+            var userData = _userManager.FindByEmailAsync(user);
 
             var check = _context.exchanges.Where(x => x.Id == userData.Result.Id)
                 .Select(x => new { x.accountName, x.connectionDescription }).ToArray();
@@ -167,7 +171,7 @@ namespace Backend.Controllers
             });
         }
 
-
+        //get blockchains from user
         [Authorize]
         [HttpGet]
         [Route("getBlockchain")]
@@ -187,6 +191,7 @@ namespace Backend.Controllers
             });
         }
 
+        //get metamask from user
         [Authorize]
         [HttpGet]
         [Route("getMetamask")]
@@ -203,6 +208,44 @@ namespace Backend.Controllers
             {
                 result = true,
                 address = JsonSerializer.Serialize(check)
+            });
+        }
+
+
+        //get all wallets names to add to dropdown in dashboard
+        [Authorize]
+        [HttpGet]
+        [Route("getAllWalletsToDashboard")]
+        public async Task<IActionResult> getAllWalletsToDashboard()
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            List<string> wallets = new List<string>();
+
+
+            var check = _context.blockchains.Where(x => x.Id == userData.Result.Id)
+                .Select(x => x.WalletName);
+
+            var check1 = _context.metamasks.Where(x => x.Id == userData.Result.Id)
+                .Select(x => x.WalletAddress);
+
+            var check2 = _context.exchanges.Where(x => x.Id == userData.Result.Id)
+                .Select(x => x.accountName);
+
+            wallets.Add("All");
+
+            wallets.AddRange(check);
+
+            wallets.AddRange(check1);
+
+            wallets.AddRange(check2);
+
+
+            return Ok(new AddWalletResult()
+            {
+                result = true,
+                listAddress = wallets
             });
         }
 

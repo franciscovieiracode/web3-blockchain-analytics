@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Title} from "@angular/platform-browser";
+import { GetWalletsServiceDashboard } from 'src/app/services/dashboard/get-wallets.service';
 
 
 @Component({
@@ -9,11 +10,29 @@ import {Title} from "@angular/platform-browser";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private titleService:Title) {
+  listAddress:any
+  selectedItem:any
+
+  constructor(private titleService:Title, private getWalletsDropdown: GetWalletsServiceDashboard) {
     this.titleService.setTitle("Dashboard")
    }
 
   ngOnInit(): void {
+    this.getWalletsDropdown.getWallets().subscribe({
+      next: (data) => {
+        if(data && data.result == true){
+          console.log(data);
+          this.listAddress = data.listAddress
+        }
+      },
+      complete: () => {
+        this.selectedItem = this.listAddress[0]
+        console.info('Get Wallets completed') }
+  })
+  }
+
+  onSelect(wallet:string){
+    this.selectedItem = wallet
   }
 
 }

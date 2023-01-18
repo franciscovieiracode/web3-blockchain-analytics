@@ -158,7 +158,7 @@ this.getWallets.getMetamask().subscribe({
       this.walletsMetamask = JSON.parse(data.address)
       setTimeout(() => {
         this.wallets = this.walletsExchange.concat(this.walletsBlockchain,this.walletsMetamask)
-      }, 10);
+      }, 100);
       console.log(this.wallets);
       
     }

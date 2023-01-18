@@ -7,7 +7,7 @@
             </div>
               <div class="p-2 mt-2">
                 <p class="titles">Wallet Balance</p>
-                <p class="text-center">{{data.balance}} $</p>
+                <p class="text-center">{{totalBalance | number:'1.2-2'}} $</p>
               </div>
         </div>
         </div>
@@ -18,7 +18,7 @@
             </div>
               <div class="p-2 mt-2">
                 <p class="titles">Total Gross Profit</p>
-                <p class="text-center">{{data.profit}} $</p>
+                <p class="text-center">{{totalProfit | slice:0:5}} $</p>
               </div>
         </div>
         </div>
@@ -29,7 +29,7 @@
             </div>
               <div class="p-2 mt-2">
                 <p class="titles">Total Gross Gain</p>
-                <p class="text-center">{{data.gain}} %</p>
+                <p class="text-center">{{percentageReturn | number:'1.2-2'}} %</p>
               </div>
         </div>
         </div>

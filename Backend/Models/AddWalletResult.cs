@@ -6,7 +6,7 @@ namespace Backend.Models
     {
         public String address { get; set; }
 
-        public List<String> listAddress { get; set; }
+        public List<Object> listAddress { get; set; }
         public Boolean result { get; set; }
 
         public String reason { get; set; }

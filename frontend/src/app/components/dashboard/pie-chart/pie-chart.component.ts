@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -17,7 +17,7 @@ import {
 export class PieChartComponent implements OnInit {
 
   
-  chartSeries: ApexNonAxisChartSeries=[0.65,0.35]
+  chartSeries: ApexNonAxisChartSeries=[1,0]
 
   chartDetails: ApexChart = {
     type:'pie',

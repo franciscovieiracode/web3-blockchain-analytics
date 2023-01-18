@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-detailes',
@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detailes.component.css']
 })
 export class DetailesComponent implements OnInit {
-
-  data={"balance":"12.000,52","profit":"2.000","gain":"20"}
+  @Input() totalBalance: any;
+  @Input() totalProfit: any;
+  @Input() percentageReturn:any
 
   constructor() { }
 

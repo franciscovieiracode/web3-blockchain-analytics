@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-crypto-details',
@@ -6,6 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crypto-details.component.css']
 })
 export class CryptoDetailsComponent implements OnInit {
+
+@Input() coinName: any
+@Input() coinId: any
+@Input() coinPrice: any
+@Input() balance: any
+@Input() change24h: any
+@Input() details1:any
+@Input() totalBalance:any
+
 
   data=[
     {"name":"Ethereum","symbol":"ETH","balance":"9.958,50","coin_value":"1.278,85", "total":"127.512,40","return24h":5},

@@ -2,8 +2,12 @@
 {
     public class GetWalletsRequest
     {
-        public String walletAddress { get; set; }
+        public String? walletAddress { get; set; }
 
-        public String? walletName { get; set; }
+        public String? accountName { get; set; }
+
+        public String? apiKey { get; set; }
+
+        public String? apiSecret { get; set; }
     }
 }

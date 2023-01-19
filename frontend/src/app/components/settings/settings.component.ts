@@ -44,6 +44,8 @@ export class SettingsComponent implements OnInit {
           this.email = this.profile.email;
           this.phoneNumber = this.profile.phoneNumber;
           this.currency = this.profile.currency;
+          console.log(this.profile.currency);
+          
         }
       },
       error: (error) =>{

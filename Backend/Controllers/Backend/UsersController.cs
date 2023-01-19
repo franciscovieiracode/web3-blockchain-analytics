@@ -1,5 +1,6 @@
 ﻿using Backend.Database;
 using Backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,27 +45,25 @@ namespace Backend.Controllers.Backend
         public async Task<IActionResult> Edit(String id, ApplicationUser model)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-             if (user == null)
+
+            if (user == null)
             {
                 return NotFound();
             }
-            if (ModelState.IsValid)
+
+            user.firstName = model.firstName;
+            user.lastName = model.lastName;
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.typeUser = model.typeUser;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
             {
-                user.Id = model.Id;
-                user.firstName = model.firstName;
-                user.lastName = model.lastName;
-                user.Email = model.Email;
-                user.PhoneNumber = model.PhoneNumber;
-                user.typeUser = model.typeUser;
-
-                var result = await _userManager.UpdateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new { id = user.Id });
         }
 
         [HttpPost]

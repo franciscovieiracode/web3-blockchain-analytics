@@ -1,9 +1,11 @@
 ﻿using Backend.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 
 namespace Backend.Database
 {
+    [Bind("firstName", "lastName", "Email", "PhoneNumber", "typeUser")]
     public class ApplicationUser : IdentityUser
     {
         public String firstName { get; set; }
@@ -24,5 +26,7 @@ namespace Backend.Database
         public virtual List<Exchange> exchanges { get; set; }
         [JsonIgnore]
         public virtual List<Metamask> metamasks { get; set; }
+
+        public virtual List<Transactions> transactions { get; set; }
     }
 }

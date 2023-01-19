@@ -50,7 +50,7 @@ namespace Backend.Controllers
                     img = "user.png",
                     typeUser = "User",
                     lastVisit = DateTime.Now,
-                    currency = "Eur"
+                    currency = "Euro"
                 };
 
                 var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);

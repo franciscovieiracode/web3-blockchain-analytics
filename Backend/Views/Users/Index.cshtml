@@ -1,23 +1,24 @@
 ﻿@model IEnumerable<Backend.Database.ApplicationUser>
 
-    @{
+@{
     ViewData["Title"] = "Users List";
-    }
+}
 
-    <div class="text-center">
-        <h1 class="display-4">Users List</h1>
-        <table class="table mt-5">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Last Visit</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var user in Model){
+<div class="text-center">
+    <h1 class="display-4">Users List</h1>
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Last Visit</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
                 <tr>
                     <td><img src=/images/@user.img width="50" height="50" /></td>
                     <td>@user.firstName @user.lastName</td>
@@ -25,13 +26,12 @@
                     <td>@user.typeUser</td>
                     <td>
                         <a class="btn btn-primary text-decoration-none m-1 d-inline-flex" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
-                        <!--<a class="btn btn-primary text-decoration-none m-1 d-inline-flex" href="Users/Edit/@user.Id">Edit</a>-->
                         <form class="m-1 d-inline-flex" method="post" asp-action="DeletUser" asp-route-id="@user.Id">
                             <button type="submit" class="btn btn-danger"> Delete </button>
                         </form>
                     </td>
                 </tr>
             }
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Backend.Models.CountViewModel
+@{
     ViewData["Title"] = "DashBoard";
 }
 @section scripts{
@@ -35,7 +36,7 @@
                             </div>
                             <div class="p-2 mt-2">
                                 <p class="titles">Number of Admins</p>
-                                <p class="text-center">null</p>
+                                <p class="text-center">@Model.CountAd</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
                             </div>
                             <div class="p-2 mt-2">
                                 <p class="titles">Number of Clients</p>
-                                <p class="text-center">null</p>
+                                    <p class="text-center">@Model.CountUs</p>
 
                             </div>
                         </div>
@@ -58,7 +59,7 @@
                             </div>
                             <div class="p-2 mt-2">
                                 <p class="titles">Number of Connected Wallets</p>
-                                <p class="text-center">2034</p>
+                                    <p class="text-center">@Model.CountAll</p>
                             </div>
                         </div>
                     </div>

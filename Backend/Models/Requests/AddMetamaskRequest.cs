@@ -2,7 +2,7 @@
 
 namespace Backend.Models.Requests
 {
-    public class MetamaskRequest
+    public class AddMetamaskRequest
     {
         [Required]
         public String WalletAddress { get; set; }

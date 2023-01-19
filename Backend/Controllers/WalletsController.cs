@@ -398,5 +398,51 @@ namespace Backend.Controllers
 
         }
 
+        [Authorize]
+        [HttpPost]
+        [Route("deleteWallet")]
+        public async Task<IActionResult> deleteWallet([FromBody] GetWalletsRequest requestDto)
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            if (requestDto.walletAddress != null)
+            {
+                var blockchainToDelete = _context.blockchains.FirstOrDefault(x => x.Id == userData.Result.Id && x.WalletAddress == requestDto.walletAddress);
+                if (blockchainToDelete != null)
+                {
+                    _context.blockchains.Remove(blockchainToDelete);
+                    _context.SaveChanges();
+
+                    return Ok(new AddWalletResult()
+                    {
+                        result = true,
+                        reason = "Deleted with success"
+                    });
+                }
+            }
+            else if (requestDto.accountName != null)
+            {
+                var coinbaseToDelete = _context.exchanges.FirstOrDefault(x => x.Id == userData.Result.Id && x.accountName == requestDto.accountName);
+                if (coinbaseToDelete != null)
+                {
+                    _context.exchanges.Remove(coinbaseToDelete);
+                    _context.SaveChanges();
+
+                    return Ok(new AddWalletResult()
+                    {
+                        result = true,
+                        reason = "Deleted with success"
+                    });
+                }
+            }
+            return BadRequest(new AddWalletResult()
+            {
+                result = false,
+                reason = "Empty data"
+            });
+        }
+
+
     }
 }

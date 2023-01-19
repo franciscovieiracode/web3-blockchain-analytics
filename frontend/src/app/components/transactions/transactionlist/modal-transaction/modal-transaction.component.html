@@ -2,23 +2,51 @@
     <h5 class="modal-title">Transaction Details</h5>
 </div>
 <div class="modal-body">
-    <div class="mb-3"><p class="text">Transaction Hash:</p> {{ fromParent.tx }}</div>
-    <div class="mb-3"><p class="text">Status:</p> {{ fromParent.stats }}</div>
-    <div class="mb-3"><p class="text">Block:</p> {{ fromParent.block }}</div>
-    <div class="mb-3"><p class="text">Date:</p> {{ fromParent.date }}</div>
-    <div *ngIf="fromParent.type == 'RECEIVE'" class="mb-3">
-        <p class="text">From:</p> <a class="source" href="{{finalEthAd}}{{fromParent.out}}" target="_blank">{{fromParent.out}}</a>
-        <input   type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
-        <div class="mb-3"><p class="text">To:</p><p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.in}}" target="_blank">{{fromParent.walletname}}</a></div>
+    <div class="mb-3">
+        <p class="text">Transaction Hash:</p> {{ fromParent.hash }}
     </div>
-    <div *ngIf="fromParent.type == 'SENT'" class="mb-3">
-        <div class="mb-3"><p class="text">From:</p><p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.out}}" target="_blank">{{fromParent.walletname}}</a></div>
-        <p class="text">To:</p> <a class="source" href="{{finalEthAd}}{{fromParent.in}}" target="_blank">{{fromParent.in}}</a>
-        <input   type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
+    <div class="mb-3" *ngIf="fromParent.totalBalance == 0">
+        <p class="text">Status:</p> Fail
     </div>
-    <div class="mb-3"><p class="text">Value:</p> {{ fromParent.ammount }}</div>
-    <div class="mb-3"><p class="text">Fee:</p> {{ fromParent.fee }}</div>
+    <div class="mb-3" *ngIf="fromParent.totalBalance != 0">
+        <p class="text">Status:</p> Success
+    </div>
+    <div class="mb-3">
+        <p class="text">Block:</p> {{ fromParent.blockNumber }}
+    </div>
+    <div class="mb-3">
+        <p class="text">Date:</p> {{ fromParent.formattedDate }}
+    </div>
 
-    
-</div> <div class="modal-footer"><button type="button" class="btn btn-outline-dark" onclick="window.location.reload();">Save </button> </div>
+    <div *ngIf="fromParent.to.toLowerCase() == fromParent.address.toLowerCase()" class="mb-3">
+        <div>
+            <p class="text">From:</p> <a class="source" href="{{finalEthAd}}{{fromParent.from}}" target="_blank">{{fromParent.from}}</a>
+            <input type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
+        </div>
+        <div class="mb-3">
+            <p class="text">To:</p>
+            <p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.to}}" target="_blank">{{fromParent.to}}</a>
+        </div>
+    </div>
 
+    <div *ngIf="fromParent.from.toLowerCase() == fromParent.address.toLowerCase()" class="mb-3">
+        <div class="mb-3">
+            <p class="text">From:</p>
+            <p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.from}}" target="_blank">{{fromParent.from}}</a>
+        </div>
+        <div>
+            <p class="text">To:</p> <a class="source" href="{{finalEthAd}}{{fromParent.to}}" target="_blank">{{fromParent.to}}</a>
+            <input type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <p class="text">Value:</p> {{ fromParent.totalBalance }}
+    </div>
+    <div class="mb-3">
+        <p class="text">Fee:</p> {{ fromParent.fee }}
+    </div>
+
+
+</div>
+<div class="modal-footer"><button type="button" class="btn btn-outline-dark" onclick="window.location.reload();">Save</button> </div>

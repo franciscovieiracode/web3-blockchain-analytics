@@ -1,114 +1,122 @@
 <app-header></app-header>
 <div class="container">
-<div class="row">
-    <div class="col-3 mb-3 searchBar">
-        <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-12" placeholder="Search transaction">
-    </div>
-    <div class="col-1 mb-3 ">
-        <input type="number" min=1 [(ngModel)]="pageSize" #searchControl="ngModel" class="input-group-text text-center col-12" placeholder="Choose Page Size">    
-    </div>
-    
-    <div class="col-3 "><app-date-picker></app-date-picker></div>
+    <div class="row">
+        <div class="col-3 mb-3 searchBar">
+            <input type="text" [(ngModel)]="search" #searchControl="ngModel" class="input-group-text text-center col-12"
+                placeholder="Search transaction">
+        </div>
+        <div class="col-1 mb-3 ">
+            <input type="number" min=1 [(ngModel)]="pageSize" #searchControl="ngModel"
+                class="input-group-text text-center col-12" placeholder="Choose Page Size">
+        </div>
 
-    <div class="col-5 mb-6 text-end">
-        <button class="btn btn-outline-success" (click)="open(content)" >Add Contacts</button>
-    </div>
-    <div class="col-3 mb-3">
-        <div ngbDropdown class="d-inline-block col-lg-3">
-            <button type="button" class="btn btn-outline-primary " id="dropdownBasic1" ngbDropdownToggle>
-                Wallet
-            </button>
-            <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button ngbDropdownItem class="item-dropdown">Wallet1</button>
-                <div class="dropdown-divider"></div>
-                <button ngbDropdownItem class="item-dropdown">Wallet2</button>
-                <div class="dropdown-divider"></div>
-                <button ngbDropdownItem class="item-dropdown">Wallet3</button>
-                <div class="dropdown-divider"></div>
-                <button ngbDropdownItem class="item-dropdown">All</button>
+        <div class="col-3 "><app-date-picker></app-date-picker></div>
+
+        <div class="col-5 mb-6 text-end">
+            <button class="btn btn-outline-success" (click)="open(content)">Add Contacts</button>
+        </div>
+        <div class="col-3 mb-3">
+            <div ngbDropdown class="d-inline-block col-lg-3">
+                <button type="button" class="btn btn-outline-primary " id="dropdownBasic1" ngbDropdownToggle>
+                    Wallet
+                </button>
+                <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem class="item-dropdown">Wallet1</button>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem class="item-dropdown">Wallet2</button>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem class="item-dropdown">Wallet3</button>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem class="item-dropdown">All</button>
+                </div>
             </div>
         </div>
     </div>
-    
- 
-    
-</div>
 
-<table class="table table-striped" >
-	<thead>
-		<tr>
-			<th scope="col" class="cursor" (click)="sortbyDate()">Date <img src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
-			<th scope="col">Type</th>
-			<th scope="col">In</th>
-			<th scope="col">Out</th>
-            <th scope="col">Amount</th>
-			<th scope="col" class="cursor" (click)="sortByPrice()">Price <img src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
-			<th scope="col">Tx ID</th>
-			<th scope="col">Classification</th>
-            <th scope="col">Source</th>
-            <th scope="col">Details</th>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="cursor" (click)="sortbyDate()">Date <img
+                        src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
+                <th scope="col">Type</th>
+                <th scope="col">To</th>
+                <th scope="col">From</th>
+                <th scope="col">Amount</th>
+                <th scope="col" class="cursor" (click)="sortByPrice()">Price <img
+                        src="../../../../assets/img/transactions/sort.png" height="15" alt=""></th>
+                <th scope="col">Tx ID</th>
+                <th scope="col">Classification</th>
+                <th scope="col">Source</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let transaction of transactions | slice: (page-1) * pageSize : page * pageSize | transactionlist:search">
+                <th scope="row">{{transaction.formattedDate}}</th>
+                
+                <td class="text-warning">
+                    <div *ngIf="transaction.to.toLowerCase() == transaction.address.toLowerCase()">
+                        <p class="text-warning">SENT</p>
+                    </div>
+                    <div *ngIf="transaction.from.toLowerCase() == transaction.address.toLowerCase()">
+                        <p class="text-success">RECEIVE</p>
+                    </div>
+                </td>
 
+                <td *ngIf="transaction.to.toLowerCase() == transaction.address.toLowerCase()"><a class="source" href="{{finalEthAd}}{{transaction.to.toLowerCase()}}" target="_blank">{{transaction.to.toLowerCase() | slice:0:9 }}</a><a class="copy" (click)="copy(transaction.to.toLowerCase())"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
+                <td *ngIf="transaction.to.toLowerCase() == transaction.address.toLowerCase()"><a class="source" href="{{finalEthAd}}{{transaction.from.toLowerCase()}}" target="_blank">{{transaction.from.toLowerCase() | slice:0:9 }}</a></td>
 
+                <td *ngIf="transaction.from.toLowerCase() == transaction.address.toLowerCase()"><a class="source" href="{{finalEthAd}}{{transaction.to.toLowerCase()}}" target="_blank">{{transaction.to.toLowerCase() | slice:0:9 }}</a></td>
+                <td *ngIf="transaction.from.toLowerCase() == transaction.address.toLowerCase()"><a class="source" href="{{finalEthAd}}{{transaction.from.toLowerCase()}}"target="_blank">{{transaction.from.toLowerCase() | slice:0:9 }} </a><a class="copy" (click)="copy(transaction.from.toLowerCase())"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
 
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let transaction of transactions | slice: (page-1) * pageSize : page * pageSize | transactionlist:search">
-			<th scope="row">{{transaction.formatedDate}}</th>
-			<td class="text-warning">
-                <div *ngIf="transaction.type == 'SENT'">
-                    <p class="text-warning">{{transaction.type}}</p>
-                </div>
-                <div *ngIf="transaction.type == 'RECEIVE'">
-                    <p class="text-success">{{transaction.type}}</p>
-                </div>
-            </td>
-            <td *ngIf="transaction.type == 'SENT'"><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.in | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.in)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td *ngIf="transaction.type == 'SENT'"><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.walletname}} </a></td>
-
-            <td *ngIf="transaction.type == 'RECEIVE'"><a class="source" href="{{finalEthAd}}{{transaction.in}}" target="_blank">{{transaction.walletname}} </a></td>
-            <td *ngIf="transaction.type == 'RECEIVE'"><a class="source" href="{{finalEthAd}}{{transaction.out}}" target="_blank">{{transaction.out | slice:0:9 }} </a> <a class="copy" (click)="copy(transaction.out)"><img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>            <td>{{ transaction.ammount }}</td>
-            <td>{{ transaction.price}}</td>
-            <td><a class="copy" (click)="copy(transaction.tx)">{{ transaction.tx | slice:0:9}} <img src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a></td>
-            <td>
-            <div ngbDropdown class="d-inline-block dropdowTypes">
-                <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1" ngbDropdownToggle>{{transaction.classification}}
-                    </button>
-                <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem class="item-dropdown" *ngFor="let item of dropdownLabels">{{item}}</button>
-                        
-                </div>
-            </div>
-            </td>
-			<td><a class="source" href="{{finalEth}}{{transaction.source}}" target="_blank">{{transaction.source | slice:0:9 }}</a>...</td>
-			<td><button (click)="openDetails(transaction)" class="btn btn-outline-secondary">Detailed info</button></td>
-
-
-		</tr>
-	</tbody>
-</table>
-<ngb-pagination
-  [(page)]="page"
-  [pageSize]="pageSize"
-  [collectionSize]="transactions.length"></ngb-pagination>
-<div>
-    <ngb-toast *ngIf="copied" class="toaster" header="Notification" [autohide]="false" (hidden)="copied=false">
-        Copied to clipboard!
-    </ngb-toast>
-</div>
-</div>
-
-<ng-template #content let-c="close" let-d="dismiss">
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Add Contact</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-        <input type="text" [(ngModel)]="name" #nameControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Wallet Name">
-        <input type="text" [(ngModel)]="address" #addressControl="ngModel" class="input-group-text text-center col-lg-12 top" placeholder="Wallet Address">
-
+                <td>{{ transaction.totalBalance | number: '1.6-6'}}</td>
+                
+                <td>{{ transaction.totalCoin | number: '1.3-3'}}</td>
+                
+                <td><a class="copy" (click)="copy(transaction.address)">{{ transaction.address | slice:0:9}} <img
+                            src="../../../../assets/img/transactions/copy.png" height="10" alt=""></a>
+                </td>
+                
+                <td>
+                    <div ngbDropdown class="d-inline-block dropdowTypes">
+                        <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1"
+                            ngbDropdownToggle>{{transaction.classification}}
+                        </button>
+                        <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem class="item-dropdown"
+                                *ngFor="let item of dropdownLabels">{{item}}</button>
+                        </div>
+                    </div>
+                </td>
+                
+                <td><a class="source" href="{{finalEth}}{{transaction.hash}}" target="_blank">{{transaction.hash |
+                        slice:0:9 }}</a>...
+                </td>
+                
+                <td><button (click)="openDetails(transaction)" class="btn btn-outline-secondary">Detailed info</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="transactions.length"></ngb-pagination>
+    <div>
+        <ngb-toast *ngIf="copied" class="toaster" header="Notification" [autohide]="false" (hidden)="copied=false">
+            Copied to clipboard!
+        </ngb-toast>
     </div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-	</div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Contact</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <input type="text" [(ngModel)]="name" #nameControl="ngModel" class="input-group-text text-center col-lg-12"
+            placeholder="Wallet Name">
+        <input type="text" [(ngModel)]="address" #addressControl="ngModel"
+            class="input-group-text text-center col-lg-12 top" placeholder="Wallet Address">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
 </ng-template>

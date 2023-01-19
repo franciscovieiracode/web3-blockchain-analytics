@@ -5,18 +5,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TransactionlistPipe implements PipeTransform {
 
-  transform(transactions:any, search:string): any {
-    if(transactions.length  === 0 || search ===""){
+  transform(transactions: any, search: string): any {
+    if (transactions.length === 0 || search === "") {
       return transactions
+    }
+    else {
+      return transactions.filter((tran: any) => {
+        return tran.to.toLowerCase().includes(search.toLowerCase())
+          || tran.from.toLowerCase().includes(search.toLowerCase())
+          || tran.formattedDate.toLowerCase().includes(search.toLowerCase())
+      })
+    }
   }
-  else{
-    return transactions.filter((tran:any)=>{        
-      return tran.in.toLowerCase().includes(search.toLowerCase()) 
-      || tran.out.toLowerCase().includes(search.toLowerCase()) 
-      || tran.type.toLowerCase().includes(search.toLowerCase())
-      || tran.formatedDate.toLowerCase().includes(search.toLowerCase())
-      || tran.walletname.toLowerCase().includes(search.toLowerCase())
-    })
-  }
-}
 }

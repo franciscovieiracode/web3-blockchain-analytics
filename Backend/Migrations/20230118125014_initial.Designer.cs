@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(LDSDBContext))]
-    [Migration("20230114001639_update")]
-    partial class update
+    [Migration("20230118125014_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -336,7 +336,8 @@ namespace Backend.Migrations
 
                     b.Property<string>("img")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("lastName")
                         .IsRequired()
@@ -344,11 +345,13 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("lastVisit")
+                        .HasMaxLength(50)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("typeUser")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });

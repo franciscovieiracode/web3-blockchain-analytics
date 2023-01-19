@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(LDSDBContext))]
-    [Migration("20230113133458_db")]
-    partial class db
+    [Migration("20230119041538_initial2")]
+    partial class initial2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,62 @@ namespace Backend.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Metamask");
+                });
+
+            modelBuilder.Entity("Backend.Models.Transactions", b =>
+                {
+                    b.Property<string>("hash")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("blockHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("blockNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("from")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gasPrice")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("gasUsed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("timeStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("to")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("hash");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -334,7 +390,21 @@ namespace Backend.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("img")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("lastVisit")
+                        .HasMaxLength(50)
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("typeUser")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -368,6 +438,17 @@ namespace Backend.Migrations
                 {
                     b.HasOne("Backend.Database.ApplicationUser", "applicationUser")
                         .WithMany("metamasks")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("applicationUser");
+                });
+
+            modelBuilder.Entity("Backend.Models.Transactions", b =>
+                {
+                    b.HasOne("Backend.Database.ApplicationUser", "applicationUser")
+                        .WithMany("transactions")
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -433,6 +514,8 @@ namespace Backend.Migrations
                     b.Navigation("exchanges");
 
                     b.Navigation("metamasks");
+
+                    b.Navigation("transactions");
                 });
 #pragma warning restore 612, 618
         }

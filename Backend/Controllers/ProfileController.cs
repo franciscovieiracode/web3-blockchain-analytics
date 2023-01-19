@@ -12,7 +12,7 @@ namespace Backend.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-
+        
         public ProfileController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;

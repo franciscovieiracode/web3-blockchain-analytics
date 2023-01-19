@@ -14,11 +14,9 @@ namespace Backend.Database
         {
         }
         public DbSet<Blockchain> blockchains { get; set; }
-
         public DbSet<Exchange> exchanges { get; set; }
-
         public DbSet<Metamask> metamasks { get; set; }
-
+        public DbSet<Transactions> transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -38,6 +36,11 @@ namespace Backend.Database
                 .WithMany(o => o.metamasks)
                 .HasForeignKey(o => o.Id);
 
+            builder.Entity<Transactions>()
+               .HasOne(o => o.applicationUser)
+               .WithMany(o => o.transactions)
+               .HasForeignKey(o => o.Id);
+
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
     }
@@ -47,7 +50,9 @@ namespace Backend.Database
         {
             builder.Property(u => u.firstName).HasMaxLength(50);
             builder.Property(u => u.lastName).HasMaxLength(50);
-
+            builder.Property(u => u.img).HasMaxLength(50);
+            builder.Property(u => u.typeUser).HasMaxLength(50);
+            builder.Property(u => u.lastVisit).HasMaxLength(50);
         }
     }
 }

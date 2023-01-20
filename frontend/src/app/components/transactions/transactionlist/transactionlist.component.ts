@@ -5,6 +5,7 @@ import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstra
 import { ClipboardService } from 'ngx-clipboard';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
 import { ContactsService } from 'src/app/services/user/contacts.service';
+import { RulesService } from 'src/app/services/user/rules.service';
 import { ModalTransactionComponent } from './modal-transaction/modal-transaction.component';
 
 
@@ -17,12 +18,14 @@ export class TransactionlistComponent implements OnInit {
 
 	readonly ETH_CONVERTER = 10 ** 18
 
-	dropdownLabels = ["Default: 28%", "Salary", "Minning", "Staking"]
 	finalEth = "https://etherscan.io/tx/"
 	finalEthAd = "https://etherscan.io/address/"
 	teste: any
 	closeResult = '';
 
+	dropdownLabels: any[] = []
+
+	rules: any[] = []
 	contacts: any[] = []
 	transactions: any[] = []
 	errorMessage: String
@@ -41,7 +44,7 @@ export class TransactionlistComponent implements OnInit {
 
 	constructor(private modalService: NgbModal,
 		private _clipboardService: ClipboardService, private http: HttpClient, private titleService: Title,
-		private getTransactions: TransactionService, private getContacts: ContactsService) {
+		private getTransactions: TransactionService, private getContacts: ContactsService, private getRules: RulesService) {
 		this.copied = false
 		this.search = ""
 		this.pageSize = 10
@@ -147,10 +150,28 @@ export class TransactionlistComponent implements OnInit {
 						return { ...transaction, formattedDate };
 					});
 
-					this.transactions = this.transactions.map(transaction => {
-						var classification = "Default: 28%"
-						return { ...transaction, classification };
-					});
+					this.getRules.getRules().subscribe({
+						next: (data) => {
+							if (data && data.result == true) {
+								this.rules = JSON.parse(data.rules)
+								this.dropdownLabels = this.rules.map(x => x.Criteria);
+								this.transactions = this.transactions.map(transaction => {
+									console.log(transaction);
+									var rulesCriteria = transaction["criteria"];
+									return { ...transaction, rulesCriteria };
+								});
+							}
+						},
+						error: (error) => {
+							console.log(error.error);
+							if (error.status == 401) {
+								this.errorMessage = "Please login first"
+							}
+						},
+						complete: () => console.info("Loaded Rules")
+					})
+
+
 
 					this.transactions = this.transactions.map(transaction => {
 						var gasPrice = (parseFloat(transaction["gasPrice"]));
@@ -172,6 +193,23 @@ export class TransactionlistComponent implements OnInit {
 		})
 	}
 
+	editRulesCriteria(hash: string, criteria: string) {
+		this.getTransactions.editCriteriaTransactions(hash, criteria).subscribe({
+			next: (data) => {
+				if (data && data.status == "true") {
+					data.rules.Criteria = criteria
+					console.log(data.rules);
+				}
+			},
+			error: (error) => {
+				console.log(error.error);
+				if (error.status == 401) {
+					this.errorMessage = "Please login first"
+				}
+			},
+			complete: () => console.info("Edit Rule complete")
+		})
+	}
 
 }
 

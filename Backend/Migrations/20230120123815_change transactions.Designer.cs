@@ -4,6 +4,7 @@ using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(LDSDBContext))]
-    partial class LDSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230120123815_change transactions")]
+    partial class changetransactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,6 +213,10 @@ namespace Backend.Migrations
                     b.Property<string>("hash")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Criteria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -224,10 +230,6 @@ namespace Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("blockNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("criteria")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

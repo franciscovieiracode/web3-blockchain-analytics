@@ -81,11 +81,10 @@
                 <td>
                     <div ngbDropdown class="d-inline-block dropdowTypes">
                         <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1"
-                            ngbDropdownToggle>{{transaction.classification}}
+                            ngbDropdownToggle>{{transaction.rulesCriteria}}
                         </button>
                         <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                            <button ngbDropdownItem class="item-dropdown"
-                                *ngFor="let item of dropdownLabels">{{item}}</button>
+                            <button (click)="editRulesCriteria(transaction.hash,item)" ngbDropdownItem class="item-dropdown" *ngFor="let item of dropdownLabels" >{{item}}</button>
                         </div>
                     </div>
                 </td>

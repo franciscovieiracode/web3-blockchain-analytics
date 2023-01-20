@@ -11,7 +11,7 @@ export class ContactsPipePipe implements PipeTransform {
   }
   else{
     return contacts.filter((contact:any)=>{        
-      return contact.name.toLowerCase().includes(searchContacts.toLowerCase())
+      return contact.WalletName.toLowerCase().includes(searchContacts.toLowerCase())
     })
   }
   }

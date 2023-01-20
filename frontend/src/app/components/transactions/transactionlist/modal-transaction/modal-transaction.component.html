@@ -18,25 +18,16 @@
         <p class="text">Date:</p> {{ fromParent.formattedDate }}
     </div>
 
-    <div *ngIf="fromParent.to.toLowerCase() == fromParent.address.toLowerCase()" class="mb-3">
-        <div>
-            <p class="text">From:</p> <a class="source" href="{{finalEthAd}}{{fromParent.from}}" target="_blank">{{fromParent.from}}</a>
-            <input type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
-        </div>
-        <div class="mb-3">
-            <p class="text">To:</p>
-            <p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.to}}" target="_blank">{{fromParent.to}}</a>
-        </div>
-    </div>
-
-    <div *ngIf="fromParent.from.toLowerCase() == fromParent.address.toLowerCase()" class="mb-3">
-        <div class="mb-3">
-            <p class="text">From:</p>
-            <p class="text"><a class="source" href="{{finalEthAd}}{{fromParent.from}}" target="_blank">{{fromParent.from}}</a>
-        </div>
-        <div>
-            <p class="text">To:</p> <a class="source" href="{{finalEthAd}}{{fromParent.to}}" target="_blank">{{fromParent.to}}</a>
-            <input type="text" class="input-group-text text-center col-lg-6" placeholder="Rename wallet">
+    <div *ngFor="let contact of contacts">
+        <div *ngIf="contact.WalletAddress.toLowerCase() == fromParent.from.toLowerCase() || contact.WalletAddress.toLowerCase() == fromParent.to.toLowerCase()">
+            <div class="mb-3">
+                <p class="text">From:</p>
+                <a class="source" href="{{finalEthAd}}{{fromParent.from}}" target="_blank">{{contact.WalletAddress.toLowerCase() == fromParent.from.toLowerCase() ? contact.WalletName : fromParent.from}}</a>
+            </div>
+            <div class="mb-3">
+                <p class="text">To:</p>
+                <a class="source" href="{{finalEthAd}}{{fromParent.to}}" target="_blank">{{contact.WalletAddress.toLowerCase() == fromParent.to.toLowerCase() ? contact.WalletName : fromParent.to}}</a>
+            </div>
         </div>
     </div>
 
@@ -49,4 +40,5 @@
 
 
 </div>
-<div class="modal-footer"><button type="button" class="btn btn-outline-dark" onclick="window.location.reload();">Save</button> </div>
+<div class="modal-footer"><button type="button" class="btn btn-outline-dark"
+        onclick="window.location.reload();">Save</button> </div>

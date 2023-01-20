@@ -5,49 +5,48 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
-build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Backend
 build_property.RootNamespace = Backend
-build_property.ProjectDir = C:\Users\franc\Documents\LDS2223_05\Backend\
+build_property.ProjectDir = C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\franc\Documents\LDS2223_05\Backend
+build_property.MSBuildProjectDirectory = C:\Users\Utilizador\Desktop\uni\22_23\1_semestre\LDS\TrabalhoLDS\Backend
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Home/Index.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Shared/Error.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Users/Edit.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Users/Index.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/_ViewImports.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/_ViewStart.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/AuthBackend/Index.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/AuthBackend/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aEJhY2tlbmRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ry1z18flih
 
-[C:/Users/franc/Documents/LDS2223_05/Backend/Views/Shared/_Layout.cshtml]
+[C:/Users/Utilizador/Desktop/uni/22_23/1_semestre/LDS/TrabalhoLDS/Backend/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-d59tb7l7w9

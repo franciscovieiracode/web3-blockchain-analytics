@@ -28,5 +28,11 @@ namespace Backend.Database
         public virtual List<Metamask> metamasks { get; set; }
 
         public virtual List<Transactions> transactions { get; set; }
+
+        public virtual List<Contacts> contacts { get; set; }
+
+        public virtual List<Rules> rules { get; set; }
+
+        public virtual List<LoginHistory> loginHistory { get; set; }
     }
 }

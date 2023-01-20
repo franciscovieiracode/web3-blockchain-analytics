@@ -8,6 +8,7 @@ import { combineLatest, forkJoin } from 'rxjs';
 import { ContactsService } from 'src/app/services/user/contacts.service';
 import { GetProfileService } from 'src/app/services/user/get-profile.service';
 import { GetWalletsService } from 'src/app/services/wallets/get-wallets.service';
+import { RemoveWalletService } from 'src/app/services/wallets/remove-wallet.service';
 
 @Component({
   selector: 'app-profile',
@@ -78,7 +79,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private _clipboardService: ClipboardService, private http: HttpClient,
     public route: Router, public titleService: Title, private modalService: NgbModal,
-    private getProfileService: GetProfileService, private getWallets: GetWalletsService, private getContacts: ContactsService) {
+    private getProfileService: GetProfileService, private getWallets: GetWalletsService, private getContacts: ContactsService, private removeWallet: RemoveWalletService) {
     this.copied = false
     this.search = ""
     this.pageSize = 10
@@ -204,12 +205,44 @@ export class ProfileComponent implements OnInit {
 
     setTimeout(() => { this.copied = false }, 2000)
   }
-
-  clickMethod(name: string) {
-    if (confirm("Are you sure to delete " + name + "?")) {
-      console.log("Implement delete functionality here");
-    }
+  
+  clickMethod(wallet: any) {
+    if(wallet.accountName == null){
+      this.removeWallet.removeWallet(wallet.WalletAddress,null).subscribe({
+        next: (data) => {
+          if(data && data.result == true){
+            console.log("deleted" );            
+          }
+        },
+        error: (error) =>{
+          console.log(error.error);
+          
+          if(error.status == 401){
+            this.errorMessage = "Please login first"
+          }
+        },
+        complete: () => console.info("Loaded Metamask")
+       
+      })    }else{
+        if(wallet.accountName != null){
+          this.removeWallet.removeWallet(null,wallet.accountName).subscribe({
+            next: (data) => {
+              if(data && data.result == true){
+                console.log("deleted" );            
+              }
+            },
+            error: (error) =>{
+              console.log(error.error);
+              
+              if(error.status == 401){
+                this.errorMessage = "Please login first"
+              }
+            },
+            complete: () => console.info("Loaded Metamask")
+           
+          })     }
   }
+}
 
   clickMethodDelete(contactAddress: string, contactName: string) {
       this.getContacts.deleteContacts(contactAddress, contactName).subscribe({

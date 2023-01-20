@@ -13,6 +13,7 @@
         public string gasPrice { get; set; }
         public string gasUsed { get; set; }
         public string address { get; set; }
+        public string criteria { get; set; }
         public string Id { get; set; }
     }
 }

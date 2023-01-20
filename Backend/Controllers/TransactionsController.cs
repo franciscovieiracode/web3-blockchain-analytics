@@ -1,5 +1,6 @@
 ﻿using Backend.Database;
 using Backend.Models;
+using Backend.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Identity;
@@ -76,6 +77,7 @@ namespace Backend.Controllers
                                 gasPrice = (string)transaction["gasPrice"],
                                 gasUsed = (string)transaction["gasUsed"],
                                 address = address.WalletAddress.ToString(),
+                                criteria = "default",
                                 Id = userData.Id
                             };
                             _context.transactions.Add(trans);
@@ -106,6 +108,7 @@ namespace Backend.Controllers
                 gas = x.gas,
                 gasPrice = x.gasPrice,
                 gasUsed = x.gasUsed,
+                criteria = x.criteria,
                 address = x.address,
                 Id = x.Id
             });
@@ -120,5 +123,36 @@ namespace Backend.Controllers
                 priceCoin = todaysPrice.ToString(),
             });
         }
+
+        [Authorize]
+        [HttpPut]
+        [Route("editRuleTransaction")]
+        public async Task<IActionResult> editRuleTransaction([FromBody] UpdateTransactionsRequest requestDto)
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            var check = _context.transactions.Where(x => x.Id == userData.Result.Id);
+
+            var existingruleTransaction = check.FirstOrDefault(x => x.hash == requestDto.hash);
+
+            if (existingruleTransaction != null)
+            {
+                existingruleTransaction.criteria = requestDto.criteria;
+                _context.transactions.Update(existingruleTransaction);
+                await _context.SaveChangesAsync();
+                return Ok(new AddTransactionsResult()
+                {
+                    status = "true",
+                    message = "Transaction updated"
+                });
+            }
+            return BadRequest(new AddTransactionsResult()
+            {
+                status = "false",
+                message = "Transaction already added"
+            });
+        }
+
     }
 }

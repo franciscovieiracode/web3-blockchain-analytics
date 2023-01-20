@@ -23,6 +23,11 @@ export class TransactionService {
       .pipe(catchError(this.handleError));
   }
 
+ editCriteriaTransactions(hash: string, criteria: string): Observable<any> {
+    return this.http.put(endpoint + "editRuleTransaction",new criteriatransaction(hash, criteria))
+      .pipe(catchError(this.handleError));
+  }
+
 
   handleError(error: HttpErrorResponse) {
     return throwError(() => {
@@ -30,5 +35,8 @@ export class TransactionService {
     });
   }
 
+}
 
+export class criteriatransaction {
+  constructor(public hash: string, public criteria: string) { }
 }

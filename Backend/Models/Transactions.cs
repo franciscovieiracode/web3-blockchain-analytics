@@ -19,6 +19,7 @@ namespace Backend.Models
         public String gasPrice { get; set; }
         public String gasUsed { get; set; }
         public String address { get; set; }
+        public String criteria { get; set; }
         public String Id { get; set; }
         public virtual ApplicationUser applicationUser { get; set; }
     }

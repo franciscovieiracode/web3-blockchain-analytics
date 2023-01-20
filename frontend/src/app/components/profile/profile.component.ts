@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
 import { combineLatest, forkJoin } from 'rxjs';
+import { ContactsService } from 'src/app/services/user/contacts.service';
 import { GetProfileService } from 'src/app/services/user/get-profile.service';
 import { GetWalletsService } from 'src/app/services/wallets/get-wallets.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  
+
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
@@ -31,148 +32,160 @@ export class ProfileComponent implements OnInit {
   year = ["2021", "2022"]
 
   finalEth = "https://etherscan.io/tx/"
-	teste:any
+  teste: any
   closeResult = '';
-  wallets:any
-  walletsMetamask=""
-  walletsBlockchain=""
-  walletsExchange=""
-    search:string
-    searchContact:string
-    copied:boolean
-    page=1
-    pageSize:number
-    pageSizeLogins:number
+  wallets: any
+  walletsMetamask = ""
+  walletsBlockchain = ""
+  walletsExchange = ""
+  search: string
+  searchContact: string
+  copied: boolean
+  page = 1
+  pageSize: number
+  pageSizeLogins: number
 
-    errorMessage:string
+  errorMessage: string
 
-    contacts =[
-      {"name":"Alberto","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-      {"name":"Dinis","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-      {"name":"Maria","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-      {"name":"Pedro","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-      {"name":"Joao","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-      {"name":"Joaquim","address":"0xf2f5c73fa04406b1995e397b55c24ab1f3ea726c"},
-    ]
-    
+  contacts: any[] = []
 
-    login=[
-      {"date":"08-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"08-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"07-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"07-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"06-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-      {"date":"01-12-2022","browser":"Chrome(Windows)","ip":"67.218.223.51"},
-    ]
 
-    rules=[
-      {"name":"Minning","criteria":"Minning","behaviour":"Taxable","tax":"28%"},
-      {"name":"Eth gift","criteria":"Gift","behaviour":"Non-Taxable","tax":"0%"}
-    ]
-    name:String
-    description:String
-    criteria:String
-    behaviour:String
-    taxRule:Number
+  login = [
+    { "date": "08-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "08-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "07-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "07-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "06-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
+  ]
 
-    walletName:String
+  rules = [
+    { "name": "Minning", "criteria": "Minning", "behaviour": "Taxable", "tax": "28%" },
+    { "name": "Eth gift", "criteria": "Gift", "behaviour": "Non-Taxable", "tax": "0%" }
+  ]
 
-    profile:any
-   
-    constructor(private _clipboardService: ClipboardService,private http:HttpClient,
-       public route: Router, public titleService:Title,private modalService: NgbModal,
-       private getProfileService: GetProfileService, private getWallets:GetWalletsService) {
-      this.copied=false
-      this.search=""
-      this.pageSize=10
-      this.pageSizeLogins=6
-      this.titleService.setTitle("Profile")
-      this.name=""
-      this.description=""
-      this.criteria=""
-      this.behaviour=""
-      this.taxRule=0
-      this.walletName=""
-      this.searchContact=""
-      this.errorMessage=""
-    }
+  name: String
+  description: String
+  criteria: String
+  behaviour: String
+  taxRule: Number
+  walletName: string
+  profile: any
+  address: string
+
+
+  constructor(private _clipboardService: ClipboardService, private http: HttpClient,
+    public route: Router, public titleService: Title, private modalService: NgbModal,
+    private getProfileService: GetProfileService, private getWallets: GetWalletsService, private getContacts: ContactsService) {
+    this.copied = false
+    this.search = ""
+    this.pageSize = 10
+    this.pageSizeLogins = 6
+    this.titleService.setTitle("Profile")
+    this.name = ""
+    this.description = ""
+    this.criteria = ""
+    this.behaviour = ""
+    this.taxRule = 0
+    this.walletName = ""
+    this.searchContact = ""
+    this.errorMessage = ""
+    this.address = ""
+  }
 
   ngOnInit(): void {
     this.getProfileService.getCurrentProfile().subscribe({
       next: (data) => {
-        if(data && data.result == true){
+        if (data && data.result == true) {
           console.log(data);
           this.profile = data.user
         }
       },
-      error: (error) =>{
+      error: (error) => {
         console.log(error.error);
-        
-        if(error.status == 401){
+
+        if (error.status == 401) {
           this.errorMessage = "Please login first"
         }
       },
-      complete: () => console.info('Profile load completed') 
-  })
+      complete: () => console.info('Profile load completed')
+    })
 
-  this.getWallets.getBlockchain().subscribe({
-    next: (data) => {
-      if(data && data.result == true){
-        console.log(data);
-        this.walletsBlockchain = JSON.parse(data.address)
-      }
-    },
-    error: (error) =>{
-      console.log(error.error);
-      
-      if(error.status == 401){
-        this.errorMessage = "Please login first"
-      }
-    },
-    complete: () => console.info('Blochain Wallets load completed') 
-})
+    this.getWallets.getBlockchain().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.walletsBlockchain = JSON.parse(data.address)
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
 
-this.getWallets.getExchange().subscribe({
-  next: (data) => {
-    if(data && data.result == true){
-      console.log(data);
-      this.walletsExchange = JSON.parse(data.address)
-    }
-  },
-  error: (error) =>{
-    console.log(error.error);
-    
-    if(error.status == 401){
-      this.errorMessage = "Please login first"
-    }
-  },
-  complete: () => console.info('Exchange wallets load completed') 
-})
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info('Blochain Wallets load completed')
+    })
 
-this.getWallets.getMetamask().subscribe({
-  next: (data) => {
-    if(data && data.result == true){
-      console.log(data);
-      this.walletsMetamask = JSON.parse(data.address)
-      setTimeout(() => {
-        this.wallets = this.walletsExchange.concat(this.walletsBlockchain,this.walletsMetamask)
-      }, 100);
-      console.log(this.wallets);
-      
-    }
-  },
-  error: (error) =>{
-    console.log(error.error);
-    
-    if(error.status == 401){
-      this.errorMessage = "Please login first"
-    }
-  },
-  complete: () => console.info("Loaded Metamask")
- 
-})
+    this.getWallets.getExchange().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.walletsExchange = JSON.parse(data.address)
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info('Exchange wallets load completed')
+    })
+
+    this.getWallets.getMetamask().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.walletsMetamask = JSON.parse(data.address)
+          setTimeout(() => {
+            this.wallets = this.walletsExchange.concat(this.walletsBlockchain, this.walletsMetamask)
+          }, 100);
+          console.log(this.wallets);
+
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Loaded Metamask")
+
+    })
+
+    this.getContacts.getContacts().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.contacts = JSON.parse(data.contacts)
+          console.log(this.contacts);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Loaded Contacts")
+    })
 
   }
 
@@ -180,36 +193,72 @@ this.getWallets.getMetamask().subscribe({
     this.route.navigate(["/newRule"])
   }
 
-  buttonExport(){
+  buttonExport() {
     alert("Downloading! :)")
   }
 
-  copy(data:any){
+  copy(data: any) {
     this._clipboardService.copy(data)
-  
-    this.copied=true
-    
-    setTimeout(()=>{this.copied=false},2000)
+
+    this.copied = true
+
+    setTimeout(() => { this.copied = false }, 2000)
   }
-  
+
   clickMethod(name: string) {
-    if(confirm("Are you sure to delete "+ name +"?")) {
+    if (confirm("Are you sure to delete " + name + "?")) {
       console.log("Implement delete functionality here");
     }
   }
 
-  deleteRule(name:String){
-    alert("Deleted "+name+" Rule")
+  clickMethodDelete(contactAddress: string, contactName: string) {
+      this.getContacts.deleteContacts(contactAddress, contactName).subscribe({
+        next: (data) => {
+          if (data && data.result == true) {
+            console.log(data.contacts);
+          }
+        },
+        error: (error) => {
+          console.log(error.error);
+          if (error.status == 401) {
+            this.errorMessage = "Please login first"
+          }
+        },
+        complete: () => console.info("Delete Contact complete")
+      })
   }
 
-  
-  open(content:any) {
+  deleteRule(name: String) {
+    alert("Deleted " + name + " Rule")
+  }
+
+
+  open(content: any) {
     this.modalService.open(content);
   }
 
-  openEditContact(contentContact:any){
+  openEditContact(contentContact: any, walletAddress: string) {
+    this.address = walletAddress;
     this.modalService.open(contentContact);
+  }
 
+  editContact(address: string, name: string, d: any) {
+    this.getContacts.editContacts(address, name).subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          data.contacts.WalletName = name
+          console.log(data.contacts);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Edit Contact complete")
+    })
+    d('Saved');
   }
 
 }

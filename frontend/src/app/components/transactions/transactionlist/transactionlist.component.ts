@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
 import { TransactionService } from 'src/app/services/transactions/transaction.service';
+import { ContactsService } from 'src/app/services/user/contacts.service';
 import { ModalTransactionComponent } from './modal-transaction/modal-transaction.component';
 
 
@@ -14,7 +15,7 @@ import { ModalTransactionComponent } from './modal-transaction/modal-transaction
 })
 export class TransactionlistComponent implements OnInit {
 
-	readonly ETH_CONVERTER = 10**18
+	readonly ETH_CONVERTER = 10 ** 18
 
 	dropdownLabels = ["Default: 28%", "Salary", "Minning", "Staking"]
 	finalEth = "https://etherscan.io/tx/"
@@ -22,6 +23,7 @@ export class TransactionlistComponent implements OnInit {
 	teste: any
 	closeResult = '';
 
+	contacts: any[] = []
 	transactions: any[] = []
 	errorMessage: String
 	classification: any
@@ -34,10 +36,12 @@ export class TransactionlistComponent implements OnInit {
 	address: string
 	clickedPrice: boolean
 	clickedDate: boolean
+	nameContact: string
+	addressContact: string
 
 	constructor(private modalService: NgbModal,
 		private _clipboardService: ClipboardService, private http: HttpClient, private titleService: Title,
-		private getTransactions: TransactionService) {
+		private getTransactions: TransactionService, private getContacts: ContactsService) {
 		this.copied = false
 		this.search = ""
 		this.pageSize = 10
@@ -47,6 +51,8 @@ export class TransactionlistComponent implements OnInit {
 		this.clickedPrice = false
 		this.clickedDate = false
 		this.errorMessage = ""
+		this.nameContact = ""
+		this.addressContact = ""
 	}
 
 	openDetails(transaction: any) {
@@ -56,8 +62,30 @@ export class TransactionlistComponent implements OnInit {
 		modalRef.componentInstance.fromParent = transaction;
 	}
 
-	open(content: any) {
+	openAddContacts(content: any, walletAddress: string, walletName: string) {
+		this.nameContact = walletName;
+		this.addressContact = walletName;
 		this.modalService.open(content);
+	}
+
+	addContact(address: string, name: string, d: any) {
+		this.getContacts.addContacts(address, name).subscribe({
+			next: (data) => {
+				if (data && data.result == true) {
+					data.contacts.WalletName = name
+					data.contacts.WalletAddress = address
+					console.log(data.contacts);
+				}
+			},
+			error: (error) => {
+				console.log(error.error);
+				if (error.status == 401) {
+					this.errorMessage = "Please login first"
+				}
+			},
+			complete: () => console.info("Edit Contact complete")
+		})
+		d('Saved');
 	}
 
 	copy(data: any) {
@@ -110,11 +138,11 @@ export class TransactionlistComponent implements OnInit {
 						var parsedBalance = (parseFloat(transaction["value"]))
 						console.log(parseFloat(data.priceCoin));
 						var totalCoin = (parsedBalance / this.ETH_CONVERTER) * parseFloat(data.priceCoin)
-					return { ...transaction, totalCoin };
+						return { ...transaction, totalCoin };
 					});
-					
+
 					this.transactions = this.transactions.map(transaction => {
-						var newDate = new Date(parseInt(transaction["timeStamp"]) * 1000 );
+						var newDate = new Date(parseInt(transaction["timeStamp"]) * 1000);
 						var formattedDate = newDate.getDate() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getFullYear();
 						return { ...transaction, formattedDate };
 					});
@@ -124,7 +152,6 @@ export class TransactionlistComponent implements OnInit {
 						return { ...transaction, classification };
 					});
 
-
 					this.transactions = this.transactions.map(transaction => {
 						var gasPrice = (parseFloat(transaction["gasPrice"]));
 						var gasUsed = (parseFloat(transaction["gasUsed"]));
@@ -132,7 +159,6 @@ export class TransactionlistComponent implements OnInit {
 						var fee = (gasPrice * gasUsed) / this.ETH_CONVERTER;
 						return { ...transaction, fee };
 					});
-
 					console.log(this.transactions);
 				}
 			},
@@ -145,7 +171,7 @@ export class TransactionlistComponent implements OnInit {
 			complete: () => console.info('Transactions load completed')
 		})
 	}
-	
+
 
 }
 

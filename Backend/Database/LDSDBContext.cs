@@ -17,7 +17,9 @@ namespace Backend.Database
         public DbSet<Exchange> exchanges { get; set; }
         public DbSet<Metamask> metamasks { get; set; }
         public DbSet<Transactions> transactions { get; set; }
-
+        public DbSet<Contacts> contacts { get; set; }
+        public DbSet<Rules> rules { get; set; }
+        public DbSet<LoginHistory> loginHistory { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -39,6 +41,21 @@ namespace Backend.Database
             builder.Entity<Transactions>()
                .HasOne(o => o.applicationUser)
                .WithMany(o => o.transactions)
+               .HasForeignKey(o => o.Id);
+
+            builder.Entity<Contacts>()
+               .HasOne(o => o.applicationUser)
+               .WithMany(o => o.contacts)
+               .HasForeignKey(o => o.Id);
+
+            builder.Entity<Rules>()
+               .HasOne(o => o.applicationUser)
+               .WithMany(o => o.rules)
+               .HasForeignKey(o => o.Id);
+
+            builder.Entity<LoginHistory>()
+               .HasOne(o => o.applicationUser)
+               .WithMany(o => o.loginHistory)
                .HasForeignKey(o => o.Id);
 
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());

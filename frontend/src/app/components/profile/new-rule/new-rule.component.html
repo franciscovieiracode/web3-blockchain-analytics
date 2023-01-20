@@ -8,26 +8,30 @@
                     [(ngModel)]="ruleName">
                 <input type="text" required class="form-control" id="ruleDescription" placeholder="Rule Description"
                     name="ruleDescription" [(ngModel)]="ruleDescription">
-                <div ngbDropdown class="d-inline-block dropdowTypes">
-                    <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1" ngbDropdownToggle>Rule
-                        Criteria</button>
-                    <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem class="item-dropdown"
-                            *ngFor="let item of dropdownLabels">{{item}}</button>
-                    </div>
+                <div class="form-group">
+                    <label>Criteria</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm" [(ngModel)]="ruleCriteria"
+                        name="criteria" #addressControl="ngModel" ngControl>
+                        <option *ngFor="let item of dropdownLabels" [value]="item.value" [selected]="item.value">
+                            {{item.name}}
+                        </option>
+                    </select>
                 </div>
-                <div ngbDropdown class="d-inline-block dropdowTypes">
-                    <button type="button" class="nav-link btn shadow-none" id="dropdownBasic2" ngbDropdownToggle>Rule
-                        Behaviour</button>
-                    <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                        <button ngbDropdownItem class="item-dropdown" *ngFor="let item of behaviour">{{item}}</button>
-                    </div>
+                <div class="form-group">
+                    <label>Behaviour</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm" [(ngModel)]="ruleBehaviour"
+                        name="behaviour" #addressControl="ngModel" ngControl>
+                        <option *ngFor="let item of behaviour" [value]="item.value" [selected]="item.value">
+                            {{item.name}}
+                        </option>
+                    </select>
                 </div>
                 <input type="number" required class="form-control" id="ruleTax" placeholder="Rule Tax" name="ruleTax"
                     [(ngModel)]="ruleTax">
                 <div class="col buttonsRules">
                     <button type="button" class="btnBackSaveRule btn btn-primary" (click)="buttonBack()">Back</button>
-                    <button type="button" class="btnBackSaveRule btn btn-primary" (click)="buttonSave()">Save</button>
+                    <button type="button" class="btnBackSaveRule btn btn-primary"
+                        (click)="buttonSave(ruleName, ruleDescription,ruleCriteria,ruleBehaviour,ruleTax )">Save</button>
                 </div>
             </div>
         </div>

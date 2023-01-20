@@ -234,8 +234,7 @@
                                     </td>
 
                                     <td class="center">
-                                        <button type=button class="buttondel"
-                                            (click)="clickMethod(wallet)"><i
+                                        <button type=button class="buttondel" (click)="clickMethod(wallet)"><i
                                                 class="material-icons">&#xe92b;</i></button>
                                     </td>
                                 </tr>
@@ -289,18 +288,19 @@
                                 <th scope="col">Criteria</th>
                                 <th scope="col">Behaviour</th>
                                 <th scope="col">Tax</th>
+                                <th class="center" scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let rule of rules | slice: (page-1) * pageSizeLogins : page * pageSizeLogins">
-                                <th scope="row">{{ rule.name }}</th>
-                                <th scope="row">{{ rule.criteria }}</th>
-                                <th scope="row">{{ rule.behaviour }}</th>
-                                <th scope="row">{{ rule.tax }}</th>
+                                <th scope="row">{{ rule.Name }}</th>
+                                <th scope="row">{{ rule.Criteria }}</th>
+                                <th scope="row">{{ rule.Behaviour }}</th>
+                                <th scope="row">{{ rule.Tax }}</th>
                                 <td class="center">
-                                    <button style="margin-right: 20px;" type=button (click)="open(content)"
+                                    <button style="margin-right: 20px;" type=button (click)="openEditRules(content)"
                                         class="buttondel"><i class="material-icons">&#xe150;</i></button>
-                                    <button type=button (click)="deleteRule(rule.name)" class="buttondel"><i
+                                    <button type=button (click)="clickMethodDeleteRule(rule.Name, rule.Criteria, rule.Behaviour, rule.Tax)" class="buttondel"><i
                                             class="material-icons">&#xe92b;</i></button>
                                 </td>
                             </tr>
@@ -320,19 +320,28 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <input type="text" [(ngModel)]="name" #nameControl="ngModel" class="input-group-text text-center col-lg-12"
-            placeholder="Rule Name">
-        <input type="text" [(ngModel)]="description" #addressControl="ngModel"
-            class="input-group-text text-center col-lg-12 mt-3" placeholder="Rule Description">
-        <input type="text" [(ngModel)]="criteria" #addressControl="ngModel"
-            class="input-group-text text-center col-lg-12 mt-3" placeholder="Rule Criteria">
-        <input type="text" [(ngModel)]="behaviour" #addressControl="ngModel"
-            class="input-group-text text-center col-lg-12 mt-3" placeholder="Behaviour">
-        <input type="text" [(ngModel)]="taxRule" #addressControl="ngModel"
-            class="input-group-text text-center col-lg-12 mt-3" placeholder="Tax Rule">
+        <input type="text" [(ngModel)]="nameRule" #nameControl="ngModel" class="input-group-text text-center col-lg-12" placeholder="Rule Name">
+        <input type="text" [(ngModel)]="descriptionRule" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Rule Description">
+        <div class="form-group">
+            <label>Criteria</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm" [(ngModel)]="criteriaRule"
+                name="criteria" #addressControl="ngModel" ngControl>
+                <option *ngFor="let item of dropdownLabels" [value]="item.value" [selected]="item.value">{{item.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Behaviour</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm" [(ngModel)]="behaviourRule"
+                name="behaviour" #addressControl="ngModel" ngControl>
+                <option *ngFor="let item of behaviour" [value]="item.value" [selected]="item.value">{{item.name}}
+                </option>
+            </select>
+        </div>
+        <input type="text" [(ngModel)]="taxRule" #addressControl="ngModel" class="input-group-text text-center col-lg-12 mt-3" placeholder="Tax Rule">
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="editRule(nameRule, descriptionRule, criteriaRule, behaviourRule, taxRule, d)">Save</button>
     </div>
 </ng-template>
 

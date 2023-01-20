@@ -22,10 +22,17 @@ export class GetProfileService {
     .pipe(catchError(this.handleError));
   }
 
+  getLoginHistory():Observable<any>{
+    return this.http.get(endpoint+"getLoginHistory",httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
   handleError(error:HttpErrorResponse) {
     return throwError(() => {
         return error;
     });
   }
+
+  
 
 }

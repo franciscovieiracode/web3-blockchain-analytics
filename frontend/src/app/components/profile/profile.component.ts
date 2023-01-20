@@ -46,22 +46,9 @@ export class ProfileComponent implements OnInit {
   page = 1
   pageSize: number
   pageSizeLogins: number
-
   errorMessage: string
-
   contacts: any[] = []
-
-
-  login = [
-    { "date": "08-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "08-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "07-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "07-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "06-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-    { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
-  ]
+  login:any[] = []
 
   dropdownLabels = [
     {name: "Lendings", value: "Lendings"},
@@ -134,6 +121,23 @@ export class ProfileComponent implements OnInit {
       complete: () => console.info('Profile load completed')
     })
 
+    this.getProfileService.getLoginHistory().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.login = JSON.parse(data.address)
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info('Login history load completed')
+    })
+
     this.getWallets.getBlockchain().subscribe({
       next: (data) => {
         if (data && data.result == true) {
@@ -150,6 +154,7 @@ export class ProfileComponent implements OnInit {
       },
       complete: () => console.info('Blochain Wallets load completed')
     })
+    
 
     this.getWallets.getExchange().subscribe({
       next: (data) => {

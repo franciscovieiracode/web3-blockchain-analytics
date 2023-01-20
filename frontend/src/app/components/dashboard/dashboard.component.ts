@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   change24h:any
   details1?:any
   percentageReturn:Number
+  piechartValues: number[] | undefined 
 
   constructor(private titleService:Title, private getWalletsDropdown: GetWalletsServiceDashboard,
     private getWallets:GetCoinsPricesService) {
@@ -34,6 +35,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllWallets()
+
+    setTimeout(() => {
+      this.getEthreumWallet(this.listAddress[0].walletAddress)
+      console.log();
+      
+    }, 1000)
+
   }
 
   onSelect(wallet:any){
@@ -50,6 +58,7 @@ export class DashboardComponent implements OnInit {
       this.selectedItem = wallet.accountName
     }
     else{
+      this.getEthreumWallet(wallet.walletAddress)
       this.selectedItem = wallet.walletAddress
     }
 
@@ -62,7 +71,6 @@ export class DashboardComponent implements OnInit {
           //console.log(data);
           this.listAddress = data.listAddress
           //console.log(this.selectedItem);
-          
         }
       },
       complete: () => {
@@ -83,10 +91,7 @@ export class DashboardComponent implements OnInit {
           this.coinDetail = parsedDetails
           this.coinName = this.coinDetail.name
           console.log(parsedDetails);
-          
-
-          this.details1 = parsedDetails
-
+          this.details1=this.coinDetail
           this.coinId = this.coinDetail.symbol
           console.log(this.details1);
 
@@ -108,6 +113,7 @@ export class DashboardComponent implements OnInit {
           this.percentageReturn = parseFloat(data.profit)/parseFloat(data.totalInvested)*100
           console.log(this.percentageReturn + "aquiqeuwiq");
           
+          this.piechartValues = [1,5,6,4,8,9,7,5,52,12,45,11];
           
         }
       },

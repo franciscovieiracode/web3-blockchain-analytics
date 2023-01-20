@@ -57,7 +57,7 @@
                                     ngbDropdownToggle><img src="../../../../assets/img/header/user.png" alt=""
                                         width="30" height="30" style="border-radius: 50%;"></button>
                                 <div class="list-dropdown" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                    <p><strong>Francisco João Moreira Vieira</strong></p>
+                                    <p><strong>{{profile.firstName}} {{profile.lastName}}</strong></p>
                                     <div class="dropdown-divider"></div>
                                     <button ngbDropdownItem (click)="profileButton()">Profile</button> <!-- adicionar (click)=""-->
                                     <button ngbDropdownItem (click)="settingsButton()">Settings</button> <!-- adicionar (click)=""-->

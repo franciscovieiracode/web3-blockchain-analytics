@@ -27,6 +27,11 @@ export class GetProfileService {
     .pipe(catchError(this.handleError));
   }
 
+  getTax():Observable<any>{
+    return this.http.get(endpoint+"getTax",httpOptions)
+    .pipe(catchError(this.handleError));
+  }
+
   handleError(error:HttpErrorResponse) {
     return throwError(() => {
         return error;

@@ -243,8 +243,6 @@ namespace Backend.Controllers
             var check2 = _context.exchanges.Where(x => x.Id == userData.Result.Id)
                 .Select(x => new { x.accountName, x.connectionDescription, x.ApiKey, x.ApliSecret });
 
-            wallets.Add(new { walletName = "All" });
-
             wallets.AddRange(check);
 
             wallets.AddRange(check1);

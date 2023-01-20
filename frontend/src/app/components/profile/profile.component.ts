@@ -5,11 +5,14 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClipboardService } from 'ngx-clipboard';
 import { combineLatest, forkJoin } from 'rxjs';
+import { TransactionService } from 'src/app/services/transactions/transaction.service';
 import { ContactsService } from 'src/app/services/user/contacts.service';
 import { GetProfileService } from 'src/app/services/user/get-profile.service';
 import { RulesService } from 'src/app/services/user/rules.service';
 import { GetWalletsService } from 'src/app/services/wallets/get-wallets.service';
 import { RemoveWalletService } from 'src/app/services/wallets/remove-wallet.service';
+import jspdf from 'jspdf'
+import 'jspdf-autotable'
 
 @Component({
   selector: 'app-profile',
@@ -20,16 +23,19 @@ import { RemoveWalletService } from 'src/app/services/wallets/remove-wallet.serv
 export class ProfileComponent implements OnInit {
 
   propeatyGains = ["Lendings", "Loan Interest", "Margin Trading Profit", "Staking"]
-  propeatyGainsMoney = "9999,99€"
+  propeatyGainsMoney = 0
 
   incomeGains = ["Airdrop", "Minning", "Salary"]
-  incomeGainsMoney = "9999,99€"
+  incomeGainsMoney = 0
 
   generalDeductions = ["Margin Trading Fee", "Margin Trading Loss"]
-  generalDeductionsMoney = "9999,99€"
+  generalDeductionsMoney = 0
 
   nonTaxableGains = ["Bounties", "Gift"]
-  nonTaxableGainsMoney = "9999,99€"
+  nonTaxableGainsMoney = 0
+
+
+  gains:any
 
   year = ["2021", "2022"]
 
@@ -230,6 +236,24 @@ export class ProfileComponent implements OnInit {
       complete: () => console.info("Loaded Rules")
     })
 
+    this.getProfileService.getTax().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          //console.log(data);
+          this.gains = data.reason
+          console.log(this.gains);
+          
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Loaded Gains")
+    })
+
   }
 
   buttonNewRule() {
@@ -237,7 +261,18 @@ export class ProfileComponent implements OnInit {
   }
 
   buttonExport() {
-    alert("Downloading! :)")
+    
+    var pdf = new jspdf()
+
+    pdf.setFontSize(20)
+    pdf.text("Welcome to Block analytics",11,25);
+    pdf.text("This is your tax report  "+this.gains+" €",25,32);
+
+
+    
+
+    pdf.output("dataurlnewwindow")
+    pdf.save("taxReport.pdf")
   }
 
   copy(data: any) {

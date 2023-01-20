@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -17,6 +17,10 @@ import {
 export class PieChartComponent implements OnInit {
 
   
+  @Input() coinId :any
+
+  
+
   chartSeries: ApexNonAxisChartSeries=[1,0]
 
   chartDetails: ApexChart = {
@@ -28,9 +32,25 @@ export class PieChartComponent implements OnInit {
 
   chartLabels=["Ethereum", "Cardano"]
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+      if (changes['coinId'] && changes['coinId'].currentValue) {
+        if(this.coinId == "eth"){
+          this.chartSeries=[1,0];
+        }else{
+          this.chartSeries=[1,0];
+        }
+        this.cdr.detectChanges();
+      }
+    }
   ngOnInit(): void {
+    if(this.coinId == "eth"){
+      this.chartSeries=[1,0]
+    }else{
+      this.chartSeries=[0,1]
+
+    }
   }
 
 }

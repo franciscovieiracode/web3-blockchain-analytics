@@ -7,6 +7,7 @@ import { ClipboardService } from 'ngx-clipboard';
 import { combineLatest, forkJoin } from 'rxjs';
 import { ContactsService } from 'src/app/services/user/contacts.service';
 import { GetProfileService } from 'src/app/services/user/get-profile.service';
+import { RulesService } from 'src/app/services/user/rules.service';
 import { GetWalletsService } from 'src/app/services/wallets/get-wallets.service';
 import { RemoveWalletService } from 'src/app/services/wallets/remove-wallet.service';
 
@@ -62,16 +63,33 @@ export class ProfileComponent implements OnInit {
     { "date": "01-12-2022", "browser": "Chrome(Windows)", "ip": "67.218.223.51" },
   ]
 
-  rules = [
-    { "name": "Minning", "criteria": "Minning", "behaviour": "Taxable", "tax": "28%" },
-    { "name": "Eth gift", "criteria": "Gift", "behaviour": "Non-Taxable", "tax": "0%" }
+  dropdownLabels = [
+    {name: "Lendings", value: "Lendings"},
+    {name: "Loan Interest", value: "Loan Interest"},
+    {name: "Marin traing Profit", value: "Marin traing Profit"},
+    {name: "Staking", value: "Staking"},
+    {name: "Airdrop", value: "Airdrop"},
+    {name: "Minning", value: "Minning"},
+    {name: "Salary", value: "Salary"},
+    {name: "Margin Trading Fee", value: "Margin Trading Fee"},
+    {name: "Margin Trading Loss", value: "Margin Trading Loss"},
+    {name: "Bounties", value: "Bounties"},
+    {name: "Gift", value: "Gift"},
   ]
+  
+  behaviour = [
+    {name:"Taxable", value:"Taxable"},
+    {name:"Non-Taxable", value:"Non-Taxable"}
+  ]
+  
+  rules: any[] = []
 
   name: String
-  description: String
-  criteria: String
-  behaviour: String
-  taxRule: Number
+  nameRule:string
+  descriptionRule: string
+  criteriaRule: string
+  behaviourRule: string
+  taxRule: number
   walletName: string
   profile: any
   address: string
@@ -79,16 +97,18 @@ export class ProfileComponent implements OnInit {
 
   constructor(private _clipboardService: ClipboardService, private http: HttpClient,
     public route: Router, public titleService: Title, private modalService: NgbModal,
-    private getProfileService: GetProfileService, private getWallets: GetWalletsService, private getContacts: ContactsService, private removeWallet: RemoveWalletService) {
+    private getProfileService: GetProfileService, private getWallets: GetWalletsService,
+    private getContacts: ContactsService, private removeWallet: RemoveWalletService, private getRules: RulesService) {
     this.copied = false
     this.search = ""
     this.pageSize = 10
     this.pageSizeLogins = 6
     this.titleService.setTitle("Profile")
     this.name = ""
-    this.description = ""
-    this.criteria = ""
-    this.behaviour = ""
+    this.nameRule = ""
+    this.descriptionRule = ""
+    this.criteriaRule = ""
+    this.behaviourRule = ""
     this.taxRule = 0
     this.walletName = ""
     this.searchContact = ""
@@ -188,6 +208,23 @@ export class ProfileComponent implements OnInit {
       complete: () => console.info("Loaded Contacts")
     })
 
+    this.getRules.getRules().subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data);
+          this.rules = JSON.parse(data.rules)
+          console.log(this.rules);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Loaded Rules")
+    })
+
   }
 
   buttonNewRule() {
@@ -200,74 +237,95 @@ export class ProfileComponent implements OnInit {
 
   copy(data: any) {
     this._clipboardService.copy(data)
-
     this.copied = true
-
     setTimeout(() => { this.copied = false }, 2000)
   }
-  
-  clickMethod(wallet: any) {
-    if(wallet.accountName == null){
-      this.removeWallet.removeWallet(wallet.WalletAddress,null).subscribe({
-        next: (data) => {
-          if(data && data.result == true){
-            console.log("deleted" );            
-          }
-        },
-        error: (error) =>{
-          console.log(error.error);
-          
-          if(error.status == 401){
-            this.errorMessage = "Please login first"
-          }
-        },
-        complete: () => console.info("Loaded Metamask")
-       
-      })    }else{
-        if(wallet.accountName != null){
-          this.removeWallet.removeWallet(null,wallet.accountName).subscribe({
-            next: (data) => {
-              if(data && data.result == true){
-                console.log("deleted" );            
-              }
-            },
-            error: (error) =>{
-              console.log(error.error);
-              
-              if(error.status == 401){
-                this.errorMessage = "Please login first"
-              }
-            },
-            complete: () => console.info("Loaded Metamask")
-           
-          })     }
-  }
-}
 
-  clickMethodDelete(contactAddress: string, contactName: string) {
-      this.getContacts.deleteContacts(contactAddress, contactName).subscribe({
+  clickMethod(wallet: any) {
+    if (wallet.accountName == null) {
+      this.removeWallet.removeWallet(wallet.WalletAddress, null).subscribe({
         next: (data) => {
           if (data && data.result == true) {
-            console.log(data.contacts);
+            console.log("deleted");
           }
         },
         error: (error) => {
           console.log(error.error);
+
           if (error.status == 401) {
             this.errorMessage = "Please login first"
           }
         },
-        complete: () => console.info("Delete Contact complete")
+        complete: () => console.info("Loaded Metamask")
+
       })
-  }
+    } else {
+      if (wallet.accountName != null) {
+        this.removeWallet.removeWallet(null, wallet.accountName).subscribe({
+          next: (data) => {
+            if (data && data.result == true) {
+              console.log("deleted");
+            }
+          },
+          error: (error) => {
+            console.log(error.error);
 
-  deleteRule(name: String) {
-    alert("Deleted " + name + " Rule")
-  }
+            if (error.status == 401) {
+              this.errorMessage = "Please login first"
+            }
+          },
+          complete: () => console.info("Loaded Metamask")
 
+        })
+      }
+    }
+  }
 
   open(content: any) {
     this.modalService.open(content);
+  }
+
+  openEditRules(content: any) {
+    this.modalService.open(content);
+  }
+  editRule(name: string, description: string, criteria: string, behaviour: string, tax: number, d: any) {
+    this.getRules.editRules(name, description, criteria, behaviour, tax).subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          data.rules.Name = name
+          data.rules.Description = description
+          data.rules.Criteria = criteria
+          data.rules.Behaviour = behaviour
+          data.rules.Tax = tax
+          console.log(data.rules);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Edit Rule complete")
+    })
+    d('Saved');
+  }
+
+  clickMethodDeleteRule(name: string, criteria: string, behaviour: string, tax: number) {
+    this.getRules.deleteRules(name, criteria, behaviour, tax).subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data.rules);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Delete Rule complete")
+    })
   }
 
   openEditContact(contentContact: any, walletAddress: string) {
@@ -294,4 +352,20 @@ export class ProfileComponent implements OnInit {
     d('Saved');
   }
 
+  clickMethodDelete(contactAddress: string, contactName: string) {
+    this.getContacts.deleteContacts(contactAddress, contactName).subscribe({
+      next: (data) => {
+        if (data && data.result == true) {
+          console.log(data.contacts);
+        }
+      },
+      error: (error) => {
+        console.log(error.error);
+        if (error.status == 401) {
+          this.errorMessage = "Please login first"
+        }
+      },
+      complete: () => console.info("Delete Contact complete")
+    })
+  }
 }

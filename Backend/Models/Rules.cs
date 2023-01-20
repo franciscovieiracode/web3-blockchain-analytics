@@ -11,12 +11,14 @@ namespace Backend.Models
         public int RulesId { get; set; }
         [Required]
         public String Name { get; set; }
+        public String? Description { get; set; }
+
         [Required]
         public String Criteria { get; set; }
         [Required]
         public String Behaviour { get; set; }
         [Required]
-        public float Tax { get; set; }
+        public decimal Tax { get; set; }
 
         public String Id { get; set; }
         public virtual ApplicationUser applicationUser { get; set; }

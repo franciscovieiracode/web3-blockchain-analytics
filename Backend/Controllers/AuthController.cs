@@ -1,11 +1,17 @@
 ﻿using Backend.Database;
 using Backend.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
+
 
 namespace Backend.Controllers
 {
@@ -13,13 +19,15 @@ namespace Backend.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly LDSDBContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration, LDSDBContext context)
         {
             _userManager = userManager;
             _configuration = configuration;
+            _context = context;
         }
 
 
@@ -102,13 +110,22 @@ namespace Backend.Controllers
                         Error = "Invalid credentials"
                     });
                 }
+                var check = _context.loginHistory.Where(x => x.Id == existing_user.Id);
+                var userAgent = HttpContext.Request.Headers["User-Agent"];
+                var loginHistory = new LoginHistory(){
+                  browser = userAgent,
+                  ip = "77.54.163.233",
+                  data =DateTime.Now.ToString(),
+                  Id= existing_user.Id
+                };
+                _context.loginHistory.Add(loginHistory);
+                _context.SaveChanges();
                 var jwtToken = GenerateJwtToken(existing_user);
                 return Ok(new AuthResult()
                 {
                     Result = true,
                     Token = jwtToken
                 });
-
             }
             return BadRequest(new AuthResult()
             {
@@ -142,6 +159,6 @@ namespace Backend.Controllers
 
             return jwtToken;
         }
-
+        
     }
 }

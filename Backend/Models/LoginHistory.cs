@@ -14,5 +14,6 @@ namespace Backend.Models
         public String data { get; set; }
         public String Id { get; set; }
         public virtual ApplicationUser applicationUser { get; set; }
+
     }
 }

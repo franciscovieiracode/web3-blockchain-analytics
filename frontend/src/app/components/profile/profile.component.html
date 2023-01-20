@@ -169,7 +169,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let log of login | slice: (page-1) * pageSizeLogins : page * pageSizeLogins">
-                                <th scope="row">{{ log.date }}</th>
+                                <th scope="row">{{ log.data }}</th>
                                 <th scope="row">{{ log.browser }}</th>
                                 <th scope="row">{{ log.ip }}</th>
                             </tr>

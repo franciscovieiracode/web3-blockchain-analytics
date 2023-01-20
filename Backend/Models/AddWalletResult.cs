@@ -10,5 +10,7 @@ namespace Backend.Models
         public Boolean result { get; set; }
 
         public String reason { get; set; }
+
+        public String test{ get; set; }
     }
 }

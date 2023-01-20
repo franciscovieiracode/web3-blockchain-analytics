@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using System.Text.Json;
 
 namespace Backend.Controllers
@@ -66,6 +65,40 @@ namespace Backend.Controllers
             {
                 result = true,
                 address = JsonSerializer.Serialize(check)
+            });
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("getTax")]
+        public async Task<IActionResult> getTax()
+        {
+            var user = _userManager.GetUserId(User);
+            var userData = _userManager.FindByEmailAsync(user);
+
+            var check = _context.transactions.Where(x => x.Id == userData.Result.Id)
+                .Select(x => new { x.value, x.from, x.to, x.address });
+
+            var test = "";
+            var PropertyGains = 0.0;
+            var IncomeGains = 0;
+            var GeneralDeductions0 = 0;
+            var NonTaxableGains = 0;
+
+            foreach ( var tran in check)
+            {
+                //var tax = tran.rule.tax;
+                var ammount = Convert.ToDouble(tran.value) / (double)1000000000000000000.0 * (double)1400.0;
+
+                PropertyGains += ammount * 0.28;
+            }
+
+
+            return Ok(new AddWalletResult()
+            {
+                result = true,
+                reason = PropertyGains.ToString(),
+                test = test
             });
         }
 

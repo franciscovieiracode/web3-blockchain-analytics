@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -27,10 +27,12 @@ export type ChartOptions = {
 })
 export class LinearChartComponent implements OnInit {
 
+@Input() piechartValues:any
 
   public chartOptions: Partial<ChartOptions> | any
 
   valuesArray = [10, 41, 35, 51, 49, 62, 69, 91, 148,12,15,35]
+
   months= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dez"]
 
   constructor() {
@@ -71,6 +73,7 @@ export class LinearChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
 }
